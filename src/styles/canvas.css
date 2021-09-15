@@ -1,0 +1,158 @@
+.Canvas {
+  z-index: 1;
+  position: absolute;
+  bottom: 50px;
+  left: 200px;
+  min-width: 40px;
+  min-height: 40px;
+  border: 2px dashed transparent;
+  cursor: grab;
+}
+
+.forward {
+  z-index: 10;
+}
+
+.transparent canvas {
+  opacity: 0.6;
+}
+
+.Canvas:hover {
+  border-color: var(--colorP1);
+}
+
+.Canvas-p2 {
+  right: 200px;
+  left: auto;
+}
+
+.Canvas-p2:hover {
+  border-color: var(--colorP2);
+}
+
+.Canvas-controls {
+  list-style: none;
+  display: none;
+  flex-direction: column-reverse;
+  position: absolute;
+  left: -30px;
+  bottom: -2px;
+  width: 24px;
+  height: 100%;
+  padding: 2px;
+  background-color: var(--colorP1);
+}
+
+.Canvas-p2 .Canvas-controls {
+  left: auto;
+  right: -30px;
+  background-color: var(--colorP2);
+}
+
+.Canvas:hover .Canvas-controls {
+  display: flex;
+}
+
+.Canvas-controls [role="button"] {
+  text-align: center;
+  width: 18px;
+  height: 18px;
+  margin: 4px 0 0;
+  border: 2px solid var(--colorP1);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.Canvas-p2 .Canvas-controls [role="button"] {
+  border-color: var(--colorP2);
+}
+
+.Canvas-controls [role="button"]:hover {
+  border: 2px solid white;
+}
+
+.Canvas-controls [role="button"]::after {
+  top: -3px;
+  left: -104px;
+  width: 100%;
+}
+
+.Canvas-p2 .Canvas-controls [role="button"]::after {
+  left: auto;
+  right: -104px;
+}
+
+.transparent-button {
+  background: rgba(255, 255, 255, 1);
+  color: var(--colorP1);
+}
+
+.Canvas-p2 .transparent-button {
+  color: var(--colorP2);
+}
+
+.transparent .transparent-button {
+  background: inherit;
+  color: var(--colorMain);
+}
+
+.forward-button {
+  display: flex;
+  justify-content: space-between;
+  background-repeat: no-repeat;
+}
+
+.Canvas-p1 .forward-button {
+  background-image: linear-gradient(
+    -135deg,
+    white 50%,
+    rgba(255, 255, 255, 0) 50%
+  );
+}
+
+.Canvas-p1.forward .forward-button {
+  background-image: linear-gradient(
+    45deg,
+    white 50%,
+    rgba(255, 255, 255, 0) 50%
+  );
+}
+
+.Canvas-p2 .forward-button {
+  background-image: linear-gradient(
+    45deg,
+    white 50%,
+    rgba(255, 255, 255, 0) 50%
+  );
+}
+
+.Canvas-p2.forward .forward-button {
+  background-image: linear-gradient(
+    -135deg,
+    white 50%,
+    rgba(255, 255, 255, 0) 50%
+  );
+}
+
+.forward-button .p1 {
+  margin-left: 3px;
+}
+
+.forward-button .p2 {
+  margin-right: 3px;
+}
+
+.Canvas-p1 .forward-button .p2,
+.Canvas-p1.forward .forward-button .p1 {
+  color: var(--colorP1);
+}
+
+.Canvas-p2 .forward-button .p1,
+.Canvas-p2.forward .forward-button .p2 {
+  color: var(--colorP2);
+}
+
+.Canvas-p1.forward .forward-button .p2,
+.Canvas-p2.forward .forward-button .p1 {
+  color: var(--colorMain);
+}

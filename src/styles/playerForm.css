@@ -1,0 +1,100 @@
+.PlayerForm-p1 select,
+.StepSelector-p1 select {
+  text-align: right;
+}
+
+.Move-figure {
+  font-weight: var(--bold);
+}
+
+.PlayerForm,
+.StepSelector {
+  width: 50%;
+}
+
+.PlayerForm img {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  z-index: 2;
+}
+
+.PlayerForm-p2 .title span,
+.StepSelector-p2 .title span {
+  transform: skew(-25deg);
+}
+
+.PlayerForm-p2 .title,
+.StepSelector-p2 .title {
+  text-align: right;
+  color: var(--colorP2);
+}
+
+.PlayerForm-p2 img {
+  left: 16px;
+  right: auto;
+}
+
+.CharacterSelector,
+.MoveSelector select {
+  position: absolute;
+  top: 32px;
+  left: 64px;
+  z-index: 4;
+  width: calc(100% - 80px);
+}
+
+img + .CharacterSelector {
+  width: calc(100% - 208px);
+}
+
+.PlayerForm-p2 .CharacterSelector {
+  left: auto;
+  right: 64px;
+}
+
+.MoveSelector select {
+  top: 0;
+  left: 128px;
+  width: calc(100% - 144px);
+}
+
+.PlayerForm-p2 .MoveSelector select {
+  left: auto;
+  right: 128px;
+}
+
+.MoveSelector ul {
+  margin: 16px 16px 0;
+  padding: 8px 12px;
+  list-style: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius);
+  line-height: 20px;
+}
+
+.MoveSelector ul a {
+  float: right;
+  padding: 1px 6px;
+  border-radius: var(--radius);
+  background: black;
+  text-align: center;
+  line-height: 16px;
+  font-size: var(--smallText);
+  font-weight: var(--bold);
+}
+
+/**************************************/
+@media (max-width: 800px) {
+  .PlayerForm img {
+    display: none;
+  }
+
+  .PlayerForm h2.title {
+    margin-bottom: 16px;
+  }
+
+  .CharacterSelector {
+    width: calc(100% - 64px);
+  }
+}

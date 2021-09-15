@@ -1,0 +1,89 @@
+.Viewer-controls {
+  display: flex;
+  z-index: 30;
+}
+
+.StepSelector select {
+  position: absolute;
+  top: 16px;
+  left: 128px;
+  width: calc(100% - 144px);
+}
+
+.StepSelector-p2 select {
+  left: auto;
+  right: 128px;
+}
+
+.step-controls {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 16px;
+}
+
+.step-controls .shortcuts {
+  order: 1;
+}
+
+.step-controls .arrows {
+  order: 2;
+}
+
+.step-controls .arrows button {
+  font-size: 18px;
+  line-height: 16px;
+}
+
+.StepSelector-p2 .step-controls .shortcuts {
+  order: 2;
+}
+
+.StepSelector-p2 .step-controls .arrows {
+  order: 1;
+}
+
+.board {
+  width: 100%;
+  height: 500px;
+  margin-top: -12px;
+  background-color: #777;
+
+  background-size: 48px 48px;
+  background-image: linear-gradient(to right, teal 1px, transparent 1px),
+    linear-gradient(to bottom, teal 1px, transparent 1px);
+  border: 2px dashed black;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.board.scanlines {
+  cursor: not-allowed;
+}
+
+.board.scanlines::after {
+  content: "";
+  position: absolute;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  background-size: 2px 2px;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 1px,
+    transparent 1px
+  );
+}
+
+.board-controls {
+  position: absolute;
+  top: calc(500px - 12px);
+  z-index: 30;
+  text-align: center;
+  left: 0;
+  width: 100%;
+}
+
+.board-controls > span {
+  display: inline-block;
+  margin-right: 16px;
+}

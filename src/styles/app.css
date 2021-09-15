@@ -1,0 +1,228 @@
+:root {
+  --bold: 700;
+  --canvasH: 500;
+  --smallText: 10px;
+  --colorMain: white;
+  --colorP1: red;
+  --colorP2: blue;
+  --radius: 4px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: linear-gradient(to right, var(--colorP1) 50%, var(--colorP2) 50%);
+  color: var(--colorMain);
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+}
+
+.App-warning,
+.App-header,
+.App-footer {
+  display: block;
+  max-width: 192px;
+  margin: 16px auto 0;
+  padding: 8px;
+  background-color: black;
+  text-align: center;
+  font-size: var(--smallText);
+  line-height: 14px;
+  font-weight: var(--bold);
+}
+
+.App-footer {
+  margin-top: 0;
+  border-top: 1px dashed #777;
+}
+
+.App-warning {
+  display: none;
+  background-color: var(--colorMain);
+  color: black;
+}
+
+.App-main {
+  min-width: 300px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 36px;
+  text-transform: uppercase;
+}
+
+h1 span {
+  display: block;
+  text-transform: initial;
+  font-size: var(--smallText);
+  line-height: 14px;
+}
+
+a:not(.link-button) {
+  color: var(--colorMain);
+  text-decoration: underline;
+}
+
+img,
+canvas {
+  image-rendering: pixelated; /* webkit */
+  image-rendering: crisp-edges; /* firefox */
+}
+
+select,
+button,
+.link-button {
+  appearance: none;
+  border: 0;
+  padding: 4px;
+  height: 32px;
+  background: var(--colorMain);
+  color: black;
+  font-weight: var(--bold);
+}
+
+select:hover {
+  cursor: pointer;
+  background: #fffffd;
+}
+
+button:hover,
+.link-button:hover {
+  cursor: pointer;
+  background-color: #ddd;
+}
+button:active,
+.link-button:active {
+  background-color: #aaa;
+}
+
+button,
+.link-button {
+  display: inline-block;
+  border: 2px solid black;
+  min-width: 32px;
+  font-size: var(--smallText);
+}
+
+button + button,
+button + .link-button {
+  border-left: 0;
+}
+
+.link-button {
+  text-decoration: none;
+  padding: 0 4px;
+  font-size: 12px;
+  line-height: 28px;
+  box-sizing: border-box;
+}
+
+option {
+  font-weight: 300;
+  background: #fff;
+}
+
+optgroup {
+  background: #ccc;
+  color: black;
+}
+
+button:disabled {
+  background: #999;
+  color: black;
+}
+
+.selected {
+  background-color: black;
+  color: var(--colorMain);
+}
+
+.mirror {
+  transform: scaleX(-1);
+}
+
+[title] {
+  position: relative;
+}
+
+[title]:hover::after {
+  content: attr(title);
+  z-index: 5;
+  position: absolute;
+  top: 90%;
+  left: -33%;
+  display: block;
+  min-width: 80px;
+  width: 150%;
+  padding: 4px 8px;
+  background: var(--colorMain);
+  color: black;
+  text-align: left;
+  font-weight: 300;
+  font-size: var(--smallText);
+  line-height: 12px;
+  border: 2px solid black;
+  border-radius: var(--radius);
+}
+
+.title {
+  margin: 16px 0;
+  padding: 0 16px;
+  background: var(--colorMain);
+  font-size: 28px;
+  font-weight: var(--bold);
+  text-transform: uppercase;
+  color: var(--colorP1);
+}
+
+.title span {
+  display: block;
+  transform: skew(25deg);
+}
+
+.title::before,
+.title::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -16px;
+  width: 16px;
+  height: 100%;
+  background: linear-gradient(64deg, transparent 50%, var(--colorMain) 50%);
+}
+
+.title::after {
+  left: auto;
+  right: -16px;
+  background: linear-gradient(-64deg, transparent 50%, var(--colorMain) 50%);
+}
+
+h2.title {
+  margin: 32px 0 48px;
+}
+
+.App-playerForms {
+  display: flex;
+}
+
+.PlayerForm,
+.MoveSelector,
+.Viewer,
+.StepSelector,
+.Viewer-controls,
+.title,
+.board {
+  position: relative;
+}
+
+/**************************************/
+@media (max-width: 800px) {
+  .App-warning {
+    display: block;
+  }
+}
