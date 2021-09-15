@@ -71,7 +71,7 @@
   border: 2px solid white;
 }
 
-.Canvas-controls [role="button"]::after {
+.Canvas .Canvas-controls [role="button"]::after {
   top: -3px;
   left: -104px;
   width: 100%;
