@@ -37,10 +37,7 @@ const renderMoveData = (moveData) => (
       .map((moveKey) => {
         const key = `${moveData.slug}-${moveKey}`;
         const label = transfromSlugIntoLabel(moveKey);
-        let moveValue = moveData[moveKey];
-        if (typeof moveData[moveKey] === "boolean") {
-          moveValue = moveData[moveKey] ? "Yes" : "No";
-        }
+        const moveValue = moveData[moveKey];
 
         return (
           <li key={key}>
@@ -103,8 +100,8 @@ export const MoveSelector = ({ playerId }) => {
         </h3>
         <select value={moveSlug} onChange={handleChange}>
           <option value="-">Select a move</option>
-          {characterData.neutrals &&
-            renderMoveList(characterSlug, characterData.neutrals, moveSlug)}
+          {characterData.movements &&
+            renderMoveList(characterSlug, characterData.movements, moveSlug)}
           {characterData.normals &&
             renderMoveList(characterSlug, characterData.normals, moveSlug)}
           {characterData.specials &&

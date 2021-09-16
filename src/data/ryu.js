@@ -2,8 +2,8 @@ export const data = {
   name: "Ryu",
   slug: "ryu",
   srkWikiUrl: "https://srk.shib.live/w/Super_Street_Fighter_2_Turbo/Ryu",
-  // neutrals: {
-  //   stand: {
+  // movements: {
+  //   stand_normals: {
   //     neutral: {
   //       name: "Stand neutral",
   //       slug: "chunli-stand-neutral",
@@ -20,14 +20,14 @@ export const data = {
   //       steps: [],
   //     },
   //   },
-  //   crouch: {
+  //   crouch_normals: {
   //     neutral: {
   //       name: "Crouch",
   //       slug: "chunli-crouch-neutral",
   //       steps: [],
   //     },
   //   },
-  //   jump: {
+  //   jump_normals: {
   //     neutral: {
   //       name: "Jump neutral",
   //       slug: "chunli-jump-neutral",
@@ -41,16 +41,16 @@ export const data = {
   //   },
   // },
   normals: {
-    stand: {
+    stand_normals: {
       close_lp: {
         name: "Close LP",
-        slug: "ryu-normals-stand-close_lp",
+        slug: "ryu-normals-stand_normals-close_lp",
         damage: "4[0]",
         stun: "0~5",
         stun_timer: "40",
-        chain_cancel: false,
-        special_cancel: true,
-        super_cancel: true,
+        chain_cancel: "No",
+        special_cancel: "Yes",
+        super_cancel: "Yes",
         frame_advantage: "+4",
         steps: [
           {
@@ -72,13 +72,13 @@ export const data = {
       },
       far_lp: {
         name: "Far LP",
-        slug: "ryu-normals-stand-far_lp",
+        slug: "ryu-normals-stand_normals-far_lp",
         damage: "4[0]",
         stun: "0~5",
         stun_timer: "40",
-        chain_cancel: true,
-        special_cancel: true,
-        super_cancel: true,
+        chain_cancel: "Yes",
+        special_cancel: "Yes",
+        super_cancel: "Yes",
         frame_advantage: "+4",
         steps: [
           {

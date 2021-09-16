@@ -16,7 +16,7 @@ const getPlayerStateFromUrl = (playerId, url) => {
     return defaultPlayerState;
   }
 
-  // &p1=chunli-normals-stand-far_lp-1
+  // &p1=chunli-normals-stand_normals-far_lp-1
   const searchParams = new URLSearchParams(url.search).get(playerId);
   if (!searchParams) {
     return defaultPlayerState;

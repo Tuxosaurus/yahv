@@ -1,35 +1,35 @@
 export const data = {
   name: "Chun Li",
   slug: "chunli",
-  neutrals: {
-    //   stand: {
+  movements: {
+    //   stand_normals: {
     //     neutral: {
     //       name: "Stand neutral",
-    //       slug: "chunli-neutrals-stand-neutral",
+    //       slug: "chunli-movements-stand-neutral",
     //       steps: [],
     //     },
     //     backward: {
     //       name: "Stand backward",
-    //       slug: "chunli-neutrals-stand-backward",
+    //       slug: "chunli-movements-stand-backward",
     //       steps: [],
     //     },
     //     forward: {
     //       name: "Stand forward",
-    //       slug: "chunli-neutrals-stand-forward",
+    //       slug: "chunli-movements-stand-forward",
     //       steps: [],
     //     },
     //   },
-    //   crouch: {
+    //   crouch_normals: {
     //     neutral: {
     //       name: "Crouch",
-    //       slug: "chunli-neutrals-crouch-neutral",
+    //       slug: "chunli-movements-crouch-neutral",
     //       steps: [],
     //     },
     //   },
-    jump: {
+    jump_movements: {
       wall_jump: {
         name: "Wall jump",
-        slug: "chunli-neutrals-jump-wall_jump",
+        slug: "chunli-movements-jump_movements-wall_jump",
         steps: [
           {
             img: "wj",
@@ -39,27 +39,27 @@ export const data = {
       },
       //     neutral: {
       //       name: "Jump neutral",
-      //       slug: "chunli-neutrals-jump-neutral",
+      //       slug: "chunli-movements-jump_movements-neutral",
       //       steps: [],
       //     },
       //     diagonal: {
       //       name: "Jump diagonal",
-      //       slug: "chunli-neutrals-jump-diagonal",
+      //       slug: "chunli-movements-jump_movements-diagonal",
       //       steps: [],
       //     },
     },
   },
   normals: {
-    stand: {
+    stand_normals: {
       close_lp: {
         name: "Close LP (jab)",
-        slug: "chunli-normals-stand-close_lp",
+        slug: "chunli-normals-stand_normals-close_lp",
         damage: "18[0]",
         stun: "0~5",
         stun_timer: "40",
-        chain_cancel: true,
-        special_cancel: true,
-        super_cancel: true,
+        chain_cancel: "Yes",
+        special_cancel: "Yes",
+        super_cancel: "Yes",
         frame_advantage: "+5",
         steps: [
           {
@@ -91,13 +91,13 @@ export const data = {
       },
       close_mp: {
         name: "Close MP (strong)",
-        slug: "chunli-normals-stand-close_mp",
+        slug: "chunli-normals-stand_normals-close_mp",
         damage: "22[1]",
         stun: "5~11",
         stun_timer: "60",
-        chain_cancel: false,
-        special_cancel: true,
-        super_cancel: true,
+        chain_cancel: "No",
+        special_cancel: "Yes",
+        super_cancel: "Yes",
         frame_advantage: "+10",
         steps: [
           {
@@ -129,13 +129,13 @@ export const data = {
       },
       close_hp: {
         name: "Close HP (fierce)",
-        slug: "chunli-normals-stand-close_hp",
+        slug: "chunli-normals-stand_normals-close_hp",
         damage: "24[1]",
         stun: "10~16",
         stun_timer: "80",
-        chain_cancel: false,
-        special_cancel: true,
-        super_cancel: true,
+        chain_cancel: "No",
+        special_cancel: "Yes",
+        super_cancel: "Yes",
         frame_advantage: "-9",
         steps: [
           {
@@ -157,13 +157,13 @@ export const data = {
       },
       far_lp: {
         name: "Far LP (jab)",
-        slug: "chunli-normals-stand-far_lp",
+        slug: "chunli-normals-stand_normals-far_lp",
         damage: "4[0]",
         stun: "0~5",
         stun_timer: "40",
-        chain_cancel: true,
-        special_cancel: true,
-        super_cancel: true,
+        chain_cancel: "Yes",
+        special_cancel: "Yes",
+        super_cancel: "Yes",
         frame_advantage: "+3",
         steps: [
           {
@@ -195,13 +195,13 @@ export const data = {
       },
       far_mp: {
         name: "Far MP (strong)",
-        slug: "chunli-normals-stand-far_mp",
+        slug: "chunli-normals-stand_normals-far_mp",
         damage: "22[0]",
         stun: "5~11",
         stun_timer: "60",
-        chain_cancel: false,
-        special_cancel: true,
-        super_cancel: true,
+        chain_cancel: "No",
+        special_cancel: "Yes",
+        super_cancel: "Yes",
         frame_advantage: "+10",
         steps: [
           {
@@ -233,13 +233,13 @@ export const data = {
       },
       far_hp: {
         name: "Far HP (fierce)",
-        slug: "chunli-normals-stand-far_hp",
+        slug: "chunli-normals-stand_normals-far_hp",
         damage: "24[0]",
         stun: "10~16",
         stun_timer: "80",
-        chain_cancel: false,
-        special_cancel: false,
-        super_cancel: true,
+        chain_cancel: "No",
+        special_cancel: "No",
+        super_cancel: "Yes",
         frame_advantage: "-2",
         steps: [
           {
@@ -274,17 +274,280 @@ export const data = {
           },
         ],
       },
+      close_lk: {
+        name: "Close LK (short)",
+        slug: "chunli-normals-stand_normals-close_lk",
+        damage: "20[1]",
+        stun: "0~5",
+        stun_timer: "40",
+        chain_cancel: "No",
+        special_cancel: "Yes",
+        super_cancel: "Yes",
+        frame_advantage: "+3",
+        steps: [
+          {
+            img: "stclshrt15_stclfrwrd17",
+            frames: "2",
+            status: "startup",
+          },
+          {
+            img: "stclshrt24",
+            frames: "1",
+            status: "startup",
+          },
+          {
+            img: "stclshrt3",
+            frames: "5",
+            status: "active",
+          },
+          {
+            img: "stclshrt24",
+            frames: "4",
+            status: "recovery",
+          },
+          {
+            img: "stclshrt15_stclfrwrd17",
+            frames: "1",
+            status: "recovery",
+          },
+        ],
+      },
+      close_mk: {
+        name: "Close MK (forward)",
+        slug: "chunli-normals-stand_normals-close_mk",
+        damage: "24[1]",
+        stun: "5~11",
+        stun_timer: "60",
+        chain_cancel: "No",
+        special_cancel: "Yes / No",
+        super_cancel: "Yes / No",
+        frame_advantage: "+1 / +4",
+        steps: [
+          {
+            img: "stclshrt15_stclfrwrd17",
+            frames: "2",
+            status: "startup",
+          },
+          {
+            img: "stclfrwrd26",
+            frames: "1",
+            status: "startup",
+          },
+          {
+            img: "stclfrwrd3",
+            frames: "3",
+            status: "active",
+          },
+          {
+            img: "stclfrwrd4",
+            frames: "6",
+            status: "active",
+          },
+          {
+            img: "stclfrwrd5",
+            frames: "3",
+            status: "recovery",
+          },
+          {
+            img: "stclfrwrd26",
+            frames: "4",
+            status: "recovery",
+          },
+          {
+            img: "stclshrt15_stclfrwrd17",
+            frames: "1",
+            status: "recovery",
+          },
+        ],
+      },
+      close_hk: {
+        name: "Close HK (roundhouse)",
+        slug: "chunli-normals-stand_normals-close_hk",
+        damage: "28[1]",
+        stun: "10~16",
+        stun_timer: "80",
+        chain_cancel: "No",
+        special_cancel: "No",
+        super_cancel: "No",
+        frame_advantage: "-5",
+        steps: [
+          {
+            img: "stclrh1",
+            frames: "1",
+            status: "startup",
+          },
+          {
+            img: "stclrh2",
+            frames: "1",
+            status: "startup",
+          },
+          {
+            img: "stclrh3",
+            frames: "6",
+            status: "startup",
+          },
+          {
+            img: "stclrh4",
+            frames: "1",
+            status: "startup",
+          },
+          {
+            img: "stclrh5",
+            frames: "6",
+            status: "active",
+          },
+          {
+            img: "stclrh6",
+            frames: "4",
+            status: "recovery",
+          },
+          {
+            img: "stclrh7",
+            frames: "6",
+            status: "recovery",
+          },
+          {
+            img: "stclrh8",
+            frames: "4",
+            status: "recovery",
+          },
+          {
+            img: "stclrh9",
+            frames: "7",
+            status: "recovery",
+          },
+        ],
+      },
+      far_lk: {
+        name: "Far LK (short)",
+        slug: "chunli-normals-stand_normals-far_lk",
+        damage: "20[0]",
+        stun: "0~5",
+        stun_timer: "40",
+        chain_cancel: "No",
+        special_cancel: "No",
+        super_cancel: "No",
+        frame_advantage: "+3",
+        steps: [
+          {
+            img: "stfarshrt15_stfarfrwrd15",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "stfarshrt24",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "stfarshrt3",
+            frames: "5",
+            status: "active",
+          },
+          {
+            img: "stfarshrt24",
+            frames: "4",
+            status: "recovery",
+          },
+          {
+            img: "stfarshrt15_stfarfrwrd15",
+            frames: "1",
+            status: "recovery",
+          },
+        ],
+      },
+      far_mk: {
+        name: "Far MK (forward)",
+        slug: "chunli-normals-stand_normals-far_mk",
+        damage: "24[0]",
+        stun: "5~11",
+        stun_timer: "60",
+        chain_cancel: "No",
+        special_cancel: "No",
+        super_cancel: "No",
+        frame_advantage: "+5",
+        steps: [
+          {
+            img: "stfarshrt15_stfarfrwrd15",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "stfarfrwrd24",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "stfarfrwrd3",
+            frames: "5",
+            status: "active",
+          },
+          {
+            img: "stfarfrwrd24",
+            frames: "4",
+            status: "recovery",
+          },
+          {
+            img: "stfarshrt15_stfarfrwrd15",
+            frames: "4",
+            status: "recovery",
+          },
+        ],
+      },
+      far_hk: {
+        name: "Far HK (roundhouse)",
+        slug: "chunli-normals-stand_normals-far_hk",
+        damage: "28[0]",
+        stun: "10~16",
+        stun_timer: "80",
+        chain_cancel: "No",
+        special_cancel: "No",
+        super_cancel: "No",
+        frame_advantage: "0",
+        steps: [
+          {
+            img: "stfarrh1",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "stfarrh2",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "stfarrh3",
+            frames: "4",
+            status: "startup",
+          },
+          {
+            img: "stfarrh4",
+            frames: "8",
+            status: "active",
+          },
+          {
+            img: "stfarrh5",
+            frames: "7",
+            status: "recovery",
+          },
+          {
+            img: "stfarrh6",
+            frames: "7",
+            status: "recovery",
+          },
+        ],
+      },
     },
-    crouch: {
+    crouch_normals: {
       lp: {
-        name: "LP (jab)",
-        slug: "chunli-normals-crouch-lp",
+        name: "Crouch LP (jab)",
+        slug: "chunli-normals-crouch_normals-lp",
         damage: "4[0]",
         stun: "0~5",
         stun_timer: "40",
-        chain_cancel: false,
-        special_cancel: true,
-        super_cancel: true,
+        chain_cancel: "No",
+        special_cancel: "Yes",
+        super_cancel: "Yes",
         frame_advantage: "+4",
         steps: [
           {
@@ -315,14 +578,14 @@ export const data = {
         ],
       },
       mp: {
-        name: "MP (strong)",
-        slug: "chunli-normals-crouch-mp",
+        name: "Crouch MP (strong)",
+        slug: "chunli-normals-crouch_normals-mp",
         damage: "18[1]",
         stun: "5~11",
         stun_timer: "60",
-        chain_cancel: false,
-        special_cancel: true,
-        super_cancel: true,
+        chain_cancel: "No",
+        special_cancel: "Yes",
+        super_cancel: "Yes",
         frame_advantage: "+9",
         steps: [
           {
@@ -353,14 +616,14 @@ export const data = {
         ],
       },
       hp: {
-        name: "HP (fierce)",
-        slug: "chunli-normals-crouch-hp",
+        name: "Crouch HP (fierce)",
+        slug: "chunli-normals-crouch_normals-hp",
         damage: "22[2]",
         stun: "10~16",
         stun_timer: "80",
-        chain_cancel: false,
-        special_cancel: false,
-        super_cancel: false,
+        chain_cancel: "No",
+        special_cancel: "No",
+        super_cancel: "No",
         frame_advantage: "-3",
         steps: [
           {
@@ -386,6 +649,706 @@ export const data = {
           {
             img: "crstrng15_crfrc15",
             frames: "11",
+            status: "recovery",
+          },
+        ],
+      },
+      lk: {
+        name: "Crouch LK (short)",
+        slug: "chunli-normals-crouch_normals-lk",
+        damage: "14[0]",
+        stun: "0~5",
+        stun_timer: "40",
+        chain_cancel: "No",
+        special_cancel: "Yes",
+        super_cancel: "Yes",
+        frame_advantage: "+4",
+        steps: [
+          {
+            img: "crshrt15",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "crshrt24",
+            frames: "1",
+            status: "startup",
+          },
+          {
+            img: "crshrt3",
+            frames: "4",
+            status: "active",
+          },
+          {
+            img: "crshrt24",
+            frames: "4",
+            status: "recovery",
+          },
+          {
+            img: "crshrt15",
+            frames: "1",
+            status: "recovery",
+          },
+        ],
+      },
+      mk: {
+        name: "Crouch MK (forward)",
+        slug: "chunli-normals-crouch_normals-mk",
+        damage: "18[1]",
+        stun: "5~11",
+        stun_timer: "60",
+        chain_cancel: "No",
+        special_cancel: "Yes",
+        super_cancel: "Yes",
+        frame_advantage: "+9",
+        steps: [
+          {
+            img: "crfrwrd1",
+            frames: "4",
+            status: "startup",
+          },
+          {
+            img: "crfrwrd2",
+            frames: "5",
+            status: "active",
+          },
+          {
+            img: "crfrwrd3",
+            frames: "4",
+            status: "recovery",
+          },
+        ],
+      },
+      hk: {
+        name: "Crouch HK (roundhouse)",
+        slug: "chunli-normals-crouch_normals-hk",
+        damage: "22[2]",
+        stun: "5~11",
+        stun_timer: "130",
+        chain_cancel: "No",
+        special_cancel: "No",
+        super_cancel: "No",
+        frame_advantage: "-3",
+        steps: [
+          {
+            img: "crrh15",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "crrh24",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "crrh3",
+            frames: "6",
+            status: "active",
+          },
+          {
+            img: "crrh24",
+            frames: "8",
+            status: "recovery",
+          },
+          {
+            img: "crrh15",
+            frames: "11",
+            status: "recovery",
+          },
+        ],
+      },
+    },
+    jump_normals: {
+      neutral_lp: {
+        name: "Neutral Jump LP (jab)",
+        slug: "chunli-normals-jump_normals-neutral_lp",
+        damage: "18[2]",
+        stun: "1~7(2)",
+        stun_timer: "40",
+        special_cancel: "No",
+        steps: [
+          {
+            img: "njjab1_njstrng17_njfrc17",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "njjab2_njstrng26_njfrc26",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "njjab3_njstrng35_njfrc35",
+            frames: "2",
+            status: "startup",
+          },
+          {
+            img: "njjab4",
+            frames: "∞",
+            status: "active",
+          },
+        ],
+      },
+      neutral_mp: {
+        name: "Neutral Jump MP (strong)",
+        slug: "chunli-normals-jump_normals-neutral_mp",
+        damage: "22[2]",
+        stun: "5~11(2)",
+        stun_timer: "50(+10)",
+        special_cancel: "No",
+        steps: [
+          {
+            img: "njjab1_njstrng17_njfrc17",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "njjab2_njstrng26_njfrc26",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "njjab3_njstrng35_njfrc35",
+            frames: "2",
+            status: "startup",
+          },
+          {
+            img: "njstrng4",
+            frames: "16",
+            status: "active",
+          },
+          {
+            img: "njjab3_njstrng35_njfrc35",
+            frames: "2",
+            status: "recovery",
+          },
+          {
+            img: "njjab2_njstrng26_njfrc26",
+            frames: "3",
+            status: "recovery",
+          },
+          {
+            img: "njjab1_njstrng17_njfrc17",
+            frames: "4",
+            status: "recovery",
+          },
+          {
+            img: "njstrng8_njfrc8_djstrng6_djfrc6",
+            frames: "∞",
+            status: "recovery",
+          },
+        ],
+      },
+      neutral_hp: {
+        name: "Neutral Jump HP (fierce)",
+        slug: "chunli-normals-jump_normals-neutral_hp",
+        damage: "26[2]",
+        stun: "11~17(-1)",
+        stun_timer: "60(+20)",
+        special_cancel: "No",
+        steps: [
+          {
+            img: "njjab1_njstrng17_njfrc17",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "njjab2_njstrng26_njfrc26",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "njjab3_njstrng35_njfrc35",
+            frames: "2",
+            status: "startup",
+          },
+          {
+            img: "njfrc4",
+            frames: "8",
+            status: "active",
+          },
+          {
+            img: "njjab3_njstrng35_njfrc35",
+            frames: "2",
+            status: "recovery",
+          },
+          {
+            img: "njjab2_njstrng26_njfrc26",
+            frames: "3",
+            status: "recovery",
+          },
+          {
+            img: "njjab1_njstrng17_njfrc17",
+            frames: "4",
+            status: "recovery",
+          },
+          {
+            img: "njstrng8_njfrc8_djstrng6_djfrc6",
+            frames: "∞",
+            status: "recovery",
+          },
+        ],
+      },
+      diagonal_lp: {
+        name: "Diagonal Jump LP (jab)",
+        slug: "chunli-normals-jump_normals-diagonal_lp",
+        damage: "16[2]",
+        stun: "1~7(2)",
+        stun_timer: "40",
+        special_cancel: "No",
+        steps: [
+          {
+            img: "djjab1_djstrng15_djfrc15",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "djjab2_djstrng24_djfrc24",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "djjab3",
+            frames: "∞",
+            status: "active",
+          },
+        ],
+      },
+      diagonal_mp: {
+        name: "Diagonal Jump MP (strong)",
+        slug: "chunli-normals-jump_normals-diagonal_mp",
+        damage: "20[2]",
+        stun: "5~11",
+        stun_timer: "50(+10)",
+        special_cancel: "No",
+        steps: [
+          {
+            img: "djjab1_djstrng15_djfrc15",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "djjab2_djstrng24_djfrc24",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "djstrng3",
+            frames: "8",
+            status: "active",
+          },
+          {
+            img: "djjab2_djstrng24_djfrc24",
+            frames: "3",
+            status: "recovery",
+          },
+          {
+            img: "djjab1_djstrng15_djfrc15",
+            frames: "4",
+            status: "recovery",
+          },
+          {
+            img: "njstrng8_njfrc8_djstrng6_djfrc6",
+            frames: "∞",
+            status: "recovery",
+          },
+        ],
+      },
+      diagonal_hp: {
+        name: "Diagonal Jump HP (fierce)",
+        slug: "chunli-normals-jump_normals-diagonal_hp",
+        damage: "24[2]",
+        stun: "11~17(-1)",
+        stun_timer: "60(+20)",
+        special_cancel: "No",
+        steps: [
+          {
+            img: "djjab1_djstrng15_djfrc15",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "djjab2_djstrng24_djfrc24",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "djfrc3",
+            frames: "8",
+            status: "active",
+          },
+          {
+            img: "djjab2_djstrng24_djfrc24",
+            frames: "3",
+            status: "recovery",
+          },
+          {
+            img: "djjab1_djstrng15_djfrc15",
+            frames: "4",
+            status: "recovery",
+          },
+          {
+            img: "njstrng8_njfrc8_djstrng6_djfrc6",
+            frames: "∞",
+            status: "recovery",
+          },
+        ],
+      },
+      neutral_lk: {
+        name: "Neutral Jump LK (short)",
+        slug: "chunli-normals-jump_normals-neutral_lk",
+        damage: "18[2]",
+        stun: "1~7(2)",
+        stun_timer: "40",
+        special_cancel: "No",
+        steps: [
+          {
+            img: "njshrt1_njfrwrd15_djrh1",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "njshrt2_njfrwrd24_djrh2",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "njshrt3",
+            frames: "∞",
+            status: "active",
+          },
+        ],
+      },
+      neutral_mk: {
+        name: "Neutral Jump MK (forward)",
+        slug: "chunli-normals-jump_normals-neutral_mk",
+        damage: "22[2]",
+        stun: "5~11",
+        stun_timer: "50(+10)",
+        special_cancel: "No",
+        steps: [
+          {
+            img: "njshrt1_njfrwrd15_djrh1",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "njshrt2_njfrwrd24_djrh2",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "njfrwrd3",
+            frames: "10",
+            status: "active",
+          },
+          {
+            img: "njshrt2_njfrwrd24_djrh2",
+            frames: "3",
+            status: "recovery",
+          },
+          {
+            img: "njshrt1_njfrwrd15_djrh1",
+            frames: "∞",
+            status: "recovery",
+          },
+        ],
+      },
+      neutral_hk: {
+        name: "Neutral Jump HK (roundhouse)",
+        slug: "chunli-normals-jump_normals-neutral_hk",
+        damage: "26[2]",
+        stun: "10~16",
+        stun_timer: "80",
+        special_cancel: "Yes",
+        steps: [
+          {
+            img: "njrh1",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "njrh2",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "njrh3",
+            frames: "10",
+            status: "active",
+          },
+          {
+            img: "njrh4",
+            frames: "10",
+            status: "active",
+          },
+          {
+            img: "njrh5",
+            frames: "10",
+            status: "active",
+          },
+          {
+            img: "njrh6",
+            frames: "3",
+            status: "recovery",
+          },
+          {
+            img: "njrh7",
+            frames: "3",
+            status: "recovery",
+          },
+          {
+            img: "njrh8",
+            frames: "∞",
+            status: "recovery",
+          },
+        ],
+      },
+      diagonal_lk: {
+        name: "Diagonal Jump LK (short)",
+        slug: "chunli-normals-jump_normals-diagonal_lk",
+        damage: "20[2]",
+        stun: "1~7(2)",
+        stun_timer: "40",
+        special_cancel: "No",
+        steps: [
+          {
+            img: "djshrt1_djfrwrd15",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "djshrt2_djfrwrd24",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "djshrt3",
+            frames: "∞",
+            status: "active",
+          },
+        ],
+      },
+      diagonal_mk: {
+        name: "Diagonal Jump MK (forward)",
+        slug: "chunli-normals-jump_normals-diagonal_mk",
+        damage: "20[2]",
+        stun: "5~11",
+        stun_timer: "50(+10)",
+        special_cancel: "No",
+        steps: [
+          {
+            img: "djshrt1_djfrwrd15",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "djshrt2_djfrwrd24",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "djfrwrd3",
+            frames: "16",
+            status: "active",
+          },
+          {
+            img: "djshrt2_djfrwrd24",
+            frames: "3",
+            status: "recovery",
+          },
+          {
+            img: "djshrt1_djfrwrd15",
+            frames: "∞",
+            status: "recovery",
+          },
+        ],
+      },
+      diagonal_hk: {
+        name: "Diagonal Jump HK (roundhouse)",
+        slug: "chunli-normals-jump_normals-diagonal_hk",
+        damage: "24[2]",
+        stun: "11~17(-1)",
+        stun_timer: "60(+20)",
+        special_cancel: "No",
+        steps: [
+          {
+            img: "njshrt1_njfrwrd15_djrh1",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "njshrt2_njfrwrd24_djrh2",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "djrh3",
+            frames: "6",
+            status: "active",
+          },
+          {
+            img: "djrh4",
+            frames: "4",
+            status: "active",
+          },
+          {
+            img: "djrh5",
+            frames: "6",
+            status: "active",
+          },
+          {
+            img: "djrh6",
+            frames: "6",
+            status: "recovery",
+          },
+          {
+            img: "djrh7",
+            frames: "∞",
+            status: "recovery",
+          },
+        ],
+      },
+    },
+    command_normals: {
+      flip_kick: {
+        name: "Flip Kick",
+        slug: "chunli-normals-command_normals-flip_kick",
+        damage: "22[0]",
+        stun: "0~5",
+        stun_timer: "40",
+        steps: [
+          {
+            img: "fk1",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "fk2",
+            frames: "3",
+            status: "startup",
+          },
+          {
+            img: "fk3",
+            frames: "5",
+            status: "active",
+          },
+          {
+            img: "fk4",
+            frames: "4",
+            status: "active",
+          },
+          {
+            img: "fk5",
+            frames: "4",
+            status: "recovery",
+          },
+          {
+            img: "fk6",
+            frames: "4",
+            status: "recovery",
+          },
+          {
+            img: "fk7",
+            frames: "6",
+            status: "recovery",
+          },
+          {
+            img: "fk8",
+            frames: "29",
+            status: "recovery",
+          },
+        ],
+      },
+      neck_breaker: {
+        name: "Neck Breaker",
+        slug: "chunli-normals-command_normals-neck_breaker",
+        damage: "20[0]",
+        stun: "10~16",
+        stun_timer: "80",
+        steps: [
+          {
+            img: "nb1",
+            frames: "4",
+            status: "startup",
+          },
+          {
+            img: "nb2",
+            frames: "4",
+            status: "startup",
+          },
+          {
+            img: "nb3",
+            frames: "5",
+            status: "startup",
+          },
+          {
+            img: "nb4",
+            frames: "6",
+            status: "startup",
+          },
+          {
+            img: "nb5",
+            frames: "7",
+            status: "startup",
+          },
+          {
+            img: "nb6",
+            frames: "8",
+            status: "startup",
+          },
+          {
+            img: "nb7",
+            frames: "2",
+            status: "startup",
+          },
+          {
+            img: "nb8",
+            frames: "14",
+            status: "active",
+          },
+        ],
+      },
+      head_stomp: {
+        name: "Head Stomp",
+        slug: "chunli-normals-command_normals-head_stomp",
+        damage: "20[0]",
+        stun: "2~8",
+        stun_timer: "60",
+        steps: [
+          {
+            img: "hs14",
+            frames: "1",
+            status: "startup",
+          },
+          {
+            img: "hs25",
+            frames: "2",
+            status: "startup",
+          },
+          {
+            img: "hs3",
+            frames: "16",
+            status: "active",
+          },
+          {
+            img: "hs14",
+            frames: "8",
+            status: "recovery",
+          },
+          {
+            img: "hs25",
+            frames: "4",
+            status: "recovery",
+          },
+          {
+            img: "hs6",
+            frames: "5",
+            status: "recovery",
+          },
+          {
+            img: "hs7",
+            frames: "∞",
             status: "recovery",
           },
         ],
@@ -821,9 +1784,9 @@ export const data = {
       lk: {
         name: "Tenshou Kyaku LK (short)",
         slug: "chunli-specials-tenshou_kyaku-lk",
-        damage: "12[2] *3",
-        stun: "0~4 *3",
-        stun_timer: "20 *3",
+        damage: "12[2]*3",
+        stun: "0~4*3",
+        stun_timer: "20*3",
         super_meter: "8",
         steps: [
           {
@@ -911,9 +1874,9 @@ export const data = {
       mk: {
         name: "Tenshou Kyaku MK (forward)",
         slug: "chunli-specials-tenshou_kyaku-mk",
-        damage: "12[2] *3",
-        stun: "0~4 *3",
-        stun_timer: "20 *3",
+        damage: "12[2]*3",
+        stun: "0~4*3",
+        stun_timer: "20*3",
         super_meter: "8",
         steps: [
           {
@@ -1026,9 +1989,9 @@ export const data = {
       hk: {
         name: "Tenshou Kyaku HK (roundhouse)",
         slug: "chunli-specials-tenshou_kyaku-hk",
-        damage: "12[2] *3",
-        stun: "0~4 *3",
-        stun_timer: "20 *3",
+        damage: "12[2]*3",
+        stun: "0~4*3",
+        stun_timer: "20*3",
         super_meter: "8",
         steps: [
           {
@@ -2273,6 +3236,138 @@ export const data = {
             img: "asbkcl13",
             frames: "3",
             status: "recovery - complete landing",
+          },
+        ],
+      },
+    },
+    super: {
+      senretsu_kyaku: {
+        name: "Senretsu Kyaku",
+        slug: "chunli-specials-super-senretsu_kyaku",
+        damage: "16[0]*6",
+        stun: "0~4*6",
+        stun_timer: "20*6",
+        frame_advantage: "+9",
+        steps: [
+          {
+            img: "super1",
+            frames: "1+[18]+1",
+            status: "startup",
+          },
+          {
+            img: "super2",
+            frames: "2",
+            status: "startup",
+          },
+          {
+            img: "super3",
+            frames: "2",
+            status: "startup",
+          },
+          {
+            img: "super4",
+            frames: "2",
+            status: "startup",
+          },
+          {
+            img: "super5",
+            frames: "2",
+            status: "startup",
+          },
+          {
+            img: "super6",
+            frames: "4",
+            status: "active",
+          },
+          {
+            img: "super7",
+            frames: "1",
+            status: "active",
+          },
+          {
+            img: "super8",
+            frames: "2",
+            status: "active",
+          },
+          {
+            img: "super9",
+            frames: "2",
+            status: "active",
+          },
+          {
+            img: "super10",
+            frames: "2",
+            status: "active",
+          },
+          {
+            img: "super1113",
+            frames: "2",
+            status: "active",
+          },
+          {
+            img: "super12",
+            frames: "6",
+            status: "active",
+          },
+          {
+            img: "super1113",
+            frames: "3",
+            status: "active",
+          },
+          {
+            img: "super14",
+            frames: "3",
+            status: "active",
+          },
+          {
+            img: "super15",
+            frames: "1",
+            status: "active",
+          },
+          {
+            img: "super16",
+            frames: "1",
+            status: "active",
+          },
+          {
+            img: "super17",
+            frames: "1",
+            status: "active",
+          },
+          {
+            img: "super1822",
+            frames: "1",
+            status: "active",
+          },
+          {
+            img: "super19",
+            frames: "1",
+            status: "active",
+          },
+          {
+            img: "super20",
+            frames: "1",
+            status: "active",
+          },
+          {
+            img: "super21",
+            frames: "1",
+            status: "active",
+          },
+          {
+            img: "super1822",
+            frames: "1",
+            status: "recovery",
+          },
+          {
+            img: "super23",
+            frames: "6",
+            status: "recovery",
+          },
+          {
+            img: "super24",
+            frames: "7",
+            status: "recovery",
           },
         ],
       },

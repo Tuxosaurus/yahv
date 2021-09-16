@@ -3,16 +3,16 @@ export const data = {
   slug: "ehonda",
   srkWikiUrl: "https://srk.shib.live/w/Super_Street_Fighter_2_Turbo/E._Honda",
   normals: {
-    stand: {
+    stand_normals: {
       close_lp: {
         name: "Close LP",
-        slug: "ehonda-normals-stand-close_lp",
+        slug: "ehonda-normals-stand_normals-close_lp",
         damage: "20[1]",
         stun: "0~5",
         stun_timer: "40",
-        chain_cancel: false,
-        special_cancel: true,
-        super_cancel: true,
+        chain_cancel: "No",
+        special_cancel: "Yes",
+        super_cancel: "Yes",
         frame_advantage: "+8",
         steps: [
           {
@@ -49,13 +49,13 @@ export const data = {
       },
       far_lp: {
         name: "Far LP",
-        slug: "ehonda-normals-stand-far_lp",
+        slug: "ehonda-normals-stand_normals-far_lp",
         damage: "20[1]",
         stun: "0~5",
         stun_timer: "40",
-        chain_cancel: false,
-        special_cancel: false,
-        super_cancel: false,
+        chain_cancel: "No",
+        special_cancel: "No",
+        super_cancel: "No",
         frame_advantage: "+4",
         steps: [
           {
