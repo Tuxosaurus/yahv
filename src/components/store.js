@@ -10,11 +10,11 @@ export const validBgs = [darkBg, mediumBg, brightBg];
 export const validZooms = ["1", "2", "3"];
 
 function isValidBackground(b) {
-  return b <= validBgs.length;
+  return b && b <= validBgs.length;
 }
 
 function isValidZoom(z) {
-  return validZooms.includes(z);
+  return z && validZooms.includes(z);
 }
 
 const defaultPlayerState = {
