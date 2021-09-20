@@ -168,6 +168,7 @@ button:disabled {
   line-height: 12px;
   border: 2px solid black;
   border-radius: var(--radius);
+  text-indent: 0;
 }
 
 .title {

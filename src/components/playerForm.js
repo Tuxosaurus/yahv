@@ -25,6 +25,7 @@ export const PlayerForm = ({ playerId }) => {
   const characterSlug = state[playerId].selectedCharacterSlug;
   const hasCharacterSlug = characterSlug !== "-";
   const portrait = hasCharacterSlug ? getPortrait(characterSlug) : null;
+  const isMediaLarge = window.innerWidth >= 800;
   const isP1 = playerId === "p1";
 
   return (
@@ -32,7 +33,7 @@ export const PlayerForm = ({ playerId }) => {
       <h2 className="title">
         <span>{playerId.toUpperCase()}</span>
       </h2>
-      {hasCharacterSlug && (
+      {hasCharacterSlug && isMediaLarge && (
         <img
           src={portrait}
           className={isP1 ? "mirror" : ""}

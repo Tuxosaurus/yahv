@@ -29,9 +29,17 @@
   order: 2;
 }
 
-.step-controls .arrows button {
-  font-size: 18px;
-  line-height: 16px;
+.step-controls .arrows button,
+.board-controls .camera {
+  background-image: url("../assets/iconmonstr-arrow-1.svg");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 60% 60%;
+  text-indent: -99999px;
+}
+
+.board-controls .camera {
+  background-image: url("../assets/iconmonstr-photo-camera-4.svg");
 }
 
 .StepSelector-p2 .step-controls .shortcuts {

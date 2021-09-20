@@ -90,24 +90,22 @@ export const Canvas = ({ image, playerId, zoom = 2, cps2 = false }) => {
     const context = canvas.getContext("2d");
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (image) {
-      const img = new Image();
-      img.src = image;
-      img.onload = function () {
-        const canvasW = (img.width * zoom) / ratioFix;
-        const canvasH = img.height * zoom;
-        canvas.width = canvasW;
-        canvas.height = canvasH;
-        context.imageSmoothingEnabled = false;
+    const img = new Image();
+    img.src = image;
+    img.onload = function () {
+      const canvasW = (img.width * zoom) / ratioFix;
+      const canvasH = img.height * zoom;
+      canvas.width = canvasW;
+      canvas.height = canvasH;
+      context.imageSmoothingEnabled = false;
 
-        if (isP1) {
-          context.drawImage(img, 0, 0, canvasW, canvasH);
-        } else {
-          context.scale(-1, 1);
-          context.drawImage(img, 0, 0, canvasW * -1, canvasH);
-        }
-      };
-    }
+      if (isP1) {
+        context.drawImage(img, 0, 0, canvasW, canvasH);
+      } else {
+        context.scale(-1, 1);
+        context.drawImage(img, 0, 0, canvasW * -1, canvasH);
+      }
+    };
   }, [image, isP1, ratioFix, zoom]);
 
   const stylePosition = ({ x, y }) => {

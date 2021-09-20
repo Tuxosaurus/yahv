@@ -120,15 +120,17 @@ export const StepSelector = ({ playerId }) => {
             value={previousStepNumber}
             onClick={handleSelectedStepChange}
             disabled={selectedStepNumber === 0}
+            className="previous mirror"
           >
-            &#129032;
+            Previous step
           </button>
           <button
             value={nextStepNumber}
             onClick={handleSelectedStepChange}
             disabled={selectedStepNumber === totalStepsNumber}
+            className="next"
           >
-            &#129034;
+            Next step
           </button>
         </span>
       </div>

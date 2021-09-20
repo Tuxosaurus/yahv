@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useRef, useState } from "react";
+import React, { Fragment, useContext, useRef } from "react";
 import html2canvas from "html2canvas";
 
 import { Canvas } from "./canvas.js";
@@ -23,7 +23,6 @@ export const Viewer = () => {
   const globalState = useContext(store);
   const { dispatch, state } = globalState;
   const { p1, p2, background, zoom, cps2, scanlines } = state;
-
   const boardRef = useRef(null);
 
   function buildUrl() {
@@ -179,8 +178,8 @@ export const Viewer = () => {
             </button>
           </span>
           <span>
-            <button onClick={capture} title="Smile ;)">
-              &#128247;
+            <button className="camera" onClick={capture} title="Smile ;)">
+              Screenshot
             </button>
             <a
               className="link-button"
