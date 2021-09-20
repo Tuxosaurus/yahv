@@ -7,12 +7,14 @@ import "../styles/canvas.css";
 const forwardP1 = "p1";
 const forwardP2 = "p2";
 const initialPosition = { x: 200, y: 50 };
-const minRestartPosition = { x: 0, y: 0 };
-const maxRestartPosition = { x: 850, y: 300 };
-const minPosition = { x: -100, y: -100 };
-const maxPosition = { x: 920, y: 400 };
 
-export const Canvas = ({ image, playerId, zoom = 2, cps2 = false }) => {
+export const Canvas = ({
+  image,
+  playerId,
+  zoom = 2,
+  cps2 = false,
+  boardSize,
+}) => {
   const globalState = useContext(store);
   const { dispatch, state } = globalState;
   const [stepPosition, setStepPosition] = useState(initialPosition);
@@ -62,12 +64,26 @@ export const Canvas = ({ image, playerId, zoom = 2, cps2 = false }) => {
       diff += raw;
     }
 
-    if (diff < minPosition[axis]) {
-      return minRestartPosition[axis];
-    }
+    // repositioning still far from perfect
+    if (boardSize) {
+      const minRestartPosition = { x: 0, y: 0 };
+      const maxRestartPosition = {
+        x: boardSize.right - 100,
+        y: boardSize.top + 100,
+      };
+      const minPosition = { x: -100, y: -100 };
+      const maxPosition = {
+        x: boardSize.width - 100,
+        y: boardSize.height - 100,
+      };
 
-    if (diff > maxPosition[axis]) {
-      return maxRestartPosition[axis];
+      if (diff < minPosition[axis]) {
+        return minRestartPosition[axis];
+      }
+
+      if (diff > maxPosition[axis]) {
+        return maxRestartPosition[axis];
+      }
     }
 
     return diff;

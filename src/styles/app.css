@@ -46,8 +46,9 @@ body {
 
 .App-main {
   min-width: 300px;
-  max-width: 1000px;
   margin: 0 auto;
+  padding: 0 24px 48px;
+  overflow: hidden;
 }
 
 h1 {
@@ -221,9 +222,19 @@ h2.title {
   position: relative;
 }
 
+.App-playerForms,
+.Viewer-controls {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 /**************************************/
 @media (max-width: 800px) {
   .App-warning {
     display: block;
+  }
+
+  .App-main {
+    padding: 0 0 48px;
   }
 }

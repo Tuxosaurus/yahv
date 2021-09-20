@@ -3,7 +3,8 @@
   top: 0;
   padding-top: 48px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 24px;
   border: 2px solid black;
   border-width: 1px 2px;
   background: black;
@@ -66,4 +67,11 @@
 .Legend li.disabled {
   background-color: #777;
   color: black;
+}
+
+/**************************************/
+@media (max-width: 800px) {
+  .Legend {
+    gap: 0;
+  }
 }
