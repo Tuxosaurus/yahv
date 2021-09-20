@@ -12,7 +12,6 @@ const allData = {
 
 function splitMoveSlug(moveSlug) {
   const split = moveSlug.split("-");
-  console.log(split);
   const slugParts = {
     character: split[0], // ryu
     category: split[1], // normals | specials
@@ -30,7 +29,7 @@ export const getMoveDataFromMoveSlug = (moveSlug) => {
   if (!moveSlug || moveSlug === "-") {
     return null;
   }
-  console.log(moveSlug);
+
   const parts = splitMoveSlug(moveSlug);
   const moveData =
     allData[parts.character][parts.category][parts.stance][parts.move];

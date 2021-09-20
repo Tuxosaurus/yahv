@@ -15,14 +15,14 @@ const maxPosition = { x: 920, y: 400 };
 export const Canvas = ({ image, playerId, zoom = 2, cps2 = false }) => {
   const globalState = useContext(store);
   const { dispatch, state } = globalState;
-  const [isTransparent, setIsTransparent] = useState(false);
   const [stepPosition, setStepPosition] = useState(initialPosition);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const canvasRef = useRef(null);
   const isP1 = playerId === "p1";
   const ratioFix = cps2 ? 1.2 : 1;
   const forwardClass = state.forward === playerId ? "forward" : "";
-  const transparentClass = isTransparent ? "transparent" : "";
+  const mirroredClass = state[playerId].mirror ? "mirror" : "";
+  const transparentClass = state[playerId].transparent ? "transparent" : "";
 
   function handleForwardChange() {
     dispatch({
@@ -31,8 +31,18 @@ export const Canvas = ({ image, playerId, zoom = 2, cps2 = false }) => {
     });
   }
 
+  function handleMirrorChange() {
+    dispatch({
+      type: "mirrorChange",
+      payload: { playerId: playerId },
+    });
+  }
+
   function handleTransparentChange() {
-    setIsTransparent(!isTransparent);
+    dispatch({
+      type: "transparentChange",
+      payload: { playerId: playerId },
+    });
   }
 
   function startCursor(event) {
@@ -116,8 +126,8 @@ export const Canvas = ({ image, playerId, zoom = 2, cps2 = false }) => {
       onDragEnd={stopCursor}
       draggable="true"
     >
-      <canvas ref={canvasRef} />
-      <ul class="Canvas-controls">
+      <canvas ref={canvasRef} className={mirroredClass} />
+      <ul className="Canvas-controls">
         <li
           className="transparent-button"
           role="button"
@@ -125,6 +135,14 @@ export const Canvas = ({ image, playerId, zoom = 2, cps2 = false }) => {
           title="Make transparent"
         >
           T
+        </li>
+        <li
+          className="mirror-button"
+          role="button"
+          onClick={handleMirrorChange}
+          title="Mirror image"
+        >
+          M
         </li>
         <li
           className="forward-button"

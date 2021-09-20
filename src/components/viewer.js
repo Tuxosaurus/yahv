@@ -3,18 +3,11 @@ import html2canvas from "html2canvas";
 
 import { Canvas } from "./canvas.js";
 import { Legend } from "./legend.js";
-import { store } from "./store.js";
+import { store, validBgs } from "./store.js";
 import { StepSelector } from "./stepSelector.js";
 import { getStepImageFilename } from "../data/utils";
 
 import "../styles/viewer.css";
-
-const darkBg = "#333";
-const mediumBg = "#777";
-const brightBg = "#aaa";
-const validBgs = [darkBg, mediumBg, brightBg];
-
-const validZooms = [1, 2, 3];
 
 function retrieveStepImage(stepFilename) {
   const img = require(`../assets/images/${stepFilename}`);
@@ -28,49 +21,49 @@ function retrieveStepImage(stepFilename) {
 
 export const Viewer = () => {
   const globalState = useContext(store);
-  const { state } = globalState;
-  const { p1, p2 } = state;
+  const { dispatch, state } = globalState;
+  const { p1, p2, background, zoom, cps2, scanlines } = state;
 
-  const [background, setBackground] = useState(mediumBg);
-  const [zoom, setZoom] = useState(validZooms[1]);
-  const [cps2, setCps2] = useState(false);
-  const [scanlines, setScanlines] = useState(false);
   const boardRef = useRef(null);
 
   function buildUrl() {
-    let url = `?forward=${state.forward}`;
+    let url = `?fwd=${state.forward}`;
+    url += `&bg=${state.background}`;
+    url += `&zoom=${state.zoom}`;
+    if (cps2) {
+      url += `&cps2=true`;
+    }
+    if (scanlines) {
+      url += `&scanlines=true`;
+    }
     if (p1.selectedMoveSlug !== "-") {
-      url += `&p1=${p1.selectedMoveSlug}-${p1.selectedStepNumber}`;
+      url += `&p1=${p1.selectedMoveSlug}-${p1.selectedStepNumber}${
+        p1.transparent ? "t" : ""
+      }${p1.mirror ? "m" : ""}`;
     }
     if (p2.selectedMoveSlug !== "-") {
-      url += `&p2=${p2.selectedMoveSlug}-${p2.selectedStepNumber}`;
+      url += `&p2=${p2.selectedMoveSlug}-${p2.selectedStepNumber}${
+        p2.transparent ? "t" : ""
+      }${p2.mirror ? "m" : ""}`;
     }
 
     return url;
   }
 
   function handleZoomChange(event) {
-    const validZoom = validZooms.includes(Number(event.target.value))
-      ? Number(event.target.value)
-      : validZooms[1];
-
-    setZoom(validZoom);
+    dispatch({ type: "zoomChange", payload: event.target.value });
   }
 
   function handleBackgroundChange(event) {
-    const validBg = validBgs.includes(event.target.value)
-      ? event.target.value
-      : mediumBg;
-
-    setBackground(validBg);
+    dispatch({ type: "backgroundChange", payload: event.target.value });
   }
 
   function handleCps2Change() {
-    setCps2(!Boolean(cps2));
+    dispatch({ type: "cps2Change" });
   }
 
   function handleScanlinesChange() {
-    setScanlines(!Boolean(scanlines));
+    dispatch({ type: "scanlinesChange" });
   }
 
   function capture() {
@@ -107,7 +100,7 @@ export const Viewer = () => {
           ref={boardRef}
           className={`board${scanlines ? " scanlines" : ""}`}
           style={{
-            backgroundColor: background,
+            backgroundColor: validBgs[background],
           }}
         >
           {stepImageP1 && (
@@ -120,23 +113,23 @@ export const Viewer = () => {
         <div className="board-controls">
           <span>
             <button
-              value={darkBg}
+              value="0"
               onClick={handleBackgroundChange}
-              disabled={background === darkBg}
+              disabled={Number(background) === 0}
             >
               Dark
             </button>
             <button
-              value={mediumBg}
+              value="1"
               onClick={handleBackgroundChange}
-              disabled={background === mediumBg}
+              disabled={Number(background) === 1}
             >
               Medium
             </button>
             <button
-              value={brightBg}
+              value="2"
               onClick={handleBackgroundChange}
-              disabled={background === brightBg}
+              disabled={Number(background) === 2}
             >
               Bright
             </button>
@@ -169,7 +162,7 @@ export const Viewer = () => {
               onClick={handleCps2Change}
               title="Pixel ratio as seen on original hardware (approximation)"
             >
-              CPS2 {cps2 === true ? "ON" : "OFF"}
+              CPS2 {cps2 ? "ON" : "OFF"}
             </button>
             <button
               onClick={handleScanlinesChange}

@@ -60,6 +60,9 @@
   margin: 4px 0 0;
   border: 2px solid var(--colorP1);
   border-radius: var(--radius);
+  line-height: 18px;
+  font-size: var(--smallText);
+  font-weight: var(--bold);
   cursor: pointer;
 }
 
@@ -82,18 +85,21 @@
   right: -104px;
 }
 
+.mirror-button,
 .transparent-button {
+  background: inherit;
+  color: var(--colorMain);
+}
+
+.Canvas .mirror + .Canvas-controls .mirror-button,
+.transparent .transparent-button {
   background: rgba(255, 255, 255, 1);
   color: var(--colorP1);
 }
 
-.Canvas-p2 .transparent-button {
+.Canvas-p2 .mirror + .Canvas-controls .mirror-button,
+.Canvas-p2 .transparent .transparent-button {
   color: var(--colorP2);
-}
-
-.transparent .transparent-button {
-  background: inherit;
-  color: var(--colorMain);
 }
 
 .forward-button {
@@ -134,11 +140,14 @@
   );
 }
 
-.forward-button .p1 {
+.forward-button .p1,
+.forward-button .p2 {
   margin-left: 3px;
+  font-size: 16px;
 }
 
 .forward-button .p2 {
+  margin-left: 0;
   margin-right: 3px;
 }
 

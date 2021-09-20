@@ -1,14 +1,28 @@
 import { createContext, useReducer } from "react";
 
+const urlParams = new URLSearchParams(window.location.search);
+
+const darkBg = "#333";
+const mediumBg = "#777";
+const brightBg = "#aaa";
+export const validBgs = [darkBg, mediumBg, brightBg];
+
+export const validZooms = ["1", "2", "3"];
+
+function isValidBackground(b) {
+  return b <= validBgs.length;
+}
+
+function isValidZoom(z) {
+  return validZooms.includes(z);
+}
+
 const defaultPlayerState = {
   selectedCharacterSlug: "-",
   selectedMoveSlug: "-",
   selectedStepNumber: 0,
-};
-
-const defaultForward = () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get("forward") || "p1";
+  mirror: false,
+  transparent: false,
 };
 
 const getPlayerStateFromUrl = (playerId, url) => {
@@ -24,13 +38,15 @@ const getPlayerStateFromUrl = (playerId, url) => {
 
   const searchParts = searchParams.split("-");
   const characterSlug = searchParts[0];
-  const stepNumber = searchParts.pop();
+  const stepOptions = searchParts.pop();
   const moveSlug = searchParts.join("-");
 
   return {
     selectedCharacterSlug: characterSlug,
     selectedMoveSlug: moveSlug,
-    selectedStepNumber: stepNumber,
+    selectedStepNumber: parseInt(stepOptions),
+    transparent: stepOptions.includes("t"),
+    mirror: stepOptions.includes("m"),
   };
 };
 
@@ -41,7 +57,11 @@ const defaultState = {
   p2: {
     ...getPlayerStateFromUrl("p2", window.location),
   },
-  forward: defaultForward(),
+  forward: urlParams.get("fwd") || "p1",
+  background: isValidBackground(urlParams.get("bg")) ? urlParams.get("bg") : 1,
+  zoom: isValidZoom(urlParams.get("zoom")) ? urlParams.get("zoom") : 2,
+  cps2: urlParams.get("cps2") || false,
+  scanlines: urlParams.get("scanlines") || false,
 };
 
 export const store = createContext(defaultState);
@@ -79,8 +99,38 @@ export const StateProvider = ({ children }) => {
             selectedStepNumber: action.payload.selectedStepNumber,
           },
         };
+      case "mirrorChange":
+        return {
+          ...state,
+          [playerId]: {
+            ...playerState,
+            mirror: !playerState.mirror,
+          },
+        };
+      case "transparentChange":
+        return {
+          ...state,
+          [playerId]: {
+            ...playerState,
+            transparent: !playerState.transparent,
+          },
+        };
       case "forwardChange":
         return { ...state, forward: action.payload };
+      case "backgroundChange":
+        return {
+          ...state,
+          background: isValidBackground(action.payload) ? action.payload : 1,
+        };
+      case "zoomChange":
+        return {
+          ...state,
+          zoom: isValidZoom(action.payload) ? action.payload : 1,
+        };
+      case "cps2Change":
+        return { ...state, cps2: !state.cps2 };
+      case "scanlinesChange":
+        return { ...state, scanlines: !state.scanlines };
       default:
         throw new Error();
     }
