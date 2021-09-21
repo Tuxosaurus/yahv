@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { PlayerForm } from "./components/playerForm.js";
 import { store } from "./components/store.js";
@@ -6,14 +6,24 @@ import { Viewer } from "./components/viewer.js";
 
 import "./styles/app.css";
 
+const localStorage = window.localStorage;
+
 export const App = () => {
   const globalState = useContext(store);
   const { state } = globalState;
   const hasP1Move = state.p1.selectedMoveSlug !== "";
   const hasP2Move = state.p2.selectedMoveSlug !== "";
+  const [useSoftTheme, setUseSoftTheme] = useState(
+    JSON.parse(localStorage.getItem("softTheme"))
+  );
+
+  function handleThemeChange(event) {
+    setUseSoftTheme(event.target.checked);
+    localStorage.setItem("softTheme", JSON.stringify(event.target.checked));
+  }
 
   return (
-    <div className="App">
+    <div className={`App${useSoftTheme ? " soft-theme" : ""}`}>
       <main className="App-main">
         <div className="App-playerForms">
           <PlayerForm playerId="p1" />
@@ -38,6 +48,17 @@ export const App = () => {
         </h1>
       </header>
       <footer className="App-footer">
+        <section className="App-settings">
+          <label>
+            Soft theme{" "}
+            <input
+              type="checkbox"
+              name="softTheme"
+              onChange={handleThemeChange}
+              checked={useSoftTheme}
+            />
+          </label>
+        </section>
         <p>
           Special thanks to the{" "}
           <a

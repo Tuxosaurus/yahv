@@ -8,12 +8,25 @@
   --radius: 4px;
 }
 
+.App.soft-theme {
+  --colorMain: #f3f3f3;
+  --colorP1: #b94b4b;
+  --colorP2: #48488c;
+}
+
+html,
+body,
+#root,
+.App {
+  min-height: 100vh;
+}
+
 * {
   padding: 0;
   margin: 0;
 }
 
-body {
+.App {
   background: linear-gradient(to right, var(--colorP1) 50%, var(--colorP2) 50%);
   color: var(--colorMain);
   font-family: "Roboto", "Helvetica Neue", sans-serif;
@@ -36,6 +49,22 @@ body {
 .App-footer {
   margin-top: 0;
   border-top: 1px dashed #777;
+}
+
+.App-settings {
+  border-bottom: 1px dashed #777;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.App-settings label {
+  display: block;
+  padding-left: 24px;
+  background-image: url("../assets/iconmonstr-gear-1.svg");
+  background-repeat: no-repeat;
+  background-position: 8px 50%;
+  background-size: 12px 12px;
 }
 
 .App-warning {
