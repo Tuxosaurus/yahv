@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/yahv/static/css/main.b95f25be.chunk.css",
-    "main.js": "/yahv/static/js/main.a26e7ce1.chunk.js",
-    "main.js.map": "/yahv/static/js/main.a26e7ce1.chunk.js.map",
+    "main.css": "/yahv/static/css/main.f7230e1f.chunk.css",
+    "main.js": "/yahv/static/js/main.f495d974.chunk.js",
+    "main.js.map": "/yahv/static/js/main.f495d974.chunk.js.map",
     "runtime-main.js": "/yahv/static/js/runtime-main.b3129c53.js",
     "runtime-main.js.map": "/yahv/static/js/runtime-main.b3129c53.js.map",
     "static/js/2.5ca86a91.chunk.js": "/yahv/static/js/2.5ca86a91.chunk.js",
     "static/js/2.5ca86a91.chunk.js.map": "/yahv/static/js/2.5ca86a91.chunk.js.map",
     "index.html": "/yahv/index.html",
-    "static/css/main.b95f25be.chunk.css.map": "/yahv/static/css/main.b95f25be.chunk.css.map",
+    "static/css/main.f7230e1f.chunk.css.map": "/yahv/static/css/main.f7230e1f.chunk.css.map",
     "static/js/2.5ca86a91.chunk.js.LICENSE.txt": "/yahv/static/js/2.5ca86a91.chunk.js.LICENSE.txt",
     "static/media/blanka_broll17anm.gif": "/yahv/static/media/blanka_broll17anm.5b89bc5e.gif",
     "static/media/blanka_elec2anm.gif": "/yahv/static/media/blanka_elec2anm.17e10379.gif",
@@ -38,7 +38,7 @@
   "entrypoints": [
     "static/js/runtime-main.b3129c53.js",
     "static/js/2.5ca86a91.chunk.js",
-    "static/css/main.b95f25be.chunk.css",
-    "static/js/main.a26e7ce1.chunk.js"
+    "static/css/main.f7230e1f.chunk.css",
+    "static/js/main.f495d974.chunk.js"
   ]
 }
