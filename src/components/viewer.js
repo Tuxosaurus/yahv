@@ -66,14 +66,7 @@ export const Viewer = () => {
   }
 
   function capture() {
-    const { width, height } = boardRef.current.getBoundingClientRect();
-    const options = {
-      width: width,
-      height: height,
-      windowWidth: width,
-      windowHeight: height,
-    };
-    html2canvas(boardRef.current, options).then(function (canvas) {
+    html2canvas(boardRef.current).then(function (canvas) {
       window.open(canvas.toDataURL(), "_blank");
     });
   }
