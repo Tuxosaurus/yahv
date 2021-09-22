@@ -64,6 +64,7 @@
   line-height: 18px;
   font-size: var(--smallText);
   font-weight: var(--bold);
+  color: white;
   cursor: pointer;
 }
 
@@ -89,7 +90,6 @@
 .mirror-button,
 .transparent-button {
   background: inherit;
-  color: var(--colorMain);
 }
 
 .Canvas .mirror + .Canvas-controls .mirror-button,
@@ -99,7 +99,7 @@
 }
 
 .Canvas-p2 .mirror + .Canvas-controls .mirror-button,
-.Canvas-p2 .transparent .transparent-button {
+.Canvas-p2.transparent .transparent-button {
   color: var(--colorP2);
 }
 
@@ -164,5 +164,5 @@
 
 .Canvas-p1.forward .forward-button .p2,
 .Canvas-p2.forward .forward-button .p1 {
-  color: var(--colorMain);
+  color: white;
 }

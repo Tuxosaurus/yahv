@@ -22,51 +22,45 @@
   font-weight: var(--bold);
   text-align: center;
   border: 1px solid black;
+  color: black;
 }
 
 .Legend li.red {
   background-color: #ff0000;
-  color: black;
 }
 
 .Legend li.blue {
   background-color: #0000ff;
-  color: var(--colorMain);
+  color: white;
 }
 
 .Legend li.black {
   background-color: #010101;
-  color: var(--colorMain);
+  color: white;
 }
 
 .Legend li.white {
   background-color: #fefefe;
-  color: black;
 }
 
 .Legend li.green {
   background-color: #00ff00;
-  color: black;
 }
 
 .Legend li.yellow {
   background-color: yellow;
-  color: black;
 }
 
 .Legend li.cyan {
   background-color: #00ffff;
-  color: black;
 }
 
 .Legend li.orange {
   background-color: #ff6600;
-  color: black;
 }
 
 .Legend li.disabled {
   background-color: #777;
-  color: black;
 }
 
 /**************************************/

@@ -1,11 +1,22 @@
 import { createContext, useReducer } from "react";
 
+const localStorage = window.localStorage;
+const hasLocalStorageDarkTheme = localStorage.getItem("darkTheme") !== null;
+const browserUsesDarkMode = window.matchMedia(
+  "(prefers-color-scheme: dark)"
+).matches;
+
+export const isUsingDarkTheme = hasLocalStorageDarkTheme
+  ? JSON.parse(localStorage.getItem("darkTheme"))
+  : browserUsesDarkMode;
+
 const urlParams = new URLSearchParams(window.location.search);
 
 const darkBg = "#333";
 const mediumBg = "#777";
 const brightBg = "#aaa";
 export const validBgs = [darkBg, mediumBg, brightBg];
+const defaultBg = isUsingDarkTheme ? 0 : 1;
 
 export const validZooms = ["1", "2", "3"];
 
@@ -58,7 +69,9 @@ const defaultState = {
     ...getPlayerStateFromUrl("p2", window.location),
   },
   forward: urlParams.get("fwd") || "p1",
-  background: isValidBackground(urlParams.get("bg")) ? urlParams.get("bg") : 1,
+  background: isValidBackground(urlParams.get("bg"))
+    ? urlParams.get("bg")
+    : defaultBg,
   zoom: isValidZoom(urlParams.get("zoom")) ? urlParams.get("zoom") : 2,
   cps2: urlParams.get("cps2") || false,
   scanlines: urlParams.get("scanlines") || false,

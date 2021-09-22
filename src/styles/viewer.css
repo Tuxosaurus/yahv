@@ -42,6 +42,23 @@
   background-image: url("../assets/iconmonstr-photo-camera-4.svg");
 }
 
+.dark-theme .step-controls button:disabled,
+.dark-theme .board-controls button:disabled {
+  color: var(--colorMain);
+}
+
+.dark-theme .step-controls .arrows button {
+  background-image: url("../assets/iconmonstr-arrow-1-white.svg");
+}
+
+.dark-theme .step-controls .arrows button:disabled {
+  background-image: url("../assets/iconmonstr-arrow-1.svg");
+}
+
+.dark-theme .board-controls .camera {
+  background-image: url("../assets/iconmonstr-photo-camera-4-white.svg");
+}
+
 .StepSelector-p2 .step-controls .shortcuts {
   order: 2;
 }

@@ -3,15 +3,25 @@
   --canvasH: 500;
   --smallText: 10px;
   --colorMain: white;
+  --colorSub: black;
+  --colorSelectHover: #fffffd;
+  --colorButtonHover: #ddd;
+  --colorButtonActive: #aaa;
+  --colorButtonDisabled: #999;
   --colorP1: red;
   --colorP2: blue;
   --radius: 4px;
 }
 
-.App.soft-theme {
-  --colorMain: #f3f3f3;
-  --colorP1: #b94b4b;
-  --colorP2: #48488c;
+.App.dark-theme {
+  --colorMain: black;
+  --colorSub: #f3f3f3;
+  --colorSelectHover: #000001;
+  --colorButtonHover: #777;
+  --colorButtonActive: #333;
+  --colorButtonDisabled: #555;
+  --colorP1: #5e2626;
+  --colorP2: #2b2b55;
 }
 
 html,
@@ -40,6 +50,7 @@ body,
   margin: 16px auto 0;
   padding: 8px;
   background-color: black;
+  color: white;
   text-align: center;
   font-size: var(--smallText);
   line-height: 14px;
@@ -70,7 +81,7 @@ body,
 .App-warning {
   display: none;
   background-color: var(--colorMain);
-  color: black;
+  color: var(--colorSub);
 }
 
 .App-main {
@@ -94,7 +105,7 @@ h1 span {
 }
 
 a:not(.link-button) {
-  color: var(--colorMain);
+  color: white;
   text-decoration: underline;
 }
 
@@ -112,23 +123,23 @@ button,
   padding: 4px;
   height: 32px;
   background: var(--colorMain);
-  color: black;
+  color: var(--colorSub);
   font-weight: var(--bold);
 }
 
 select:hover {
   cursor: pointer;
-  background: #fffffd;
+  background: var(--colorSelectHover);
 }
 
 button:hover,
 .link-button:hover {
   cursor: pointer;
-  background-color: #ddd;
+  background-color: var(--colorButtonHover);
 }
 button:active,
 .link-button:active {
-  background-color: #aaa;
+  background-color: var(--colorButtonActive);
 }
 
 button,
@@ -154,21 +165,22 @@ button + .link-button {
 
 option {
   font-weight: 300;
-  background: #fff;
+  background: var(--colorMain);
 }
 
 optgroup {
-  background: #ccc;
-  color: black;
+  background: var(--colorButtonDisabled);
+  color: var(--colorSub);
 }
 
 button:disabled {
-  background: #999;
-  color: black;
+  background: var(--colorButtonDisabled);
+  color: var(--colorSub);
+  cursor: default;
 }
 
 .selected {
-  background-color: black;
+  background-color: var(--colorSub);
   color: var(--colorMain);
 }
 
@@ -191,7 +203,7 @@ button:disabled {
   width: 150%;
   padding: 4px 8px;
   background: var(--colorMain);
-  color: black;
+  color: var(--colorSub);
   text-align: left;
   font-weight: 300;
   font-size: var(--smallText);

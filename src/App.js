@@ -1,29 +1,28 @@
 import React, { useContext, useState } from "react";
 
 import { PlayerForm } from "./components/playerForm.js";
-import { store } from "./components/store.js";
+import { isUsingDarkTheme, store } from "./components/store.js";
 import { Viewer } from "./components/viewer.js";
 
 import "./styles/app.css";
-
-const localStorage = window.localStorage;
 
 export const App = () => {
   const globalState = useContext(store);
   const { state } = globalState;
   const hasP1Move = state.p1.selectedMoveSlug !== "";
   const hasP2Move = state.p2.selectedMoveSlug !== "";
-  const [useSoftTheme, setUseSoftTheme] = useState(
-    JSON.parse(localStorage.getItem("softTheme"))
-  );
+  const [useDarkTheme, setUseDarkTheme] = useState(isUsingDarkTheme);
 
   function handleThemeChange(event) {
-    setUseSoftTheme(event.target.checked);
-    localStorage.setItem("softTheme", JSON.stringify(event.target.checked));
+    setUseDarkTheme(event.target.checked);
+    window.localStorage.setItem(
+      "darkTheme",
+      JSON.stringify(event.target.checked)
+    );
   }
 
   return (
-    <div className={`App${useSoftTheme ? " soft-theme" : ""}`}>
+    <div className={`App${useDarkTheme ? " dark-theme" : ""}`}>
       <main className="App-main">
         <div className="App-playerForms">
           <PlayerForm playerId="p1" />
@@ -50,12 +49,12 @@ export const App = () => {
       <footer className="App-footer">
         <section className="App-settings">
           <label>
-            Soft theme{" "}
+            Dark theme{" "}
             <input
               type="checkbox"
-              name="softTheme"
+              name="darkTheme"
               onChange={handleThemeChange}
-              checked={useSoftTheme}
+              checked={useDarkTheme ? "checked" : ""}
             />
           </label>
         </section>
