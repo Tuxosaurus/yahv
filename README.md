@@ -1,6 +1,18 @@
-# Yet Another Hitbox Viewer
+## Yet Another Hitbox Viewer
 
-## for Super Street Fighter 2X/Turbo
+Comparative hitbox viewer for Super Street Fighter 2X/Turbo
 
-Built using Create React App
-https://create-react-app.dev/
+### Images & Data:
+
+- [Shoryuken Wiki](https://srk.shib.live/w/Super_Street_Fighter_2_Turbo)
+
+### Built using:
+
+- [Create React App](https://create-react-app.dev/)
+- [html2canvas](https://html2canvas.hertzen.com/)
+- [react-draggable](https://github.com/react-grid-layout/react-draggable)
+
+### Alternatives:
+
+- [DoctorGuile](https://doctorguile.github.io/ssf2st)
+- [SSF2X Hitbox Guide - Android](https://play.google.com/store/apps/details?id=com.okerboriou.framedatassf2x)
