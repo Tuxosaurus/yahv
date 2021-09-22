@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
+import Draggable from "react-draggable";
 
 import { store } from "./store.js";
 
@@ -6,19 +7,10 @@ import "../styles/canvas.css";
 
 const forwardP1 = "p1";
 const forwardP2 = "p2";
-const initialPosition = { x: 200, y: 50 };
 
-export const Canvas = ({
-  image,
-  playerId,
-  zoom = 2,
-  cps2 = false,
-  boardSize,
-}) => {
+export const Canvas = ({ image, playerId, zoom = 2, cps2 = false }) => {
   const globalState = useContext(store);
   const { dispatch, state } = globalState;
-  const [stepPosition, setStepPosition] = useState(initialPosition);
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const canvasRef = useRef(null);
   const isP1 = playerId === "p1";
   const ratioFix = cps2 ? 1.2 : 1;
@@ -26,10 +18,10 @@ export const Canvas = ({
   const mirroredClass = state[playerId].mirror ? "mirror" : "";
   const transparentClass = state[playerId].transparent ? "transparent" : "";
 
-  function handleForwardChange() {
+  function forceForwardChange() {
     dispatch({
       type: "forwardChange",
-      payload: state.forward === forwardP1 ? forwardP2 : forwardP1,
+      payload: isP1 ? forwardP1 : forwardP2,
     });
   }
 
@@ -44,60 +36,6 @@ export const Canvas = ({
     dispatch({
       type: "transparentChange",
       payload: { playerId: playerId },
-    });
-  }
-
-  function startCursor(event) {
-    setCursorPosition({
-      x: event.screenX,
-      y: event.screenY,
-    });
-  }
-
-  function getDiffPosition(axis, stopPosition) {
-    let diff = stepPosition[axis];
-    const raw = cursorPosition[axis] - stopPosition;
-
-    if (axis === "x") {
-      isP1 ? (diff -= raw) : (diff += raw);
-    } else {
-      diff += raw;
-    }
-
-    // repositioning still far from perfect
-    if (boardSize) {
-      const minRestartPosition = { x: 0, y: 0 };
-      const maxRestartPosition = {
-        x: boardSize.right - 100,
-        y: boardSize.top + 100,
-      };
-      const minPosition = { x: -100, y: -100 };
-      const maxPosition = {
-        x: boardSize.width - 100,
-        y: boardSize.height - 100,
-      };
-
-      if (diff < minPosition[axis]) {
-        return minRestartPosition[axis];
-      }
-
-      if (diff > maxPosition[axis]) {
-        return maxRestartPosition[axis];
-      }
-    }
-
-    return diff;
-  }
-
-  function stopCursor(event) {
-    const diff = {
-      x: getDiffPosition("x", event.screenX),
-      y: getDiffPosition("y", event.screenY),
-    };
-
-    setStepPosition({
-      x: diff.x,
-      y: diff.y,
     });
   }
 
@@ -124,50 +62,31 @@ export const Canvas = ({
     };
   }, [image, isP1, ratioFix, zoom]);
 
-  const stylePosition = ({ x, y }) => {
-    return {
-      left: isP1 ? `${x}px` : "auto",
-      right: !isP1 ? `${x}px` : "auto",
-      bottom: y + "px",
-    };
-  };
-
   return (
-    <div
-      className={`Canvas Canvas-${playerId} ${forwardClass} ${transparentClass}`}
-      style={stylePosition(stepPosition)}
-      onDragStart={startCursor}
-      onDragEnd={stopCursor}
-      draggable="true"
-    >
-      <canvas ref={canvasRef} className={mirroredClass} />
-      <ul className="Canvas-controls">
-        <li
-          className="transparent-button"
-          role="button"
-          onClick={handleTransparentChange}
-          title="Make transparent"
-        >
-          T
-        </li>
-        <li
-          className="mirror-button"
-          role="button"
-          onClick={handleMirrorChange}
-          title="Mirror image"
-        >
-          M
-        </li>
-        <li
-          className="forward-button"
-          role="button"
-          onClick={handleForwardChange}
-          title="Bring forward"
-        >
-          <span className="p1">&#8321;</span>
-          <span className="p2">&#178;</span>
-        </li>
-      </ul>
-    </div>
+    <Draggable bounds="parent" onMouseDown={forceForwardChange}>
+      <div
+        className={`Canvas Canvas-${playerId} ${forwardClass} ${transparentClass}`}
+      >
+        <canvas ref={canvasRef} className={mirroredClass} />
+        <ul className="Canvas-controls">
+          <li
+            className="transparent-button"
+            role="button"
+            onClick={handleTransparentChange}
+            title="Make transparent"
+          >
+            T
+          </li>
+          <li
+            className="mirror-button"
+            role="button"
+            onClick={handleMirrorChange}
+            title="Mirror image"
+          >
+            M
+          </li>
+        </ul>
+      </div>
+    </Draggable>
   );
 };

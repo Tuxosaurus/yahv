@@ -103,26 +103,10 @@ export const Viewer = () => {
           }}
         >
           {stepImageP1 && (
-            <Canvas
-              playerId="p1"
-              image={stepImageP1}
-              zoom={zoom}
-              cps2={cps2}
-              boardSize={
-                boardRef.current && boardRef.current.getBoundingClientRect()
-              }
-            />
+            <Canvas playerId="p1" image={stepImageP1} zoom={zoom} cps2={cps2} />
           )}
           {stepImageP2 && (
-            <Canvas
-              playerId="p2"
-              image={stepImageP2}
-              zoom={zoom}
-              cps2={cps2}
-              boardSize={
-                boardRef.current && boardRef.current.getBoundingClientRect()
-              }
-            />
+            <Canvas playerId="p2" image={stepImageP2} zoom={zoom} cps2={cps2} />
           )}
         </div>
         <div className="board-controls">
