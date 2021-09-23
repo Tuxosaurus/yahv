@@ -65,9 +65,28 @@ export const Viewer = () => {
     dispatch({ type: "scanlinesChange" });
   }
 
+  // https://www.it-swarm-fr.com/fr/html2canvas/comment-enregistrer-limage-sur-lordinateur-local-de-lutilisateur-laide-de-html2canvas/1054259197/
+  function download(uri, filename) {
+    const link = document.createElement("a");
+
+    if (typeof link.download === "string") {
+      link.href = uri;
+      link.download = filename;
+
+      //Firefox requires the link to be in the body
+      document.body.appendChild(link);
+
+      link.click();
+
+      document.body.removeChild(link);
+    } else {
+      window.open(uri);
+    }
+  }
+
   function capture() {
     html2canvas(boardRef.current).then(function (canvas) {
-      window.open(canvas.toDataURL(), "_blank");
+      download(canvas.toDataURL(), `yahv${buildUrl()}.png`);
     });
   }
 
