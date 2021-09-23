@@ -3,6 +3,11 @@
   z-index: 30;
 }
 
+.Viewer {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
 .StepSelector select {
   position: absolute;
   top: 16px;

@@ -36,14 +36,22 @@ export const Viewer = () => {
       url += `&scanlines=true`;
     }
     if (p1.selectedMoveSlug !== "-") {
-      url += `&p1=${p1.selectedMoveSlug}-${p1.selectedStepNumber}${
-        p1.transparent ? "t" : ""
-      }${p1.mirror ? "m" : ""}`;
+      url += `&p1=${p1.selectedMoveSlug}`;
+      url += `-${p1.selectedStepNumber}`;
+      url += `${p1.transparent ? "t" : ""}`;
+      url += `${p1.mirror ? "m" : ""}`;
+      if (p1.position) {
+        url += `&p1xy=${p1.position.x},${p1.position.y}`;
+      }
     }
     if (p2.selectedMoveSlug !== "-") {
-      url += `&p2=${p2.selectedMoveSlug}-${p2.selectedStepNumber}${
-        p2.transparent ? "t" : ""
-      }${p2.mirror ? "m" : ""}`;
+      url += `&p2=${p2.selectedMoveSlug}`;
+      url += `-${p2.selectedStepNumber}`;
+      url += `${p2.transparent ? "t" : ""}`;
+      url += `${p2.mirror ? "m" : ""}`;
+      if (p2.position) {
+        url += `&p2xy=${p2.position.x},${p2.position.y}`;
+      }
     }
 
     return url;

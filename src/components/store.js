@@ -34,6 +34,10 @@ const defaultPlayerState = {
   selectedStepNumber: 0,
   mirror: false,
   transparent: false,
+  position: {
+    x: 0,
+    y: 0,
+  },
 };
 
 const getPlayerStateFromUrl = (playerId, url) => {
@@ -41,8 +45,9 @@ const getPlayerStateFromUrl = (playerId, url) => {
     return defaultPlayerState;
   }
 
-  // &p1=chunli-normals-stand_normals-far_lp-1
+  // &p1=chunli-normals-stand_normals-far_lp-1tm
   const searchParams = new URLSearchParams(url.search).get(playerId);
+
   if (!searchParams) {
     return defaultPlayerState;
   }
@@ -52,12 +57,27 @@ const getPlayerStateFromUrl = (playerId, url) => {
   const stepOptions = searchParts.pop();
   const moveSlug = searchParts.join("-");
 
+  // &p1xy=120,-33
+  let positionX = 0;
+  let positionY = 0;
+  const positionParams = new URLSearchParams(url.search).get(`${playerId}xy`);
+
+  if (positionParams) {
+    const positions = positionParams.split(",");
+    positionX = positions[0];
+    positionY = positions[1];
+  }
+
   return {
     selectedCharacterSlug: characterSlug,
     selectedMoveSlug: moveSlug,
     selectedStepNumber: parseInt(stepOptions),
     transparent: stepOptions.includes("t"),
     mirror: stepOptions.includes("m"),
+    position: {
+      x: positionX,
+      y: positionY,
+    },
   };
 };
 
@@ -110,6 +130,14 @@ export const StateProvider = ({ children }) => {
           [playerId]: {
             ...playerState,
             selectedStepNumber: action.payload.selectedStepNumber,
+          },
+        };
+      case "positionChange":
+        return {
+          ...state,
+          [playerId]: {
+            ...playerState,
+            position: action.payload.position,
           },
         };
       case "mirrorChange":

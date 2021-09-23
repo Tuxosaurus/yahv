@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Draggable from "react-draggable";
 
 import { store } from "./store.js";
@@ -14,9 +14,41 @@ export const Canvas = ({ image, playerId, zoom = 2, cps2 = false }) => {
   const canvasRef = useRef(null);
   const isP1 = playerId === "p1";
   const ratioFix = cps2 ? 1.2 : 1;
+  const playerState = state[playerId];
   const forwardClass = state.forward === playerId ? "forward" : "";
-  const mirroredClass = state[playerId].mirror ? "mirror" : "";
-  const transparentClass = state[playerId].transparent ? "transparent" : "";
+  const mirroredClass = playerState.mirror ? "mirror" : "";
+  const transparentClass = playerState.transparent ? "transparent" : "";
+  const [deltaPosition, setDeltaPosition] = useState({
+    x: parseInt(playerState?.position?.x) || 0,
+    y: parseInt(playerState?.position?.y) || 0,
+  });
+
+  function recordDrag(event, ui) {
+    event.preventDefault();
+    const { x, y } = deltaPosition;
+    const { deltaX, deltaY } = ui;
+
+    if (!isNaN(deltaX) && !isNaN(deltaY)) {
+      setDeltaPosition({
+        x: x + deltaX,
+        y: y + deltaY,
+      });
+    }
+  }
+
+  function handleDrag() {
+    const { x, y } = deltaPosition;
+    dispatch({
+      type: "positionChange",
+      payload: {
+        playerId: playerId,
+        position: {
+          x: x,
+          y: y,
+        },
+      },
+    });
+  }
 
   function forceForwardChange() {
     dispatch({
@@ -63,7 +95,16 @@ export const Canvas = ({ image, playerId, zoom = 2, cps2 = false }) => {
   }, [image, isP1, ratioFix, zoom]);
 
   return (
-    <Draggable bounds="parent" onMouseDown={forceForwardChange}>
+    <Draggable
+      defaultPosition={{
+        x: deltaPosition.x,
+        y: deltaPosition.y,
+      }}
+      bounds="parent"
+      onMouseDown={forceForwardChange}
+      onDrag={recordDrag}
+      onStop={handleDrag}
+    >
       <div
         className={`Canvas Canvas-${playerId} ${forwardClass} ${transparentClass}`}
       >
