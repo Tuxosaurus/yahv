@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/yahv/static/css/main.46f178fe.chunk.css",
-    "main.js": "/yahv/static/js/main.c96c41f6.chunk.js",
-    "main.js.map": "/yahv/static/js/main.c96c41f6.chunk.js.map",
+    "main.js": "/yahv/static/js/main.aa32c19d.chunk.js",
+    "main.js.map": "/yahv/static/js/main.aa32c19d.chunk.js.map",
     "runtime-main.js": "/yahv/static/js/runtime-main.b3129c53.js",
     "runtime-main.js.map": "/yahv/static/js/runtime-main.b3129c53.js.map",
     "static/js/2.4e517b3b.chunk.js": "/yahv/static/js/2.4e517b3b.chunk.js",
@@ -40,6 +40,6 @@
     "static/js/runtime-main.b3129c53.js",
     "static/js/2.4e517b3b.chunk.js",
     "static/css/main.46f178fe.chunk.css",
-    "static/js/main.c96c41f6.chunk.js"
+    "static/js/main.aa32c19d.chunk.js"
   ]
 }
