@@ -26,21 +26,12 @@
   margin: 0 16px;
 }
 
-.step-controls .shortcuts {
-  order: 1;
-}
-
-.step-controls .arrows {
-  order: 2;
-}
-
 .step-controls .arrows button,
 .board-controls .camera {
   background-image: url("../assets/iconmonstr-arrow-1.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: 60% 60%;
-  text-indent: -99999px;
 }
 
 .board-controls .camera {
@@ -66,6 +57,7 @@
 
 .StepSelector-p2 .step-controls .shortcuts {
   order: 2;
+  text-align: right;
 }
 
 .StepSelector-p2 .step-controls .arrows {
@@ -83,7 +75,6 @@
     linear-gradient(to bottom, teal 1px, transparent 1px);
   border: 2px dashed black;
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 .board.scanlines {
@@ -115,5 +106,5 @@
 
 .board-controls > span {
   display: inline-block;
-  margin-right: 16px;
+  margin-right: 8px;
 }

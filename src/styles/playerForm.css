@@ -94,11 +94,12 @@ img + .CharacterSelector {
     display: none;
   }
 
-  .PlayerForm h2.title {
-    margin-bottom: 16px;
+  .CharacterSelector,
+  img + .CharacterSelector {
+    width: calc(100% - 80px);
   }
 
-  .CharacterSelector {
-    width: calc(100% - 64px);
+  .PlayerForm h2.title {
+    margin-bottom: 16px;
   }
 }

@@ -93,7 +93,7 @@ export const StepSelector = ({ playerId }) => {
           <button
             value={firstStartupStep}
             onClick={handleSelectedStepChange}
-            title="Go to first statup step"
+            aria-label="Go to first statup step"
             disabled={firstStartupStep === -1}
           >
             Startup
@@ -101,7 +101,7 @@ export const StepSelector = ({ playerId }) => {
           <button
             value={firstActiveStep}
             onClick={handleSelectedStepChange}
-            title="Go to first active step"
+            aria-label="Go to first active step"
             disabled={firstActiveStep === -1}
           >
             Active
@@ -109,7 +109,7 @@ export const StepSelector = ({ playerId }) => {
           <button
             value={firstRecoveryStep}
             onClick={handleSelectedStepChange}
-            title="Go to first recovery step"
+            aria-label="Go to first recovery step"
             disabled={firstRecoveryStep === -1}
           >
             Recovery
@@ -120,18 +120,14 @@ export const StepSelector = ({ playerId }) => {
             value={previousStepNumber}
             onClick={handleSelectedStepChange}
             disabled={selectedStepNumber === 0}
-            className="previous mirror"
-          >
-            Previous step
-          </button>
+            className="previous mirror disable-tooltip"
+          />
           <button
             value={nextStepNumber}
             onClick={handleSelectedStepChange}
             disabled={selectedStepNumber === totalStepsNumber}
-            className="next"
-          >
-            Next step
-          </button>
+            className="next disable-tooltip"
+          />
         </span>
       </div>
     </div>

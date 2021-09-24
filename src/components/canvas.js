@@ -114,7 +114,7 @@ export const Canvas = ({ image, playerId, zoom = 2, cps2 = false }) => {
             className="transparent-button"
             role="button"
             onClick={handleTransparentChange}
-            title="Make transparent"
+            aria-label="Make transparent"
           >
             T
           </li>
@@ -122,7 +122,7 @@ export const Canvas = ({ image, playerId, zoom = 2, cps2 = false }) => {
             className="mirror-button"
             role="button"
             onClick={handleMirrorChange}
-            title="Mirror image"
+            aria-label="Mirror image"
           >
             M
           </li>

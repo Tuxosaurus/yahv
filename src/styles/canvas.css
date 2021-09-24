@@ -9,6 +9,10 @@
   cursor: grab;
 }
 
+.Canvas:active {
+  cursor: none;
+}
+
 .forward {
   z-index: 10;
 }

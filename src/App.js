@@ -33,7 +33,7 @@ export const App = () => {
       <header className="App-header">
         <h1>
           <span>Super Street Fighter 2X/ST</span>
-          <abbr title="Yet Another Hitbox Viewer">YAHV</abbr>
+          <abbr aria-label="Yet Another Hitbox Viewer">YAHV</abbr>
           <span>
             powered by{" "}
             <a

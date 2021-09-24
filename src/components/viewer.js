@@ -186,26 +186,29 @@ export const Viewer = () => {
           <span>
             <button
               onClick={handleCps2Change}
-              title="Pixel ratio as seen on original hardware (approximation)"
+              aria-label="Pixel ratio as seen on original hardware (approximation)"
             >
               CPS2 {cps2 ? "ON" : "OFF"}
             </button>
             <button
               onClick={handleScanlinesChange}
-              title="CAUTION: Movement disabled when scanlines are ON"
+              aria-label="CAUTION: Movement disabled when scanlines are ON"
             >
               Scanlines {scanlines ? "ON" : "OFF"}
             </button>
           </span>
           <span>
-            <button className="camera" onClick={capture} title="Smile ;)">
-              Screenshot
-            </button>
+            <button
+              className="camera"
+              onClick={capture}
+              aria-label="Download screenshot"
+            />
             <a
               className="link-button"
               href={buildUrl()}
               target="_blank"
               rel="noreferrer noopener"
+              aria-label="Share link"
             >
               www
             </a>

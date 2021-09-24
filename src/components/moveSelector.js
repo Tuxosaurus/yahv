@@ -48,7 +48,7 @@ const renderMoveData = (moveData) => (
                 href="https://srk.shib.live/w/Super_Street_Fighter_2_Turbo/Random_Damage"
                 target="_blank"
                 rel="noreferrer noopener"
-                title="Random damage explanations on SRK Wiki"
+                aria-label="Random damage explanations on SRK Wiki"
               >
                 info
               </a>
@@ -58,7 +58,7 @@ const renderMoveData = (moveData) => (
                 href="https://srk.shib.live/w/Super_Street_Fighter_2_Turbo/Canceling_(ST)"
                 target="_blank"
                 rel="noreferrer noopener"
-                title="Canceling explanations on SRK Wiki"
+                aria-label="Canceling explanations on SRK Wiki"
               >
                 info
               </a>
