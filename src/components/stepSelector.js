@@ -121,12 +121,14 @@ export const StepSelector = ({ playerId }) => {
             onClick={handleSelectedStepChange}
             disabled={selectedStepNumber === 0}
             className="previous mirror disable-tooltip"
+            title="Previous step"
           />
           <button
             value={nextStepNumber}
             onClick={handleSelectedStepChange}
             disabled={selectedStepNumber === totalStepsNumber}
             className="next disable-tooltip"
+            title="Next step"
           />
         </span>
       </div>
