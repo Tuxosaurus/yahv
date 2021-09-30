@@ -11,6 +11,7 @@ Comparative hitbox viewer for Super Street Fighter 2X/Turbo
 - [Create React App](https://create-react-app.dev/)
 - [html2canvas](https://html2canvas.hertzen.com/)
 - [react-draggable](https://github.com/react-grid-layout/react-draggable)
+- [react-hot-keys](https://github.com/jaywcjlove/react-hotkeys)
 
 ### Alternatives:
 

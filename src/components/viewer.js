@@ -1,11 +1,12 @@
-import React, { Fragment, useContext, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import html2canvas from "html2canvas";
+import Hotkeys from "react-hot-keys";
 
 import { Canvas } from "./canvas.js";
 import { Legend } from "./legend.js";
 import { store, validBgs } from "./store.js";
 import { StepSelector } from "./stepSelector.js";
-import { getStepImageFilename } from "../data/utils";
+import { getMoveMaxStepNumber, getStepImageFilename } from "../data/utils";
 
 import "../styles/viewer.css";
 
@@ -98,6 +99,38 @@ export const Viewer = () => {
     });
   }
 
+  function handleKeyDown(keyName) {
+    if (p1.selectedMoveSlug === "-" && p2.selectedMoveSlug === "-") {
+      return null;
+    }
+
+    const targetPlayer =
+      keyName.includes("left") || keyName.includes("right") ? "p1" : "p2";
+
+    const currentMoveSlug = state[targetPlayer].selectedMoveSlug;
+    if (currentMoveSlug === "-") {
+      return null;
+    }
+
+    const currentStepNumber = state[targetPlayer].selectedStepNumber;
+    const targetNumber =
+      keyName.includes("left") || keyName.includes("up")
+        ? currentStepNumber > 0
+          ? currentStepNumber - 1
+          : 0
+        : currentStepNumber < getMoveMaxStepNumber(currentMoveSlug)
+        ? currentStepNumber + 1
+        : currentStepNumber;
+
+    dispatch({
+      type: "stepNumberChange",
+      payload: {
+        playerId: targetPlayer,
+        selectedStepNumber: targetNumber,
+      },
+    });
+  }
+
   const stepFilenameP1 =
     p1.selectedMoveSlug !== "-"
       ? getStepImageFilename(p1.selectedMoveSlug, Number(p1.selectedStepNumber))
@@ -116,7 +149,10 @@ export const Viewer = () => {
   }
 
   return (
-    <Fragment>
+    <Hotkeys
+      keyName="shift+left,shift+right,shift+up,shift+down"
+      onKeyDown={handleKeyDown}
+    >
       <div className="Viewer-controls">
         <StepSelector playerId="p1" />
         <StepSelector playerId="p2" />
@@ -216,6 +252,6 @@ export const Viewer = () => {
         </div>
         <Legend />
       </div>
-    </Fragment>
+    </Hotkeys>
   );
 };

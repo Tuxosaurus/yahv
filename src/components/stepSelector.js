@@ -59,11 +59,11 @@ export const StepSelector = ({ playerId }) => {
     return emptyStepSelectorP1;
   }
 
-  const totalStepsNumber = selectedMoveData.steps.length - 1;
+  const maxStepNumber = selectedMoveData.steps.length - 1;
   const previousStepNumber =
     selectedStepNumber > 0 ? selectedStepNumber - 1 : 0;
   const nextStepNumber =
-    selectedStepNumber < totalStepsNumber ? selectedStepNumber + 1 : 0;
+    selectedStepNumber < maxStepNumber ? selectedStepNumber + 1 : 0;
 
   const firstStartupStep = getFirstStepNumberFromStatus(
     "startup",
@@ -120,15 +120,19 @@ export const StepSelector = ({ playerId }) => {
             value={previousStepNumber}
             onClick={handleSelectedStepChange}
             disabled={selectedStepNumber === 0}
-            className="previous mirror disable-tooltip"
-            title="Previous step"
+            className="previous mirror"
+            aria-label={`Previous step ${
+              playerId === "p1" ? "[SHIFT+LEFT]" : "[SHIFT+UP]"
+            }`}
           />
           <button
             value={nextStepNumber}
             onClick={handleSelectedStepChange}
-            disabled={selectedStepNumber === totalStepsNumber}
-            className="next disable-tooltip"
-            title="Next step"
+            disabled={selectedStepNumber === maxStepNumber}
+            className="next"
+            aria-label={`Next step ${
+              playerId === "p1" ? "[SHIFT+RIGHT]" : "[SHIFT+DOWN]"
+            }`}
           />
         </span>
       </div>

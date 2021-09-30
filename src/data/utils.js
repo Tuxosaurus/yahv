@@ -47,6 +47,12 @@ const getMoveStepsDataFromMoveSlug = (moveSlug) => {
   return moveData.steps;
 };
 
+export const getMoveMaxStepNumber = (moveSlug) => {
+  const moveSteps = getMoveStepsDataFromMoveSlug(moveSlug);
+
+  return moveSteps.length - 1;
+};
+
 export const getStepImageFilename = (moveSlug, stepNumber = 0) => {
   if (Number(stepNumber) < 0 || !moveSlug || moveSlug === "-") {
     return null;

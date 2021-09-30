@@ -190,6 +190,11 @@ button:disabled {
   transform: scaleX(-1);
 }
 
+/* reverse mirror effect on tooltips (sad) */
+.mirror[aria-label]:hover::after {
+  transform: scaleX(-1);
+}
+
 [aria-label]:not(.disable-tooltip) {
   position: relative;
 }
