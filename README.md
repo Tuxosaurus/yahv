@@ -15,5 +15,6 @@ Comparative hitbox viewer for Super Street Fighter 2X/Turbo
 
 ### Alternatives:
 
+- [Hitbox Theory Fighter](https://toufadev.github.io/ssf2st/)
 - [DoctorGuile](https://doctorguile.github.io/ssf2st)
 - [SSF2X Hitbox Guide - Android](https://play.google.com/store/apps/details?id=com.okerboriou.framedatassf2x)
