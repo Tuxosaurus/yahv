@@ -53,10 +53,6 @@
   background-color: var(--colorP2);
 }
 
-.Canvas:hover .Canvas-controls {
-  display: flex;
-}
-
 .Canvas-controls [role="button"] {
   text-align: center;
   width: 18px;
@@ -104,4 +100,10 @@
 .Canvas-p2 .mirror + .Canvas-controls .mirror-button,
 .Canvas-p2.transparent .transparent-button {
   color: var(--colorP2);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .Canvas:hover .Canvas-controls {
+    display: flex;
+  }
 }

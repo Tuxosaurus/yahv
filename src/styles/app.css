@@ -205,7 +205,6 @@ button:disabled {
   position: absolute;
   top: 90%;
   left: -33%;
-  display: block;
   min-width: 80px;
   width: 150%;
   padding: 4px 8px;
@@ -283,5 +282,11 @@ h2.title {
 
   .App-main {
     padding: 0 0 48px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [aria-label]:not(.disable-tooltip):hover::after {
+    display: block;
   }
 }
