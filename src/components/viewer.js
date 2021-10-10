@@ -4,6 +4,7 @@ import Hotkeys from "react-hot-keys";
 
 import { Canvas } from "./canvas.js";
 import { Legend } from "./legend.js";
+import { Modal } from "./modal.js";
 import { store, validBgs } from "./store.js";
 import { StepSelector } from "./stepSelector.js";
 import { getMoveMaxStepNumber, getStepImageFilename } from "../data/utils";
@@ -58,20 +59,32 @@ export const Viewer = () => {
     return url;
   }
 
+  function focusBoard() {
+    // To make sure hotkeys are applied after clicking controls
+    // Requires tabIndex="0" to make board "focussable"
+    if (boardRef.current) {
+      boardRef.current.focus();
+    }
+  }
+
   function handleZoomChange(event) {
     dispatch({ type: "zoomChange", payload: event.target.value });
+    focusBoard();
   }
 
   function handleBackgroundChange(event) {
     dispatch({ type: "backgroundChange", payload: event.target.value });
+    focusBoard();
   }
 
   function handleCps2Change() {
     dispatch({ type: "cps2Change" });
+    focusBoard();
   }
 
   function handleScanlinesChange() {
     dispatch({ type: "scanlinesChange" });
+    focusBoard();
   }
 
   // https://www.it-swarm-fr.com/fr/html2canvas/comment-enregistrer-limage-sur-lordinateur-local-de-lutilisateur-laide-de-html2canvas/1054259197/
@@ -91,19 +104,24 @@ export const Viewer = () => {
     } else {
       window.open(uri);
     }
+    focusBoard();
   }
 
   function capture() {
     html2canvas(boardRef.current).then(function (canvas) {
       download(canvas.toDataURL(), `yahv${buildUrl()}.png`);
     });
+    focusBoard();
   }
 
-  function handleKeyDown(keyName) {
-    if (p1.selectedMoveSlug === "-" && p2.selectedMoveSlug === "-") {
-      return null;
-    }
+  function toggleHotkeysHelp() {
+    dispatch({
+      type: "modalChange",
+      payload: state.modal === null ? "modalHotkeysHelp" : null,
+    });
+  }
 
+  function keyStepChange(keyName) {
     const targetPlayer =
       keyName.includes("left") || keyName.includes("right") ? "p1" : "p2";
 
@@ -131,6 +149,48 @@ export const Viewer = () => {
     });
   }
 
+  function keyPixelMove(keyName) {
+    const targetPlayer = keyName.includes("ctrl") ? "p1" : "p2";
+
+    const currentPosition = state[targetPlayer].position;
+    let newPosition = currentPosition;
+
+    if (keyName.includes("left")) {
+      newPosition.x -= 1;
+    }
+    if (keyName.includes("right")) {
+      newPosition.x += 1;
+    }
+    if (keyName.includes("up")) {
+      newPosition.y -= 1;
+    }
+    if (keyName.includes("down")) {
+      newPosition.y += 1;
+    }
+
+    dispatch({
+      type: "positionChange",
+      payload: {
+        playerId: targetPlayer,
+        position: newPosition,
+      },
+    });
+  }
+
+  function handleKeyDown(keyName, event) {
+    event.preventDefault();
+
+    if (p1.selectedMoveSlug === "-" && p2.selectedMoveSlug === "-") {
+      return null;
+    }
+
+    if (keyName.includes("shift")) {
+      keyStepChange(keyName);
+    } else if (keyName.includes("ctrl") || keyName.includes("alt")) {
+      keyPixelMove(keyName);
+    }
+  }
+
   const stepFilenameP1 =
     p1.selectedMoveSlug !== "-"
       ? getStepImageFilename(p1.selectedMoveSlug, Number(p1.selectedStepNumber))
@@ -150,7 +210,8 @@ export const Viewer = () => {
 
   return (
     <Hotkeys
-      keyName="shift+left,shift+right,shift+up,shift+down"
+      keyName="shift+left,shift+right,shift+up,shift+down,ctrl+left,ctrl+right,ctrl+up,ctrl+down,alt+left,alt+right,alt+up,alt+down"
+      allowRepeat
       onKeyDown={handleKeyDown}
     >
       <div className="Viewer-controls">
@@ -160,6 +221,7 @@ export const Viewer = () => {
       <div className="Viewer">
         <div
           ref={boardRef}
+          tabIndex="0"
           className={`board${scanlines ? " scanlines" : ""}`}
           style={{
             backgroundColor: validBgs[background],
@@ -228,7 +290,7 @@ export const Viewer = () => {
             </button>
             <button
               onClick={handleScanlinesChange}
-              aria-label="CAUTION: Movement disabled when scanlines are ON"
+              aria-label="CAUTION: Drag and Drop disabled when scanlines are ON"
             >
               Scanlines {scanlines ? "ON" : "OFF"}
             </button>
@@ -249,7 +311,38 @@ export const Viewer = () => {
               www
             </a>
           </span>
+          <span>
+            <button
+              className="hotkeys"
+              onClick={toggleHotkeysHelp}
+              aria-label="Hotkeys help"
+              aria-controls="modalHotkeysHelp"
+              aria-expanded={state.modal === "modalHotkeysHelp"}
+            >
+              Hotkeys
+            </button>
+          </span>
         </div>
+        <Modal id="modalHotkeysHelp" title="Available keyboard hotkeys">
+          <h3>Move player 1 by a pixel</h3>
+          <p>
+            <kbd>Ctrl</kbd> + <kbd>Left</kbd>|<kbd>Right</kbd>|<kbd>Up</kbd>|
+            <kbd>Down</kbd>
+          </p>
+          <h3>Move player 2 by a pixel</h3>
+          <p>
+            <kbd>Alt</kbd> + <kbd>Left</kbd>|<kbd>Right</kbd>|<kbd>Up</kbd>|
+            <kbd>Down</kbd>
+          </p>
+          <h3>Change player 1 step</h3>
+          <p>
+            <kbd>Shift</kbd> + <kbd>Left</kbd>|<kbd>Right</kbd>
+          </p>
+          <h3>Change player 2 step</h3>
+          <p>
+            <kbd>Shift</kbd> + <kbd>Up</kbd>|<kbd>Down</kbd>
+          </p>
+        </Modal>
         <Legend />
       </div>
     </Hotkeys>

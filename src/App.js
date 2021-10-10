@@ -1,17 +1,34 @@
 import React, { useContext, useState } from "react";
 
+import { Modal } from "./components/modal.js";
 import { PlayerForm } from "./components/playerForm.js";
-import { isUsingDarkTheme, store } from "./components/store.js";
+import {
+  isUsingDarkTheme,
+  preferredNotation,
+  validNotations,
+  store,
+} from "./components/store.js";
 import { Viewer } from "./components/viewer.js";
 
 import "./styles/app.css";
 
 export const App = () => {
   const globalState = useContext(store);
-  const { state } = globalState;
+  const { dispatch, state } = globalState;
   const hasP1Move = state.p1.selectedMoveSlug !== "";
   const hasP2Move = state.p2.selectedMoveSlug !== "";
   const [useDarkTheme, setUseDarkTheme] = useState(isUsingDarkTheme);
+  const [newPreferredNotation, setNewPreferredNotation] =
+    useState(preferredNotation);
+
+  function handleNotationChange(event) {
+    const eventValue = event.target.value;
+    if (validNotations.includes(eventValue)) {
+      setNewPreferredNotation(eventValue);
+      window.localStorage.setItem("preferredNotation", eventValue);
+      dispatch({ type: "notationChange", payload: eventValue });
+    }
+  }
 
   function handleThemeChange(event) {
     setUseDarkTheme(event.target.checked);
@@ -19,6 +36,13 @@ export const App = () => {
       "darkTheme",
       JSON.stringify(event.target.checked)
     );
+  }
+
+  function toggleSettings() {
+    dispatch({
+      type: "modalChange",
+      payload: state.modal === null ? "modalSettings" : null,
+    });
   }
 
   return (
@@ -48,15 +72,13 @@ export const App = () => {
       </header>
       <footer className="App-footer">
         <section className="App-settings">
-          <label>
-            Dark theme{" "}
-            <input
-              type="checkbox"
-              name="darkTheme"
-              onChange={handleThemeChange}
-              checked={useDarkTheme ? "checked" : ""}
-            />
-          </label>
+          <button
+            onClick={toggleSettings}
+            aria-controls="modalSettings"
+            aria-expanded={state.modal === "modalSettings"}
+          >
+            Open user settings
+          </button>
         </section>
         <p>
           Special thanks to the{" "}
@@ -80,6 +102,105 @@ export const App = () => {
 
         <p className="App-warning">Best viewed on large devices</p>
       </footer>
+
+      <Modal id="modalSettings" title="User Settings">
+        <h3>Dark mode</h3>
+        <p>
+          Toggles less flashy/darker theme (defaults to system settings):{" "}
+          <input
+            type="checkbox"
+            name="darkTheme"
+            onChange={handleThemeChange}
+            checked={useDarkTheme ? "checked" : ""}
+          />
+        </p>
+        <h3>Notation</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <label>
+                  Logical World{" "}
+                  <input
+                    type="radio"
+                    name="fhtagn"
+                    value="therightway"
+                    onChange={handleNotationChange}
+                    checked={newPreferredNotation === "therightway"}
+                  />
+                </label>
+              </th>
+              <th>
+                <label>
+                  Crazy USA{" "}
+                  <input
+                    type="radio"
+                    name="fhtagn"
+                    value="usa"
+                    onChange={handleNotationChange}
+                    checked={newPreferredNotation === "usa"}
+                  />
+                </label>
+              </th>
+              <th>
+                <label>
+                  Both{" "}
+                  <input
+                    type="radio"
+                    name="fhtagn"
+                    value="both"
+                    onChange={handleNotationChange}
+                    checked={newPreferredNotation === "both"}
+                  />
+                </label>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                LP
+                <br />
+                MP
+                <br />
+                HP
+                <br />
+                LK
+                <br />
+                MK
+                <br />
+                HK
+              </td>
+              <td>
+                JAB
+                <br />
+                STRONG
+                <br />
+                FIERCE
+                <br />
+                SHORT
+                <br />
+                FORWARD
+                <br />
+                ROUNDHOUSE
+              </td>
+              <td>
+                LP (jab)
+                <br />
+                MP (strong)
+                <br />
+                HP (fierce)
+                <br />
+                LK (short)
+                <br />
+                MK (forward)
+                <br />
+                HK (roundhouse)
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </Modal>
     </div>
   );
 };

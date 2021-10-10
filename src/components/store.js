@@ -2,6 +2,8 @@ import { createContext, useReducer } from "react";
 
 const localStorage = window.localStorage;
 const hasLocalStorageDarkTheme = localStorage.getItem("darkTheme") !== null;
+const hasLocalStoragePreferredNotation =
+  localStorage.getItem("preferredNotation") !== null;
 const browserUsesDarkMode = window.matchMedia(
   "(prefers-color-scheme: dark)"
 ).matches;
@@ -9,6 +11,13 @@ const browserUsesDarkMode = window.matchMedia(
 export const isUsingDarkTheme = hasLocalStorageDarkTheme
   ? JSON.parse(localStorage.getItem("darkTheme"))
   : browserUsesDarkMode;
+
+export const validNotations = ["both", "usa", "therightway"];
+const defaultNotation = 0;
+
+export const preferredNotation = hasLocalStoragePreferredNotation
+  ? localStorage.getItem("preferredNotation")
+  : validNotations[defaultNotation];
 
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -22,6 +31,10 @@ export const validZooms = ["1", "2", "3"];
 
 function isValidBackground(b) {
   return b && b <= validBgs.length;
+}
+
+function isValidNotation(n) {
+  return n && validNotations.includes(n);
 }
 
 function isValidZoom(z) {
@@ -95,6 +108,8 @@ const defaultState = {
   zoom: isValidZoom(urlParams.get("zoom")) ? urlParams.get("zoom") : 2,
   cps2: urlParams.get("cps2") || false,
   scanlines: urlParams.get("scanlines") || false,
+  modal: null,
+  notation: preferredNotation || validNotations[0],
 };
 
 export const store = createContext(defaultState);
@@ -172,6 +187,15 @@ export const StateProvider = ({ children }) => {
         return { ...state, cps2: !state.cps2 };
       case "scanlinesChange":
         return { ...state, scanlines: !state.scanlines };
+      case "modalChange":
+        return { ...state, modal: action.payload };
+      case "notationChange":
+        return {
+          ...state,
+          notation: isValidNotation(action.payload)
+            ? action.payload
+            : validNotations[defaultNotation],
+        };
       default:
         throw new Error();
     }

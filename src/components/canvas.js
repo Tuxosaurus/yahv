@@ -94,9 +94,16 @@ export const Canvas = ({ image, playerId, zoom = 2, cps2 = false }) => {
     };
   }, [image, isP1, ratioFix, zoom]);
 
+  useEffect(() => {
+    setDeltaPosition({
+      x: parseInt(playerState?.position?.x) || 0,
+      y: parseInt(playerState?.position?.y) || 0,
+    });
+  }, [playerState]);
+
   return (
     <Draggable
-      defaultPosition={{
+      position={{
         x: deltaPosition.x,
         y: deltaPosition.y,
       }}

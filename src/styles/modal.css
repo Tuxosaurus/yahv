@@ -1,0 +1,85 @@
+kbd {
+  background-color: #eee;
+  border-radius: var(--radius);
+  border: 1px solid #b4b4b4;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+    0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+  color: #333;
+  display: inline-block;
+  font-weight: var(--bold);
+  line-height: 1;
+  padding: 2px 4px;
+  white-space: nowrap;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 15vh;
+  left: 50%;
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+  margin-left: -300px;
+  max-height: 70vh;
+  padding: 30px 50px 0;
+  background: var(--colorMain);
+  color: var(--colorSub);
+  border-radius: var(--radius);
+  box-shadow: 0 0 1px 3px var(--colorSub);
+  box-sizing: border-box;
+}
+
+.modal.open {
+  display: block;
+}
+
+.modal h2 {
+  font-size: 24px;
+  padding-bottom: 10px;
+  text-align: center;
+  border-bottom: 1px solid var(--colorSub);
+}
+
+.modal h3 {
+  margin: 30px 0 10px;
+}
+
+.modal footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.modal footer button {
+  width: 100%;
+  padding: 20px 0 30px;
+  border: 0;
+  font-size: var(--smallText);
+  text-transform: uppercase;
+}
+
+.modal table {
+  width: 100%;
+}
+.modal th,
+.modal td {
+  width: 33%;
+  text-align: center;
+}
+
+/**************************************/
+@media (max-width: 800px) {
+  .modal {
+    max-width: none;
+    max-height: 100vh;
+    top: 0;
+    left: 0;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}

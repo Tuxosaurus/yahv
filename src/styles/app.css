@@ -69,9 +69,11 @@ body,
   text-align: left;
 }
 
-.App-settings label {
+.App-settings button {
   display: block;
+  width: 100%;
   padding-left: 24px;
+  text-align: left;
   background-image: url("../assets/iconmonstr-gear-1.svg");
   background-repeat: no-repeat;
   background-position: 8px 50%;
@@ -282,6 +284,16 @@ h2.title {
 
   .App-main {
     padding: 0 0 48px;
+  }
+
+  .modal {
+    max-width: none;
+    max-height: 100vh;
+    top: 0;
+    left: 0;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 }
 

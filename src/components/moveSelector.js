@@ -6,13 +6,59 @@ import {
   getMoveDataFromMoveSlug,
 } from "../data/utils";
 
-function transfromSlugIntoLabel(slug) {
+const transfromSlugIntoLabel = (slug) => {
   const slugWithSpaces = slug.replaceAll("_", " ").replaceAll("-", " ");
 
   return slugWithSpaces.charAt(0).toUpperCase() + slugWithSpaces.slice(1);
-}
+};
 
-const renderMoveList = (characterSlug, moveList, moveSlug) =>
+const usePreferredNotation = (moveName, notation) => {
+  if (notation === "usa") {
+    if (moveName.indexOf("(jab)") !== -1) {
+      return moveName.replace("LP (jab)", "JAB");
+    }
+    if (moveName.indexOf("(strong)") !== -1) {
+      return moveName.replace("MP (strong)", "STRONG");
+    }
+    if (moveName.indexOf("(fierce)") !== -1) {
+      return moveName.replace("HP (fierce)", "FIERCE");
+    }
+    if (moveName.indexOf("(short)") !== -1) {
+      return moveName.replace("LK (short)", "SHORT");
+    }
+    if (moveName.indexOf("(forward)") !== -1) {
+      return moveName.replace("MK (forward)", "FORWARD");
+    }
+    if (moveName.indexOf("(roundhouse)") !== -1) {
+      return moveName.replace("HK (roundhouse)", "ROUNDHOUSE");
+    }
+  }
+
+  if (notation === "therightway") {
+    if (moveName.indexOf("(jab)") !== -1) {
+      return moveName.replace(" (jab)", "");
+    }
+    if (moveName.indexOf("(strong)") !== -1) {
+      return moveName.replace(" (strong)", "");
+    }
+    if (moveName.indexOf("(fierce)") !== -1) {
+      return moveName.replace(" (fierce)", "");
+    }
+    if (moveName.indexOf("(short)") !== -1) {
+      return moveName.replace(" (short)", "");
+    }
+    if (moveName.indexOf("(forward)") !== -1) {
+      return moveName.replace(" (forward)", "");
+    }
+    if (moveName.indexOf("(roundhouse)") !== -1) {
+      return moveName.replace(" (roundhouse)", "");
+    }
+  }
+
+  return moveName;
+};
+
+const renderMoveList = (characterSlug, moveList, moveSlug, notation) =>
   Object.entries(moveList).map((moves) => (
     <optgroup
       label={transfromSlugIntoLabel(moves[0])}
@@ -24,7 +70,7 @@ const renderMoveList = (characterSlug, moveList, moveSlug) =>
           key={move[1].slug}
           value={move[1].slug}
         >
-          {move[1].name}
+          {usePreferredNotation(move[1].name, notation)}
         </option>
       ))}
     </optgroup>
@@ -72,6 +118,7 @@ const renderMoveData = (moveData) => (
 export const MoveSelector = ({ playerId }) => {
   const globalState = useContext(store);
   const { dispatch, state } = globalState;
+  const notation = state.notation;
   const characterSlug = state[playerId].selectedCharacterSlug;
 
   if (characterSlug === "-") {
@@ -101,11 +148,26 @@ export const MoveSelector = ({ playerId }) => {
         <select value={moveSlug} onChange={handleChange}>
           <option value="-">Select a move</option>
           {characterData.movements &&
-            renderMoveList(characterSlug, characterData.movements, moveSlug)}
+            renderMoveList(
+              characterSlug,
+              characterData.movements,
+              moveSlug,
+              notation
+            )}
           {characterData.normals &&
-            renderMoveList(characterSlug, characterData.normals, moveSlug)}
+            renderMoveList(
+              characterSlug,
+              characterData.normals,
+              moveSlug,
+              notation
+            )}
           {characterData.specials &&
-            renderMoveList(characterSlug, characterData.specials, moveSlug)}
+            renderMoveList(
+              characterSlug,
+              characterData.specials,
+              moveSlug,
+              notation
+            )}
         </select>
       </label>
       {moveData && renderMoveData(moveData)}
