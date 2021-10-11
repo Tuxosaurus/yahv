@@ -4,6 +4,7 @@ import { Modal } from "./components/modal.js";
 import { PlayerForm } from "./components/playerForm.js";
 import {
   isUsingDarkTheme,
+  hasDisabledTooltips,
   preferredNotation,
   validNotations,
   store,
@@ -18,6 +19,7 @@ export const App = () => {
   const hasP1Move = state.p1.selectedMoveSlug !== "";
   const hasP2Move = state.p2.selectedMoveSlug !== "";
   const [useDarkTheme, setUseDarkTheme] = useState(isUsingDarkTheme);
+  const [disabledTooltips, setDisabledTooltips] = useState(hasDisabledTooltips);
   const [newPreferredNotation, setNewPreferredNotation] =
     useState(preferredNotation);
 
@@ -38,6 +40,14 @@ export const App = () => {
     );
   }
 
+  function handleTooltipsChange(event) {
+    setDisabledTooltips(event.target.checked);
+    window.localStorage.setItem(
+      "tooltips",
+      JSON.stringify(event.target.checked)
+    );
+  }
+
   function toggleSettings() {
     dispatch({
       type: "modalChange",
@@ -45,8 +55,22 @@ export const App = () => {
     });
   }
 
+  const appClassNames = () => {
+    let baseClassName = "App";
+
+    if (useDarkTheme) {
+      baseClassName += " dark-theme";
+    }
+
+    if (disabledTooltips) {
+      baseClassName += " disabled-tooltips";
+    }
+
+    return baseClassName;
+  };
+
   return (
-    <div className={`App${useDarkTheme ? " dark-theme" : ""}`}>
+    <div className={appClassNames()}>
       <main className="App-main">
         <div className="App-playerForms">
           <PlayerForm playerId="p1" />
@@ -59,7 +83,7 @@ export const App = () => {
           <span>Super Street Fighter 2X/ST</span>
           <abbr aria-label="Yet Another Hitbox Viewer">YAHV</abbr>
           <span>
-            powered by{" "}
+            powered by&nbsp;
             <a
               href="https://srk.shib.live/w/Super_Street_Fighter_2_Turbo"
               target="_blank"
@@ -81,7 +105,7 @@ export const App = () => {
           </button>
         </section>
         <p>
-          Special thanks to the{" "}
+          Special thanks to the&nbsp;
           <a
             href="https://discord.com/invite/YHdDM6z"
             target="_blank"
@@ -96,8 +120,8 @@ export const App = () => {
             rel="noreferrer noopener"
           >
             Tuxosaurus
-          </a>{" "}
-          &#8471;2021
+          </a>
+          &nbsp;&#8471;2021
         </p>
 
         <p className="App-warning">Best viewed on large devices</p>
@@ -105,22 +129,22 @@ export const App = () => {
 
       <Modal id="modalSettings" title="User Settings">
         <h3>Dark mode</h3>
-        <p>
-          Toggles less flashy/darker theme (defaults to system settings):{" "}
+        <label>
+          Less flashy/darker theme (defaults to system settings):&nbsp;
           <input
             type="checkbox"
             name="darkTheme"
             onChange={handleThemeChange}
             checked={useDarkTheme ? "checked" : ""}
           />
-        </p>
+        </label>
         <h3>Notation</h3>
         <table>
           <thead>
             <tr>
               <th>
                 <label>
-                  Logical World{" "}
+                  World&nbsp;
                   <input
                     type="radio"
                     name="fhtagn"
@@ -132,7 +156,7 @@ export const App = () => {
               </th>
               <th>
                 <label>
-                  Crazy USA{" "}
+                  USA&nbsp;
                   <input
                     type="radio"
                     name="fhtagn"
@@ -144,7 +168,7 @@ export const App = () => {
               </th>
               <th>
                 <label>
-                  Both{" "}
+                  Both&nbsp;
                   <input
                     type="radio"
                     name="fhtagn"
@@ -200,6 +224,16 @@ export const App = () => {
             </tr>
           </tbody>
         </table>
+        <h3>Tooltips</h3>
+        <label>
+          Disable tooltips:&nbsp;
+          <input
+            type="checkbox"
+            name="tooltips"
+            onChange={handleTooltipsChange}
+            checked={disabledTooltips}
+          />
+        </label>
       </Modal>
     </div>
   );

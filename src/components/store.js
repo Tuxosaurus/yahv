@@ -2,6 +2,7 @@ import { createContext, useReducer } from "react";
 
 const localStorage = window.localStorage;
 const hasLocalStorageDarkTheme = localStorage.getItem("darkTheme") !== null;
+const hasLocalStorageTooltips = localStorage.getItem("tooltips") !== null;
 const hasLocalStoragePreferredNotation =
   localStorage.getItem("preferredNotation") !== null;
 const browserUsesDarkMode = window.matchMedia(
@@ -11,6 +12,10 @@ const browserUsesDarkMode = window.matchMedia(
 export const isUsingDarkTheme = hasLocalStorageDarkTheme
   ? JSON.parse(localStorage.getItem("darkTheme"))
   : browserUsesDarkMode;
+
+export const hasDisabledTooltips = hasLocalStorageTooltips
+  ? JSON.parse(localStorage.getItem("tooltips"))
+  : false;
 
 export const validNotations = ["both", "usa", "therightway"];
 const defaultNotation = 0;

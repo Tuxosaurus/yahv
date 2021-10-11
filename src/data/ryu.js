@@ -43,7 +43,7 @@ export const data = {
   normals: {
     stand_normals: {
       close_lp: {
-        name: "Close LP",
+        name: "Close LP (jab)",
         slug: "ryu-normals-stand_normals-close_lp",
         damage: "4[0]",
         stun: "0~5",
@@ -71,7 +71,7 @@ export const data = {
         ],
       },
       far_lp: {
-        name: "Far LP",
+        name: "Far LP (jab)",
         slug: "ryu-normals-stand_normals-far_lp",
         damage: "4[0]",
         stun: "0~5",
@@ -108,7 +108,7 @@ export const data = {
   specials: {
     hadouken: {
       lp: {
-        name: "Hadouken LP",
+        name: "Hadouken LP (jab)",
         slug: "ryu-specials-hadouken-lp",
         damage: "18[0]",
         stun: "7~13",
@@ -163,7 +163,7 @@ export const data = {
         ],
       },
       mp: {
-        name: "Hadouken MP",
+        name: "Hadouken MP (strong)",
         slug: "ryu-specials-hadouken-mp",
         damage: "20[0]",
         stun: "7~13",
@@ -218,7 +218,7 @@ export const data = {
         ],
       },
       hp: {
-        name: "Hadouken HP",
+        name: "Hadouken HP (fierce)",
         slug: "ryu-specials-hadouken-hp",
         damage: "22[0]/20[0]",
         stun: "7~13",

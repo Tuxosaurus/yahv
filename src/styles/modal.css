@@ -35,6 +35,11 @@ kbd {
   display: block;
 }
 
+.modal input {
+  width: 16px;
+  height: 16px;
+}
+
 .modal h2 {
   font-size: 24px;
   padding-bottom: 10px;
@@ -65,10 +70,16 @@ kbd {
 .modal table {
   width: 100%;
 }
+
+.modal th {
+  padding-bottom: 4px;
+}
+
 .modal th,
 .modal td {
   width: 33%;
-  text-align: center;
+  text-align: left;
+  vertical-align: top;
 }
 
 /**************************************/

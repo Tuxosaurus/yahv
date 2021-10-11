@@ -5,7 +5,7 @@ export const data = {
   normals: {
     stand_normals: {
       close_lp: {
-        name: "Close LP",
+        name: "Close LP (jab)",
         slug: "ehonda-normals-stand_normals-close_lp",
         damage: "20[1]",
         stun: "0~5",
@@ -48,7 +48,7 @@ export const data = {
         ],
       },
       far_lp: {
-        name: "Far LP",
+        name: "Far LP (jab)",
         slug: "ehonda-normals-stand_normals-far_lp",
         damage: "20[1]",
         stun: "0~5",
@@ -90,7 +90,7 @@ export const data = {
   specials: {
     hyakuretsu_harite: {
       lp: {
-        name: "Hyakuretsu Harite LP",
+        name: "Hyakuretsu Harite LP (jab)",
         slug: "ehonda-specials-hyakuretsu_harite-lp",
         damage: "24[1] / 22[1]",
         stun: "5~11",
@@ -165,7 +165,7 @@ export const data = {
         ],
       },
       mp: {
-        name: "Hyakuretsu Harite MP",
+        name: "Hyakuretsu Harite MP (strong)",
         slug: "ehonda-specials-hyakuretsu_harite-mp",
         damage: "26[2] / 24/[2]",
         stun: "5~11",
@@ -240,7 +240,7 @@ export const data = {
         ],
       },
       hp: {
-        name: "Hyakuretsu Harite HP",
+        name: "Hyakuretsu Harite HP (fierce)",
         slug: "ehonda-specials-hyakuretsu_harite-hp",
         damage: "28[3]/26[3]",
         stun: "5~11",

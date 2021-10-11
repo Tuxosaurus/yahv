@@ -13,7 +13,7 @@
   --radius: 4px;
 }
 
-.App.dark-theme {
+.dark-theme {
   --colorMain: black;
   --colorSub: #f3f3f3;
   --colorSelectHover: #000001;
@@ -78,6 +78,10 @@ body,
   background-repeat: no-repeat;
   background-position: 8px 50%;
   background-size: 12px 12px;
+}
+
+.dark-theme .App-settings button {
+  background-image: url("../assets/iconmonstr-gear-1-white.svg");
 }
 
 .App-warning {
@@ -197,11 +201,11 @@ button:disabled {
   transform: scaleX(-1);
 }
 
-[aria-label]:not(.disable-tooltip) {
+[aria-label] {
   position: relative;
 }
 
-[aria-label]:not(.disable-tooltip):hover::after {
+[aria-label]:hover::after {
   content: attr(aria-label);
   z-index: 5;
   position: absolute;
@@ -218,6 +222,10 @@ button:disabled {
   line-height: 12px;
   border: 2px solid black;
   border-radius: var(--radius);
+}
+
+.disabled-tooltips [aria-label]:hover::after {
+  content: none;
 }
 
 .title {
