@@ -128,6 +128,8 @@ export const App = () => {
       </footer>
 
       <Modal id="modalSettings" title="User Settings">
+        <p className="subtitle">Saved in the browser's Local Storage</p>
+
         <h3>Dark mode</h3>
         <label>
           Less flashy/darker theme (defaults to system settings):&nbsp;

@@ -12,28 +12,30 @@ Comparative hitbox viewer for Super Street Fighter 2X/Turbo
 
 #### Controls
 
-**< Previous | Next >**: switch to previous or next step of animation for the selected move  
-**Startup | Active | Recovery**: set the current step to the first of that category (if applicable)  
-**Dark | Medium | Bright**: change the background color to a different shade of grey  
-**1X | 2X | 3X**: set the level of zoom  
-**CPS2 ON|OFF**: change the horizontal pixel ratio to approximately match the output on a CRT screen  
-**Scanlines ON|OFF**: completely inaccurate CRT-like scanlines, for fun. CAUTION, when ON, you cannot drag and drop anymore...  
-**Screenshot**: download a screenshot of the current scene  
-**WWW**: open a new tab replicating the current scene, useful to share  
-**Hotkeys**: show a list of available keyboard hotkeys you can use  
+- **< Previous | Next >**: switch to previous or next step of animation for the selected move
+- **Startup | Active | Recovery**: set the current step to the first of that category (if applicable)
+- **Dark | Medium | Bright**: change the background color to a different shade of grey
+- **1X | 2X | 3X**: set the level of zoom
+- **CPS2 ON|OFF**: change the horizontal pixel ratio to approximately match the output on a CRT screen
+- **Scanlines ON|OFF**: completely inaccurate CRT-like scanlines, for fun. CAUTION, when ON, you cannot drag and drop anymore...
+- **Screenshot**: download a screenshot of the current scene
+- **WWW**: open a new tab replicating the current scene, useful to share
+- **Hotkeys**: show a list of available keyboard hotkeys you can use
 
 #### Keyboard hotkeys
 
-Move player 1 by a pixel: **Ctrl + Left|Right|Up|Down**  
-Move player 2 by a pixel: **Alt + Left|Right|Up|Down**  
-Change player 1 step: **Shift + Left|Right**  
-Change player 2 step: **Shift + Up|Down**  
+When the grid area is focused (white border), you can use keyboard shortcuts to control both players:
+
+- Move player 1 by a pixel: **Ctrl + Left|Right|Up|Down**
+- Move player 2 by a pixel: **Alt + Left|Right|Up|Down**
+- Change player 1 step: **Shift + Left|Right**
+- Change player 2 step: **Shift + Up|Down**
 
 #### User settings
 
 **Dark mode**: toggle less flashy/darker theme (defaults to system settings)  
 **Notation**: display move names the logical way "**LP**", the nonsensical US way "**JAB**" or go for both "**LP (jab)**" - default  
-**Disable tooltips**: disable tooltips that appear when hovering buttons, etc.  
+**Disable tooltips**: disable tooltips that appear when hovering buttons, etc.
 
 ### Images & Data:
 

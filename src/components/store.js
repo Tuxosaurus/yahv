@@ -110,7 +110,7 @@ const defaultState = {
   background: isValidBackground(urlParams.get("bg"))
     ? urlParams.get("bg")
     : defaultBg,
-  zoom: isValidZoom(urlParams.get("zoom")) ? urlParams.get("zoom") : 2,
+  zoom: isValidZoom(urlParams.get("zoom")) ?? 2,
   cps2: urlParams.get("cps2") || false,
   scanlines: urlParams.get("scanlines") || false,
   modal: null,

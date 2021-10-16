@@ -77,6 +77,10 @@
   box-sizing: border-box;
 }
 
+.board:focus {
+  border-color: white;
+}
+
 .board.scanlines {
   cursor: not-allowed;
 }

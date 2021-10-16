@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 
+import { Combobox } from "./combobox.js";
 import { store } from "./store.js";
 import {
   getCharacterDataFromCharacterSlug,
@@ -12,7 +13,7 @@ const transfromSlugIntoLabel = (slug) => {
   return slugWithSpaces.charAt(0).toUpperCase() + slugWithSpaces.slice(1);
 };
 
-const usePreferredNotation = (moveName, notation) => {
+const rewriteWithPreferredNotation = (moveName, notation) => {
   if (notation === "usa") {
     if (moveName.indexOf("(jab)") !== -1) {
       return moveName.replace("LP (jab)", "JAB");
@@ -58,26 +59,22 @@ const usePreferredNotation = (moveName, notation) => {
   return moveName;
 };
 
-const renderMoveList = (characterSlug, moveList, moveSlug, notation) =>
-  Object.entries(moveList).map((moves) => (
-    <optgroup
-      label={transfromSlugIntoLabel(moves[0])}
-      key={`${characterSlug}-${moves[0]}`}
-    >
-      {Object.entries(moves[1]).map((move) => (
-        <option
-          className={moveSlug === move[1].slug ? "selected" : ""}
-          key={move[1].slug}
-          value={move[1].slug}
-        >
-          {usePreferredNotation(move[1].name, notation)}
-        </option>
-      ))}
-    </optgroup>
-  ));
+const filterSearched = (string, searched) => {
+  let completeName = string;
+
+  // TODO should "kick" apply to Chun's super?
+  // TODO should identify throws
+  if (completeName.match(/(LP|MP|HP)/g)) {
+    completeName += " punch";
+  } else if (completeName.match(/(LK|MK|HK)/g)) {
+    completeName += " kick";
+  }
+
+  return completeName.toLowerCase().match(searched);
+};
 
 const renderMoveData = (moveData) => (
-  <ul>
+  <ul className="MoveSelector-data">
     {Object.keys(moveData)
       .filter((moveKey) => !["name", "slug", "steps"].includes(moveKey))
       .map((moveKey) => {
@@ -129,47 +126,65 @@ export const MoveSelector = ({ playerId }) => {
   const moveSlug = state[playerId].selectedMoveSlug;
   const moveData = getMoveDataFromMoveSlug(moveSlug);
 
-  function handleChange(event) {
+  function selectOption(moveSlug) {
     dispatch({
       type: "moveSlugChange",
       payload: {
         playerId: playerId,
-        selectedMoveSlug: event.target.value,
+        selectedMoveSlug: moveSlug,
       },
     });
   }
 
+  const getAllListItems = () => {
+    return getListItems(characterData.movements)
+      .concat(getListItems(characterData.normals))
+      .concat(getListItems(characterData.specials));
+  };
+
+  const getListItems = (moveset) => {
+    //  [{
+    //    key: "",
+    //    groupName: "",
+    //    options: [{
+    //      slug: "",
+    //      name: "",
+    //      preferredName: "",
+    //    }]
+    //  }]
+    if (!moveset) {
+      return [];
+    }
+
+    return Object.entries(moveset).map((moves) => ({
+      key: `${characterSlug}-${moves[0]}`,
+      groupName: transfromSlugIntoLabel(moves[0]),
+      options: Object.entries(moves[1]).map((move) => ({
+        slug: move[1].slug,
+        name: move[1].name,
+        preferredName: rewriteWithPreferredNotation(move[1].name, notation),
+      })),
+    }));
+  };
+
   return (
     <div className="MoveSelector">
-      <label>
-        <h3 className="title">
-          <span>Moves</span>
-        </h3>
-        <select value={moveSlug} onChange={handleChange}>
-          <option value="-">Select a move</option>
-          {characterData.movements &&
-            renderMoveList(
-              characterSlug,
-              characterData.movements,
-              moveSlug,
-              notation
-            )}
-          {characterData.normals &&
-            renderMoveList(
-              characterSlug,
-              characterData.normals,
-              moveSlug,
-              notation
-            )}
-          {characterData.specials &&
-            renderMoveList(
-              characterSlug,
-              characterData.specials,
-              moveSlug,
-              notation
-            )}
-        </select>
-      </label>
+      <h3 className="title">
+        <span>Moves</span>
+      </h3>
+
+      <Combobox
+        purpose="moves"
+        listItems={getAllListItems()}
+        playerId={playerId}
+        alreadySelectedItem={{
+          name:
+            moveData && rewriteWithPreferredNotation(moveData.name, notation),
+          slug: moveData && moveSlug,
+        }}
+        filterSearched={filterSearched}
+        selectOption={selectOption}
+      />
       {moveData && renderMoveData(moveData)}
     </div>
   );

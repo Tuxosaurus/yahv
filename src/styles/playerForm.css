@@ -35,8 +35,7 @@
   right: auto;
 }
 
-.CharacterSelector,
-.MoveSelector select {
+.CharacterSelector {
   position: absolute;
   top: 32px;
   left: 64px;
@@ -53,18 +52,7 @@ img + .CharacterSelector {
   right: 64px;
 }
 
-.MoveSelector select {
-  top: 0;
-  left: 128px;
-  width: calc(100% - 144px);
-}
-
-.PlayerForm-p2 .MoveSelector select {
-  left: auto;
-  right: 128px;
-}
-
-.MoveSelector ul {
+.MoveSelector-data {
   margin: 16px 16px 0;
   padding: 8px 12px;
   list-style: none;
@@ -73,11 +61,11 @@ img + .CharacterSelector {
   line-height: 20px;
 }
 
-.dark-theme .MoveSelector ul {
+.dark-theme .MoveSelector-data {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-.MoveSelector ul a {
+.MoveSelector-data a {
   float: right;
   padding: 1px 6px;
   border-radius: var(--radius);

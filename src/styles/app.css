@@ -94,7 +94,6 @@ body,
   min-width: 300px;
   margin: 0 auto;
   padding: 0 24px 48px;
-  overflow: hidden;
 }
 
 h1 {
@@ -187,11 +186,6 @@ button:disabled {
   cursor: default;
 }
 
-.selected {
-  background-color: var(--colorSub);
-  color: var(--colorMain);
-}
-
 .mirror {
   transform: scaleX(-1);
 }
@@ -231,15 +225,16 @@ button:disabled {
 .title {
   margin: 16px 0;
   padding: 0 16px;
+  line-height: 32px;
   background: var(--colorMain);
-  font-size: 28px;
-  font-weight: var(--bold);
-  text-transform: uppercase;
   color: var(--colorP1);
 }
 
 .title span {
   display: block;
+  font-size: 28px;
+  font-weight: var(--bold);
+  text-transform: uppercase;
   transform: skew(25deg);
 }
 
@@ -294,14 +289,8 @@ h2.title {
     padding: 0 0 48px;
   }
 
-  .modal {
-    max-width: none;
-    max-height: 100vh;
-    top: 0;
-    left: 0;
-    margin: 0;
-    border-radius: 0;
-    box-shadow: none;
+  .title span {
+    font-size: 18px;
   }
 }
 

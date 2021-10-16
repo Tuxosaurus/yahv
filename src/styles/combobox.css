@@ -1,0 +1,114 @@
+.Combobox-search {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 128px;
+  width: calc(100% - 148px);
+  padding-right: 16px;
+  line-height: 28px;
+  border: 0;
+  background: var(--colorMain);
+  color: var(--colorSub);
+  font-weight: var(--bold);
+  text-align: right;
+  border: 2px dashed transparent;
+}
+
+.Combobox-p2 .Combobox-search {
+  left: auto;
+  right: 128px;
+  text-align: left;
+  padding-left: 16px;
+  padding-right: 0;
+}
+
+.Combobox-search:focus {
+  outline: none;
+  border-color: var(--colorButtonHover);
+}
+
+.Combobox-list {
+  display: none;
+  position: absolute;
+  top: 32px;
+  left: 0;
+  z-index: 99;
+  width: calc(100% - 16px);
+  max-height: 50vh;
+  background: var(--colorMain);
+  color: var(--colorSub);
+  overflow-y: auto;
+}
+
+.Combobox.displayed .Combobox-list {
+  display: block;
+}
+
+.Combobox-list li {
+  list-style: none;
+  margin-bottom: 4px;
+}
+
+.Combobox-group {
+  padding: 4px 8px 0px;
+}
+
+.Combobox-option {
+  padding-left: 12px;
+}
+
+.selected:not(:hover) {
+  background-color: var(--colorSub);
+  color: var(--colorMain);
+}
+
+.Combobox-option.focused,
+.Combobox-option:focus,
+.Combobox-option:hover {
+  background-color: var(--colorButtonHover);
+}
+
+.Combobox-group p {
+  padding: 4px 8px;
+  margin-bottom: 4px;
+  font-style: italic;
+  border-radius: var(--radius);
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .Combobox-group p {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/**************************************/
+@media (max-width: 800px) {
+  .Combobox-search {
+    left: 90px;
+    width: calc(100% - 105px);
+  }
+
+  .Combobox-p2 .Combobox-search {
+    left: auto;
+    right: 90px;
+  }
+
+  .Combobox.displayed .Combobox-search,
+  .Combobox.displayed .Combobox-list {
+    position: fixed;
+    z-index: 99;
+    width: 100%;
+    text-align: left;
+  }
+
+  .Combobox.displayed .Combobox-search {
+    top: 0;
+    left: 0;
+    width: calc(100% - 20px);
+    padding: 0 8px;
+  }
+
+  .Combobox.displayed .Combobox-list {
+    height: calc(100% - 32px);
+    max-height: none;
+  }
+}
