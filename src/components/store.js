@@ -64,7 +64,7 @@ const getPlayerStateFromUrl = (playerId, url) => {
   }
 
   // &p1=chunli-normals-stand_normals-far_lp-1tm
-  const searchParams = new URLSearchParams(url.search).get(playerId);
+  const searchParams = new URLSearchParams(url).get(playerId);
 
   if (!searchParams) {
     return defaultPlayerState;
@@ -78,7 +78,7 @@ const getPlayerStateFromUrl = (playerId, url) => {
   // &p1xy=120,-33
   let positionX = 0;
   let positionY = 0;
-  const positionParams = new URLSearchParams(url.search).get(`${playerId}xy`);
+  const positionParams = new URLSearchParams(url).get(`${playerId}xy`);
 
   if (positionParams) {
     const positions = positionParams.split(",");
@@ -101,10 +101,10 @@ const getPlayerStateFromUrl = (playerId, url) => {
 
 const defaultState = {
   p1: {
-    ...getPlayerStateFromUrl("p1", window.location),
+    ...getPlayerStateFromUrl("p1", window.location.search),
   },
   p2: {
-    ...getPlayerStateFromUrl("p2", window.location),
+    ...getPlayerStateFromUrl("p2", window.location.search),
   },
   forward: urlParams.get("fwd") || "p1",
   background: isValidBackground(urlParams.get("bg"))
@@ -123,13 +123,14 @@ const { Provider } = store;
 export const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     const playerId = action.payload?.playerId;
-    const playerState = playerId ? state[playerId] : null;
+    const playerState = playerId ? state[playerId] : defaultPlayerState;
 
     switch (action.type) {
       case "characterSlugChange":
         return {
           ...state,
           [playerId]: {
+            ...playerState,
             selectedCharacterSlug: action.payload.selectedCharacterSlug,
             selectedMoveSlug: "-",
             selectedStepNumber: 0,
