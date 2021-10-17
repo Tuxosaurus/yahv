@@ -5,13 +5,10 @@ import { store } from "./store.js";
 import {
   getCharacterDataFromCharacterSlug,
   getMoveDataFromMoveSlug,
+  transfromSlugIntoLabel,
 } from "../data/utils";
 
-const transfromSlugIntoLabel = (slug) => {
-  const slugWithSpaces = slug.replaceAll("_", " ").replaceAll("-", " ");
-
-  return slugWithSpaces.charAt(0).toUpperCase() + slugWithSpaces.slice(1);
-};
+import "../styles/moveSelector.css";
 
 const rewriteWithPreferredNotation = (moveName, notation) => {
   if (notation === "usa") {
@@ -59,18 +56,28 @@ const rewriteWithPreferredNotation = (moveName, notation) => {
   return moveName;
 };
 
-const filterSearched = (string, searched) => {
-  let completeName = string;
+const filterSearchedMove = (option, searched) => {
+  if (searched === "") {
+    return true;
+  }
+
+  let completeName = `${option.name}-${option.slug}`;
 
   // TODO should "kick" apply to Chun's super?
-  // TODO should identify throws
+  // TODO should identify throws, supers
   if (completeName.match(/(LP|MP|HP)/g)) {
     completeName += " punch";
   } else if (completeName.match(/(LK|MK|HK)/g)) {
     completeName += " kick";
   }
 
-  return completeName.toLowerCase().match(searched);
+  const searchedParts = searched.split(" ");
+  // limited to 2 words
+  const regex = new RegExp(
+    `${searchedParts.join(".*")}|${searchedParts.reverse().join(".*")}`,
+    "ig"
+  );
+  return completeName.match(regex);
 };
 
 const renderMoveData = (moveData) => (
@@ -85,7 +92,7 @@ const renderMoveData = (moveData) => (
         return (
           <li key={key}>
             {`${label}: `}
-            <span className="Move-figure">{moveValue}</span>
+            <span className="MoveSelector-moreInfo">{moveValue}</span>
             {label === "Damage" && (
               <a
                 href="https://srk.shib.live/w/Super_Street_Fighter_2_Turbo/Random_Damage"
@@ -149,7 +156,7 @@ export const MoveSelector = ({ playerId }) => {
     //    options: [{
     //      slug: "",
     //      name: "",
-    //      preferredName: "",
+    //      preferredName?: "",
     //    }]
     //  }]
     if (!moveset) {
@@ -168,13 +175,14 @@ export const MoveSelector = ({ playerId }) => {
   };
 
   return (
-    <div className="MoveSelector">
+    <div className={`MoveSelector MoveSelector-${playerId}`}>
       <h3 className="title">
         <span>Moves</span>
       </h3>
 
       <Combobox
         purpose="moves"
+        placeholder="Select/Type a move"
         listItems={getAllListItems()}
         playerId={playerId}
         alreadySelectedItem={{
@@ -182,7 +190,7 @@ export const MoveSelector = ({ playerId }) => {
             moveData && rewriteWithPreferredNotation(moveData.name, notation),
           slug: moveData && moveSlug,
         }}
-        filterSearched={filterSearched}
+        filterSearched={filterSearchedMove}
         selectOption={selectOption}
       />
       {moveData && renderMoveData(moveData)}

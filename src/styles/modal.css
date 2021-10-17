@@ -15,7 +15,7 @@ kbd {
 .modal {
   display: none;
   position: fixed;
-  z-index: 999;
+  z-index: var(--zModal);
   top: 15vh;
   left: 50%;
   width: 100%;

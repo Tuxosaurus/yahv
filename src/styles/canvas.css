@@ -1,5 +1,5 @@
 .Canvas {
-  z-index: 1;
+  z-index: var(--zCanvas);
   position: absolute;
   bottom: 20%;
   left: 25%;
@@ -14,7 +14,7 @@
 }
 
 .forward {
-  z-index: 10;
+  z-index: var(--zCanvasForward);
 }
 
 .transparent canvas {

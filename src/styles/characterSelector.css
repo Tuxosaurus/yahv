@@ -1,0 +1,65 @@
+.CharacterSelector img {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  z-index: var(--zPortrait);
+}
+
+.CharacterSelector-p2 img {
+  left: 16px;
+  right: auto;
+}
+
+.CharacterSelector .Combobox-search {
+  top: 32px;
+  left: 58px;
+  width: calc(100% - 80px);
+}
+
+.CharacterSelector img + .Combobox .Combobox-search {
+  left: 54px;
+  width: calc(100% - 218px);
+}
+
+.CharacterSelector-p2 .Combobox-search {
+  left: auto;
+  right: 58px;
+}
+
+.CharacterSelector-p2 img + .Combobox .Combobox-search {
+  left: auto;
+  right: 54px;
+}
+
+.CharacterSelector .Combobox-list {
+  top: 64px;
+}
+
+/**************************************/
+@media (max-width: 800px) {
+  .CharacterSelector img {
+    display: none;
+  }
+
+  .CharacterSelector .Combobox-search,
+  .CharacterSelector .Combobox-search[value=""] {
+    top: 32px;
+    left: 42px;
+    width: calc(100% - 62px);
+  }
+
+  .CharacterSelector-p2 .Combobox-search,
+  .CharacterSelector-p2 .Combobox-search[value=""] {
+    left: auto;
+    right: 42px;
+  }
+
+  .CharacterSelector .Combobox-list {
+    top: 32px;
+    padding-top: 8px;
+  }
+
+  .CharacterSelector h2.title {
+    margin-bottom: 16px;
+  }
+}

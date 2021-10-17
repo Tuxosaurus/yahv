@@ -10,6 +10,12 @@ const allData = {
   ken: kenData,
 };
 
+export const transfromSlugIntoLabel = (slug) => {
+  const slugWithSpaces = slug.replaceAll("_", " ").replaceAll("-", " ");
+
+  return slugWithSpaces.charAt(0).toUpperCase() + slugWithSpaces.slice(1);
+};
+
 function splitMoveSlug(moveSlug) {
   const split = moveSlug.split("-");
   const slugParts = {

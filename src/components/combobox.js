@@ -7,6 +7,19 @@ const KEY_UP = 38;
 const KEY_DOWN = 40;
 const KEY_ENTER = 13;
 
+const defaultFilterSearched = (option, searched) => {
+  const completeName = `${option.name}-${option.slug}`;
+
+  const searchedParts = searched.split(" ");
+  // best results with to 2 words query
+  const regex = new RegExp(
+    `${searchedParts.join(".*")}|${searchedParts.reverse().join(".*")}`,
+    "ig"
+  );
+
+  return completeName.match(regex);
+};
+
 const renderListItem = (
   listItem,
   handleSelectItem,
@@ -27,7 +40,7 @@ const renderListItem = (
         <ul>
           {/* recursion \o/ */}
           {listItem.options
-            .filter((option) => filterSearched(option.name, searched))
+            .filter((option) => filterSearched(option, searched))
             .map((option) =>
               renderListItem(option, handleSelectItem, lastSelectedItemSlug)
             )}
@@ -45,32 +58,31 @@ const renderListItem = (
       aria-selected={isOptionSelected}
       key={`${listItem.slug}-${playerId}`}
       data-slug={listItem.slug}
-      data-name={listItem.preferredName}
+      data-name={listItem.preferredName ?? listItem.name}
       onClick={handleSelectItem}
     >
-      {listItem.preferredName}
+      {listItem.preferredName ?? listItem.name}
     </li>
   );
 };
 
 export const Combobox = ({
   purpose,
+  placeholder,
   listItems,
   playerId,
   alreadySelectedItem,
-  filterSearched,
+  filterSearched = defaultFilterSearched,
   selectOption,
 }) => {
   const [searched, setSearched] = useState("");
   const [lastFocusedIndex, setLastFocusedIndex] = useState(null);
-  const [lastSelected, setLastSelected] = useState(alreadySelectedItem);
   const comboRef = useDetectClickOutside({ onTriggered: closeDropdown });
   const searchRef = useRef(null);
   const listRef = useRef(null);
-
   const getSearchValue = () => {
-    return lastSelected?.name !== null && searched === ""
-      ? lastSelected.name
+    return alreadySelectedItem && alreadySelectedItem.name && searched === ""
+      ? alreadySelectedItem.name
       : searched;
   };
 
@@ -98,7 +110,7 @@ export const Combobox = ({
   }
 
   function handleSearch(event) {
-    setSearched(event.target.value.toLowerCase());
+    setSearched(event.target.value);
   }
 
   function handleSelectItem(event, item = null) {
@@ -108,11 +120,6 @@ export const Combobox = ({
     const selectedSlug = item
       ? item.dataset["slug"]
       : event.target.dataset["slug"];
-
-    setLastSelected({
-      name: selectedName,
-      slug: selectedSlug,
-    });
 
     selectOption(selectedSlug);
 
@@ -127,35 +134,41 @@ export const Combobox = ({
   function handleKeyDown(event) {
     let focusableItems = [];
     if (listRef.current) {
-      listRef.current.childNodes.forEach((child) => {
+      if (listRef.current.firstChild.getAttribute("role") === "group") {
         // check within "group" items for "option" items
-        if (
-          child.getAttribute("role") === "group" &&
-          child.childNodes.length > 0
-        ) {
-          focusableItems = focusableItems.concat(...child.lastChild.childNodes);
-        } else {
-          focusableItems = focusableItems.concat(...child.childNodes);
-        }
-      });
+        listRef.current.childNodes.forEach((child) => {
+          if (child.childNodes.length > 0) {
+            focusableItems = focusableItems.concat(
+              ...child.lastChild.childNodes
+            );
+          }
+        });
+      } else {
+        focusableItems = listRef.current.childNodes;
+      }
     }
 
     function setItemFocus(index) {
-      if (lastFocusedIndex !== null) {
-        unsetItemFocus(lastFocusedIndex);
-      }
+      if (focusableItems[index]) {
+        if (lastFocusedIndex !== null) {
+          unsetItemFocus(lastFocusedIndex);
+        }
 
-      listRef.current.scrollTop = index * 22; // approximate value
-      focusableItems[index].focus();
-      focusableItems[index].setAttribute("aria-selected", true);
-      focusableItems[index].classList.add("focused");
-      setLastFocusedIndex(index);
+        listRef.current.scrollTop = index * 22; // approximate value
+
+        focusableItems[index].focus();
+        focusableItems[index].setAttribute("aria-selected", true);
+        focusableItems[index].classList.add("focused");
+        setLastFocusedIndex(index);
+      }
     }
 
     function unsetItemFocus(index) {
-      focusableItems[index].blur();
-      focusableItems[index].setAttribute("aria-selected", false);
-      focusableItems[index].classList.remove("focused");
+      if (focusableItems[index]) {
+        focusableItems[index].blur();
+        focusableItems[index].setAttribute("aria-selected", false);
+        focusableItems[index].classList.remove("focused");
+      }
     }
 
     if (listRef.current) {
@@ -209,7 +222,7 @@ export const Combobox = ({
       <input
         className="Combobox-search"
         type="text"
-        placeholder="Select/Type a move"
+        placeholder={placeholder}
         value={getSearchValue()}
         aria-autocomplete="list"
         aria-controls={`listbox-${purpose}-${playerId}`}
@@ -230,7 +243,7 @@ export const Combobox = ({
             renderListItem(
               listItem,
               handleSelectItem,
-              alreadySelectedItem.slug,
+              alreadySelectedItem?.slug,
               filterSearched,
               searched,
               playerId

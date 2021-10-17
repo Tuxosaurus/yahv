@@ -1,9 +1,6 @@
 .Combobox-search {
   position: absolute;
-  z-index: 4;
-  top: 0;
-  left: 128px;
-  width: calc(100% - 148px);
+  z-index: var(--zComboboxSearch);
   padding-right: 16px;
   line-height: 28px;
   border: 0;
@@ -12,14 +9,6 @@
   font-weight: var(--bold);
   text-align: right;
   border: 2px dashed transparent;
-}
-
-.Combobox-p2 .Combobox-search {
-  left: auto;
-  right: 128px;
-  text-align: left;
-  padding-left: 16px;
-  padding-right: 0;
 }
 
 .Combobox-search:focus {
@@ -32,11 +21,12 @@
   position: absolute;
   top: 32px;
   left: 0;
-  z-index: 99;
-  width: calc(100% - 16px);
+  z-index: var(--zComboboxList);
+  width: 100%;
   max-height: 50vh;
   background: var(--colorMain);
   color: var(--colorSub);
+  border-bottom: 2px solid var(--colorButtonActive);
   overflow-y: auto;
 }
 
@@ -65,7 +55,7 @@
 .Combobox-option.focused,
 .Combobox-option:focus,
 .Combobox-option:hover {
-  background-color: var(--colorButtonHover);
+  background-color: var(--colorButtonActive);
 }
 
 .Combobox-group p {
@@ -78,6 +68,21 @@
 
 .dark-theme .Combobox-group p {
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+.Combobox-p2 .Combobox-search {
+  text-align: left;
+  padding-left: 16px;
+  padding-right: 0;
+}
+
+.Combobox-p2 .Combobox-list {
+  text-align: right;
+}
+
+.Combobox-p2 .Combobox-option {
+  padding-left: 0;
+  padding-right: 12px;
 }
 
 /**************************************/
@@ -95,7 +100,7 @@
   .Combobox.displayed .Combobox-search,
   .Combobox.displayed .Combobox-list {
     position: fixed;
-    z-index: 99;
+    z-index: var(--ComboboxFullscreen);
     width: 100%;
     text-align: left;
   }
@@ -108,6 +113,7 @@
   }
 
   .Combobox.displayed .Combobox-list {
+    border: 0;
     height: calc(100% - 32px);
     max-height: none;
   }

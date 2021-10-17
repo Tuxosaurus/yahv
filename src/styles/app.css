@@ -11,6 +11,18 @@
   --colorP1: red;
   --colorP2: blue;
   --radius: 4px;
+  --zViewer: 1;
+  --zCanvas: 10;
+  --zCanvasForward: 20;
+  --zTooltip: 20;
+  --zComboboxSearch: 20;
+  --zBoardScanlines: 50;
+  --zBoardControls: 60;
+  --zViewerControls: 60;
+  --zComboboxList: 70;
+  --zPortrait: 80;
+  --ComboboxFullscreen: 99;
+  --zModal: 99;
 }
 
 .dark-theme {
@@ -201,7 +213,7 @@ button:disabled {
 
 [aria-label]:hover::after {
   content: attr(aria-label);
-  z-index: 5;
+  z-index: var(----zTooltip);
   position: absolute;
   top: 90%;
   left: -33%;
