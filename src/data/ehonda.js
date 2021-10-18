@@ -1,12 +1,9 @@
-export const data = {
-  name: "E.Honda",
-  slug: "ehonda",
-  srkWikiUrl: "https://srk.shib.live/w/Super_Street_Fighter_2_Turbo/E._Honda",
-  normals: {
-    stand_normals: {
-      close_lp: {
-        name: "Close LP (jab)",
-        slug: "ehonda-normals-stand_normals-close_lp",
+const normals = {
+  stand_normals: {
+    close_lp: {
+      name: "Close LP (jab)",
+      slug: "ehonda-normals-stand_normals-close_lp",
+      data: {
         damage: "20[1]",
         stun: "0~5",
         stun_timer: "40",
@@ -14,7 +11,9 @@ export const data = {
         special_cancel: "Yes",
         super_cancel: "Yes",
         frame_advantage: "+8",
-        steps: [
+      },
+      steps: {
+        startup: [
           {
             img: "stcljab16_stfarjab15_stclstrng16_stfarstrng17_stclfrc",
             frames: "1",
@@ -25,11 +24,15 @@ export const data = {
             frames: "2",
             status: "startup",
           },
+        ],
+        active: [
           {
             img: "stcljab3_stclstrng3",
             frames: "2",
             status: "active",
           },
+        ],
+        recovery: [
           {
             img: "stcljab4_stclstrng4",
             frames: "1",
@@ -47,9 +50,11 @@ export const data = {
           },
         ],
       },
-      far_lp: {
-        name: "Far LP (jab)",
-        slug: "ehonda-normals-stand_normals-far_lp",
+    },
+    far_lp: {
+      name: "Far LP (jab)",
+      slug: "ehonda-normals-stand_normals-far_lp",
+      data: {
         damage: "20[1]",
         stun: "0~5",
         stun_timer: "40",
@@ -57,7 +62,9 @@ export const data = {
         special_cancel: "No",
         super_cancel: "No",
         frame_advantage: "+4",
-        steps: [
+      },
+      steps: {
+        startup: [
           {
             img: "stcljab16_stfarjab15_stclstrng16_stfarstrng17_stclfrc",
             frames: "2",
@@ -68,11 +75,15 @@ export const data = {
             frames: "3",
             status: "startup",
           },
+        ],
+        active: [
           {
             img: "stfarjab3",
             frames: "4",
             status: "active",
           },
+        ],
+        recovery: [
           {
             img: "stfarjab24",
             frames: "4",
@@ -87,16 +98,21 @@ export const data = {
       },
     },
   },
-  specials: {
-    hyakuretsu_harite: {
-      lp: {
-        name: "Hyakuretsu Harite LP (jab)",
-        slug: "ehonda-specials-hyakuretsu_harite-lp",
+};
+
+const specials = {
+  hyakuretsu_harite: {
+    lp: {
+      name: "Hyakuretsu Harite LP (jab)",
+      slug: "ehonda-specials-hyakuretsu_harite-lp",
+      data: {
         damage: "24[1] / 22[1]",
         stun: "5~11",
         stun_timer: "100",
         super_meter: "6",
-        steps: [
+      },
+      steps: {
+        startup: [
           {
             img: "hhs113",
             frames: "2",
@@ -107,6 +123,8 @@ export const data = {
             frames: "3",
             status: "startup",
           },
+        ],
+        active: [
           {
             img: "hhs3",
             frames: "4",
@@ -137,6 +155,8 @@ export const data = {
             frames: "3",
             status: "active",
           },
+        ],
+        recovery: [
           {
             img: "hhs29",
             frames: "5",
@@ -164,14 +184,18 @@ export const data = {
           },
         ],
       },
-      mp: {
-        name: "Hyakuretsu Harite MP (strong)",
-        slug: "ehonda-specials-hyakuretsu_harite-mp",
+    },
+    mp: {
+      name: "Hyakuretsu Harite MP (strong)",
+      slug: "ehonda-specials-hyakuretsu_harite-mp",
+      data: {
         damage: "26[2] / 24/[2]",
         stun: "5~11",
         stun_timer: "100",
         super_meter: "6",
-        steps: [
+      },
+      steps: {
+        startup: [
           {
             img: "hhs113",
             frames: "4",
@@ -182,6 +206,8 @@ export const data = {
             frames: "4",
             status: "startup",
           },
+        ],
+        active: [
           {
             img: "hhs3",
             frames: "2",
@@ -212,6 +238,8 @@ export const data = {
             frames: "1",
             status: "active",
           },
+        ],
+        recovery: [
           {
             img: "hhs29",
             frames: "7",
@@ -239,14 +267,18 @@ export const data = {
           },
         ],
       },
-      hp: {
-        name: "Hyakuretsu Harite HP (fierce)",
-        slug: "ehonda-specials-hyakuretsu_harite-hp",
+    },
+    hp: {
+      name: "Hyakuretsu Harite HP (fierce)",
+      slug: "ehonda-specials-hyakuretsu_harite-hp",
+      data: {
         damage: "28[3]/26[3]",
         stun: "5~11",
         stun_timer: "100",
         super_meter: "6",
-        steps: [
+      },
+      steps: {
+        startup: [
           {
             img: "hhs113",
             frames: "5",
@@ -257,6 +289,8 @@ export const data = {
             frames: "6",
             status: "startup",
           },
+        ],
+        active: [
           {
             img: "hhs3",
             frames: "1",
@@ -287,6 +321,8 @@ export const data = {
             frames: "1",
             status: "active",
           },
+        ],
+        recovery: [
           {
             img: "hhs29",
             frames: "8",
@@ -316,4 +352,9 @@ export const data = {
       },
     },
   },
+};
+
+export const data = {
+  normals: normals,
+  specials: specials,
 };

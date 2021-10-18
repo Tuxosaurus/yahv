@@ -2,12 +2,16 @@ import { data as ryuData } from "./ryu.js";
 import { data as ehondaData } from "./ehonda.js";
 import { data as chunliData } from "./chunli.js";
 import { data as kenData } from "./ken.js";
+import { data as okenData } from "./oken.js";
+import { data as oryuData } from "./oryu.js";
 
 const allData = {
   ryu: ryuData,
   ehonda: ehondaData,
   chunli: chunliData,
   ken: kenData,
+  oken: okenData,
+  oryu: oryuData,
 };
 
 export const transfromSlugIntoLabel = (slug) => {
@@ -37,6 +41,7 @@ export const getMoveDataFromMoveSlug = (moveSlug) => {
   }
 
   const parts = splitMoveSlug(moveSlug);
+
   const moveData =
     allData[parts.character][parts.category][parts.stance][parts.move];
 

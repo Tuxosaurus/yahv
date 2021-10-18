@@ -150,15 +150,15 @@ export const MoveSelector = ({ playerId }) => {
   };
 
   const getListItems = (moveset) => {
-    //  [{
-    //    key: "",
-    //    groupName: "",
-    //    options: [{
-    //      slug: "",
-    //      name: "",
-    //      preferredName?: "",
-    //    }]
-    //  }]
+    // [{
+    //   key: "ken-stand_normals",
+    //   groupName: "Stand normals",
+    //   options: [{
+    //     slug: "ken-normals-stand_normals-close_lp",
+    //     name: "Close LP (jab)",
+    //     preferredName: "Close JAB",
+    //   }]
+    // }]
     if (!moveset) {
       return [];
     }
@@ -193,6 +193,7 @@ export const MoveSelector = ({ playerId }) => {
         filterSearched={filterSearchedMove}
         selectOption={selectOption}
       />
+
       {moveData && renderMoveData(moveData)}
     </div>
   );
