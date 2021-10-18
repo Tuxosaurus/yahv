@@ -3,6 +3,8 @@ import React, { useContext } from "react";
 import { store } from "./store.js";
 import { getMoveDataFromMoveSlug } from "../data/utils";
 
+import "../styles/stepSelector.css";
+
 function renderMoveStepsList(moveData, stepNumber) {
   return Object.entries(moveData.steps).map((steps, index) => {
     const number = ++steps[0];

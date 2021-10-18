@@ -11,7 +11,7 @@ import { transfromSlugIntoLabel } from "../data/utils";
 
 import "../styles/characterSelector.css";
 
-export const CharacterSelector = ({ playerId }) => {
+export const CharacterSelector = ({ playerId, listItems }) => {
   const globalState = useContext(store);
   const { dispatch, state } = globalState;
   const characterSlug = state[playerId].selectedCharacterSlug;
