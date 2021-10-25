@@ -1,39 +1,24 @@
 import React, { useContext } from "react";
 
+import { Combobox } from "./combobox.js";
 import { store } from "./store.js";
-import { getMoveDataFromMoveSlug } from "../data/utils";
 
 import "../styles/stepSelector.css";
-
-function renderMoveStepsList(moveData, stepNumber) {
-  return Object.entries(moveData.steps).map((steps, index) => {
-    const number = ++steps[0];
-    const key = `${moveData.slug}|${index}`;
-    const status = steps[1].status ? ` (${steps[1].status})` : "";
-    const label = `#${number}/ ${steps[1].frames}fr${status}`;
-
-    return (
-      <option
-        key={key}
-        value={index}
-        className={stepNumber === index ? "selected" : ""}
-      >
-        {label}
-      </option>
-    );
-  });
-}
-
-function getFirstStepNumberFromStatus(status, moveData) {
-  return Object.entries(moveData.steps).findIndex(
-    (steps) => steps[1].status === status
-  );
-}
 
 export const StepSelector = ({ playerId }) => {
   const globalState = useContext(store);
   const { dispatch, state } = globalState;
   const playerState = state[playerId];
+
+  function selectOption(stepNumber) {
+    dispatch({
+      type: "stepNumberChange",
+      payload: {
+        playerId: playerId,
+        selectedStepNumber: stepNumber,
+      },
+    });
+  }
 
   function handleSelectedStepChange(event) {
     dispatch({
@@ -54,65 +39,59 @@ export const StepSelector = ({ playerId }) => {
     return emptyStepSelectorP1;
   }
 
-  const selectedStepNumber = Number(playerState.selectedStepNumber);
-  const selectedMoveData = getMoveDataFromMoveSlug(selectedMoveSlug);
+  const moveData = playerState.selectedMoveData;
 
-  if (!selectedMoveData) {
+  if (!moveData) {
     return emptyStepSelectorP1;
   }
 
-  const maxStepNumber = selectedMoveData.steps.length - 1;
+  const selectedStepNumber = Number(playerState.selectedStepNumber);
+  const maxStepNumber = moveData.totalSteps - 1;
   const previousStepNumber =
     selectedStepNumber > 0 ? selectedStepNumber - 1 : 0;
   const nextStepNumber =
     selectedStepNumber < maxStepNumber ? selectedStepNumber + 1 : 0;
-
-  const firstStartupStep = getFirstStepNumberFromStatus(
-    "startup",
-    selectedMoveData
-  );
-  const firstActiveStep = getFirstStepNumberFromStatus(
-    "active",
-    selectedMoveData
-  );
-  const firstRecoveryStep = getFirstStepNumberFromStatus(
-    "recovery",
-    selectedMoveData
-  );
 
   return (
     <div className={`StepSelector StepSelector-${playerId}`}>
       <h3 className="title">
         <span>Steps</span>
       </h3>
-      {selectedStepNumber !== "undefined" && (
-        <select value={selectedStepNumber} onChange={handleSelectedStepChange}>
-          {renderMoveStepsList(selectedMoveData, selectedStepNumber)}
-        </select>
+
+      {moveData && (
+        <Combobox
+          purpose="steps"
+          placeholder="Select/Type a move"
+          listItems={moveData.comboboxSteps}
+          playerId={playerId}
+          alreadySelectedItem={moveData?.onlySteps[selectedStepNumber]}
+          selectOption={selectOption}
+        />
       )}
+
       <div className="step-controls">
         <span className="shortcuts">
           <button
-            value={firstStartupStep}
+            value={moveData.firstOfGroup?.startup}
             onClick={handleSelectedStepChange}
             aria-label="Go to first statup step"
-            disabled={firstStartupStep === -1}
+            disabled={moveData.firstOfGroup?.startup === undefined}
           >
             Startup
           </button>
           <button
-            value={firstActiveStep}
+            value={moveData.firstOfGroup?.active}
             onClick={handleSelectedStepChange}
             aria-label="Go to first active step"
-            disabled={firstActiveStep === -1}
+            disabled={moveData.firstOfGroup?.active === undefined}
           >
             Active
           </button>
           <button
-            value={firstRecoveryStep}
+            value={moveData.firstOfGroup?.recovery}
             onClick={handleSelectedStepChange}
             aria-label="Go to first recovery step"
-            disabled={firstRecoveryStep === -1}
+            disabled={moveData.firstOfGroup?.recovery === undefined}
           >
             Recovery
           </button>

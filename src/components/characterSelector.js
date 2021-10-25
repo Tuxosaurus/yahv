@@ -11,6 +11,18 @@ import { transfromSlugIntoLabel } from "../data/utils";
 
 import "../styles/characterSelector.css";
 
+const getFilteredName = (option) => {
+  let completeName = `${option.name}-${option.slug}`;
+
+  if (completeName.match(/(Old)/g)) {
+    completeName += " super";
+  } else {
+    completeName += " new";
+  }
+
+  return completeName;
+};
+
 export const CharacterSelector = ({ playerId, listItems }) => {
   const globalState = useContext(store);
   const { dispatch, state } = globalState;
@@ -32,10 +44,10 @@ export const CharacterSelector = ({ playerId, listItems }) => {
     //      name: "Ryu",
     //    }]
     //  }]
-    return Object.entries(characterList).map((groups) => ({
-      key: `${groups[0]}`,
-      groupName: transfromSlugIntoLabel(groups[0]),
-      options: groups[1].map((character) => ({
+    return Object.entries(characterList).map((group) => ({
+      key: `${group[0]}`,
+      groupName: transfromSlugIntoLabel(group[0]),
+      options: group[1].map((character) => ({
         slug: character.slug,
         name: character.name,
       })),
@@ -73,6 +85,7 @@ export const CharacterSelector = ({ playerId, listItems }) => {
         listItems={getListItems()}
         playerId={playerId}
         alreadySelectedItem={character}
+        filteredName={getFilteredName}
         selectOption={selectOption}
       />
     </div>

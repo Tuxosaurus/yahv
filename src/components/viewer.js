@@ -7,7 +7,7 @@ import { Legend } from "./legend.js";
 import { Modal } from "./modal.js";
 import { store, validBgs } from "./store.js";
 import { StepSelector } from "./stepSelector.js";
-import { getMoveMaxStepNumber, getStepImageFilename } from "../data/utils";
+import { getStepImageFilename } from "../data/utils";
 
 import "../styles/viewer.css";
 
@@ -130,13 +130,14 @@ export const Viewer = () => {
       return null;
     }
 
+    const currentMoveData = state[targetPlayer].selectedMoveData;
     const currentStepNumber = state[targetPlayer].selectedStepNumber;
     const targetNumber =
       keyName.includes("left") || keyName.includes("up")
         ? currentStepNumber > 0
           ? currentStepNumber - 1
           : 0
-        : currentStepNumber < getMoveMaxStepNumber(currentMoveSlug)
+        : currentStepNumber < parseInt(currentMoveData.totalSteps) - 1
         ? currentStepNumber + 1
         : currentStepNumber;
 
@@ -193,12 +194,18 @@ export const Viewer = () => {
 
   const stepFilenameP1 =
     p1.selectedMoveSlug !== "-"
-      ? getStepImageFilename(p1.selectedMoveSlug, Number(p1.selectedStepNumber))
+      ? getStepImageFilename(
+          p1.selectedCharacterSlug,
+          p1.selectedMoveData.onlySteps[p1.selectedStepNumber]
+        )
       : null;
 
   const stepFilenameP2 =
     p2.selectedMoveSlug !== "-"
-      ? getStepImageFilename(p2.selectedMoveSlug, Number(p2.selectedStepNumber))
+      ? getStepImageFilename(
+          p2.selectedCharacterSlug,
+          p2.selectedMoveData.onlySteps[p2.selectedStepNumber]
+        )
       : null;
 
   const stepImageP1 = stepFilenameP1 ? retrieveStepImage(stepFilenameP1) : null;

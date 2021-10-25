@@ -7,24 +7,45 @@ const KEY_UP = 38;
 const KEY_DOWN = 40;
 const KEY_ENTER = 13;
 
-const defaultFilterSearched = (option, searched) => {
-  const completeName = `${option.name}-${option.slug}`;
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#escaping
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+}
 
-  const searchedParts = searched.split(" ");
-  // best results with to 2 words query
+const filterSearched = (option, searched, filteredName) => {
+  const string = filteredName
+    ? filteredName(option)
+    : `${option.name}-${option.slug}`;
+
+  const searchedParts = escapeRegExp(searched).split(" ");
+
+  if (searchedParts.length <= 0) {
+    return string;
+  }
+
+  // best results with 2 words query
   const regex = new RegExp(
     `${searchedParts.join(".*")}|${searchedParts.reverse().join(".*")}`,
     "ig"
   );
 
-  return completeName.match(regex);
+  return string.match(regex);
 };
 
+// [{
+//   key: "ken-stand_normals",
+//   groupName: "Stand normals",
+//   options: [{
+//     slug: "ken-normals-stand_normals-close_lp",
+//     name: "Close LP (jab)",
+//     preferredName: "Close JAB",
+//   }]
+// }]
 const renderListItem = (
   listItem,
   handleSelectItem,
   lastSelectedItemSlug,
-  filterSearched,
+  filteredName,
   searched,
   playerId
 ) => {
@@ -40,7 +61,7 @@ const renderListItem = (
         <ul>
           {/* recursion \o/ */}
           {listItem.options
-            .filter((option) => filterSearched(option, searched))
+            .filter((option) => filterSearched(option, searched, filteredName))
             .map((option) =>
               renderListItem(option, handleSelectItem, lastSelectedItemSlug)
             )}
@@ -72,16 +93,20 @@ export const Combobox = ({
   listItems,
   playerId,
   alreadySelectedItem,
-  filterSearched = defaultFilterSearched,
+  filteredName,
   selectOption,
 }) => {
   const [searched, setSearched] = useState("");
+  const [isDefaultValue, setIsDefaultValue] = useState(true);
   const [lastFocusedIndex, setLastFocusedIndex] = useState(null);
   const comboRef = useDetectClickOutside({ onTriggered: closeDropdown });
   const searchRef = useRef(null);
   const listRef = useRef(null);
   const getSearchValue = () => {
-    return alreadySelectedItem && alreadySelectedItem.name && searched === ""
+    return alreadySelectedItem &&
+      alreadySelectedItem.name &&
+      isDefaultValue &&
+      searched === ""
       ? alreadySelectedItem.name
       : searched;
   };
@@ -106,6 +131,7 @@ export const Combobox = ({
     }
 
     setSearched("");
+    setIsDefaultValue(false);
     openDropdown();
   }
 
@@ -117,6 +143,7 @@ export const Combobox = ({
     const selectedName = item
       ? item.dataset["name"]
       : event.target.dataset["name"];
+
     const selectedSlug = item
       ? item.dataset["slug"]
       : event.target.dataset["slug"];
@@ -128,6 +155,7 @@ export const Combobox = ({
     }
 
     setSearched("");
+    setIsDefaultValue(true);
     closeDropdown();
   }
 
@@ -237,14 +265,13 @@ export const Combobox = ({
         ref={listRef}
         role="listbox"
       >
-        {/* should distinguish between group & option items */}
         {listItems &&
           listItems.map((listItem) =>
             renderListItem(
               listItem,
               handleSelectItem,
               alreadySelectedItem?.slug,
-              filterSearched,
+              filteredName,
               searched,
               playerId
             )

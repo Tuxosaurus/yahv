@@ -16,8 +16,8 @@ import "./styles/app.css";
 export const App = () => {
   const globalState = useContext(store);
   const { dispatch, state } = globalState;
-  const hasP1Move = state.p1.selectedMoveSlug !== "";
-  const hasP2Move = state.p2.selectedMoveSlug !== "";
+  const hasP1Move = state.p1.selectedMoveSlug !== "-";
+  const hasP2Move = state.p2.selectedMoveSlug !== "-";
   const [useDarkTheme, setUseDarkTheme] = useState(isUsingDarkTheme);
   const [disabledTooltips, setDisabledTooltips] = useState(hasDisabledTooltips);
   const [newPreferredNotation, setNewPreferredNotation] =

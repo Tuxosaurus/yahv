@@ -1,5 +1,7 @@
 import { createContext, useReducer } from "react";
 
+import { getMoveDataFromMoveSlug } from "../data/utils";
+
 const localStorage = window.localStorage;
 const hasLocalStorageDarkTheme = localStorage.getItem("darkTheme") !== null;
 const hasLocalStorageTooltips = localStorage.getItem("tooltips") !== null;
@@ -43,12 +45,14 @@ function isValidNotation(n) {
 }
 
 function isValidZoom(z) {
+  console.log("isValidZoom(z)", z, validZooms.includes(z));
   return z && validZooms.includes(z);
 }
 
 const defaultPlayerState = {
   selectedCharacterSlug: "-",
   selectedMoveSlug: "-",
+  selectedMoveData: null,
   selectedStepNumber: 0,
   mirror: false,
   transparent: false,
@@ -89,6 +93,7 @@ const getPlayerStateFromUrl = (playerId, url) => {
   return {
     selectedCharacterSlug: characterSlug,
     selectedMoveSlug: moveSlug,
+    selectedMoveData: getMoveDataFromMoveSlug(moveSlug),
     selectedStepNumber: parseInt(stepOptions),
     transparent: stepOptions.includes("t"),
     mirror: stepOptions.includes("m"),
@@ -110,13 +115,13 @@ const defaultState = {
   background: isValidBackground(urlParams.get("bg"))
     ? urlParams.get("bg")
     : defaultBg,
-  zoom: isValidZoom(urlParams.get("zoom")) ?? 2,
+  zoom: isValidZoom(urlParams.get("zoom")) ? urlParams.get("zoom") : 2,
   cps2: urlParams.get("cps2") || false,
   scanlines: urlParams.get("scanlines") || false,
   modal: null,
   notation: preferredNotation || validNotations[0],
 };
-
+console.log(defaultState);
 export const store = createContext(defaultState);
 const { Provider } = store;
 
@@ -133,6 +138,7 @@ export const StateProvider = ({ children }) => {
             ...playerState,
             selectedCharacterSlug: action.payload.selectedCharacterSlug,
             selectedMoveSlug: "-",
+            selectedMoveData: null,
             selectedStepNumber: 0,
           },
         };
@@ -142,6 +148,9 @@ export const StateProvider = ({ children }) => {
           [playerId]: {
             ...playerState,
             selectedMoveSlug: action.payload.selectedMoveSlug,
+            selectedMoveData: getMoveDataFromMoveSlug(
+              action.payload.selectedMoveSlug
+            ),
             selectedStepNumber: 0,
           },
         };

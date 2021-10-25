@@ -56,11 +56,7 @@ const rewriteWithPreferredNotation = (moveName, notation) => {
   return moveName;
 };
 
-const filterSearchedMove = (option, searched) => {
-  if (searched === "") {
-    return true;
-  }
-
+const getFilteredName = (option) => {
   let completeName = `${option.name}-${option.slug}`;
 
   // TODO should "kick" apply to Chun's super?
@@ -71,51 +67,43 @@ const filterSearchedMove = (option, searched) => {
     completeName += " kick";
   }
 
-  const searchedParts = searched.split(" ");
-  // limited to 2 words
-  const regex = new RegExp(
-    `${searchedParts.join(".*")}|${searchedParts.reverse().join(".*")}`,
-    "ig"
-  );
-  return completeName.match(regex);
+  return completeName;
 };
 
-const renderMoveData = (moveData) => (
+const renderMoveData = (data) => (
   <ul className="MoveSelector-data">
-    {Object.keys(moveData)
-      .filter((moveKey) => !["name", "slug", "steps"].includes(moveKey))
-      .map((moveKey) => {
-        const key = `${moveData.slug}-${moveKey}`;
-        const label = transfromSlugIntoLabel(moveKey);
-        const moveValue = moveData[moveKey];
+    {Object.keys(data).map((moveKey) => {
+      const key = `${data.slug}-${moveKey}`;
+      const label = transfromSlugIntoLabel(moveKey);
+      const moveValue = data[moveKey];
 
-        return (
-          <li key={key}>
-            {`${label}: `}
-            <span className="MoveSelector-moreInfo">{moveValue}</span>
-            {label === "Damage" && (
-              <a
-                href="https://srk.shib.live/w/Super_Street_Fighter_2_Turbo/Random_Damage"
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label="Random damage explanations on SRK Wiki"
-              >
-                info
-              </a>
-            )}
-            {label === "Chain cancel" && (
-              <a
-                href="https://srk.shib.live/w/Super_Street_Fighter_2_Turbo/Canceling_(ST)"
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label="Canceling explanations on SRK Wiki"
-              >
-                info
-              </a>
-            )}
-          </li>
-        );
-      })}
+      return (
+        <li key={key}>
+          {`${label}: `}
+          <span className="MoveSelector-moreInfo">{moveValue}</span>
+          {label === "Damage" && (
+            <a
+              href="https://srk.shib.live/w/Super_Street_Fighter_2_Turbo/Random_Damage"
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label="Random damage explanations on SRK Wiki"
+            >
+              info
+            </a>
+          )}
+          {label === "Chain cancel" && (
+            <a
+              href="https://srk.shib.live/w/Super_Street_Fighter_2_Turbo/Canceling_(ST)"
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label="Canceling explanations on SRK Wiki"
+            >
+              info
+            </a>
+          )}
+        </li>
+      );
+    })}
   </ul>
 );
 
@@ -188,13 +176,13 @@ export const MoveSelector = ({ playerId }) => {
         alreadySelectedItem={{
           name:
             moveData && rewriteWithPreferredNotation(moveData.name, notation),
-          slug: moveData && moveSlug,
+          slug: moveSlug,
         }}
-        filterSearched={filterSearchedMove}
+        filteredName={getFilteredName}
         selectOption={selectOption}
       />
 
-      {moveData && renderMoveData(moveData)}
+      {moveData?.data && renderMoveData(moveData.data)}
     </div>
   );
 };

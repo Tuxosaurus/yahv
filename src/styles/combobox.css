@@ -97,22 +97,24 @@
     right: 90px;
   }
 
-  .Combobox.displayed .Combobox-search,
-  .Combobox.displayed .Combobox-list {
+  /* force specificity with duplicated class */
+  .Combobox.displayed.displayed .Combobox-search,
+  .Combobox.displayed.displayed .Combobox-list {
     position: fixed;
     z-index: var(--ComboboxFullscreen);
     width: 100%;
     text-align: left;
   }
 
-  .Combobox.displayed .Combobox-search {
+  .Combobox.displayed.displayed .Combobox-search {
     top: 0;
     left: 0;
-    width: calc(100% - 20px);
+    width: calc(100% - 36px);
     padding: 0 8px;
   }
 
-  .Combobox.displayed .Combobox-list {
+  .Combobox.displayed.displayed .Combobox-list {
+    top: 32px;
     border: 0;
     height: calc(100% - 32px);
     max-height: none;
