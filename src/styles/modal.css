@@ -15,7 +15,7 @@ kbd {
 .modal {
   display: none;
   position: fixed;
-  z-index: 999;
+  z-index: var(--zModal);
   top: 15vh;
   left: 50%;
   width: 100%;
@@ -45,6 +45,11 @@ kbd {
   padding-bottom: 10px;
   text-align: center;
   border-bottom: 1px solid var(--colorSub);
+}
+
+.modal .subtitle {
+  margin-top: 10px;
+  text-align: center;
 }
 
 .modal h3 {

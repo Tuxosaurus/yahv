@@ -1,0 +1,27 @@
+.StepSelector .Combobox-search {
+  top: 16px;
+  left: 124px;
+  width: calc(100% - 146px);
+}
+
+.StepSelector .Combobox-list {
+  top: 48px;
+}
+
+.StepSelector-p2 .Combobox-search {
+  left: auto;
+  right: 124px;
+}
+
+/**************************************/
+@media (max-width: 800px) {
+  .StepSelector .Combobox-search {
+    left: 84px;
+    width: calc(100% - 104px);
+  }
+
+  .StepSelector-p2 .Combobox-search {
+    left: auto;
+    right: 84px;
+  }
+}

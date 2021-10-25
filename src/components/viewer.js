@@ -7,7 +7,7 @@ import { Legend } from "./legend.js";
 import { Modal } from "./modal.js";
 import { store, validBgs } from "./store.js";
 import { StepSelector } from "./stepSelector.js";
-import { getMoveMaxStepNumber, getStepImageFilename } from "../data/utils";
+import { getStepImageFilename } from "../data/utils";
 
 import "../styles/viewer.css";
 
@@ -61,7 +61,7 @@ export const Viewer = () => {
 
   function focusBoard() {
     // To make sure hotkeys are applied after clicking controls
-    // Requires tabIndex="0" to make board "focussable"
+    // Requires tabIndex="0" to make board "focusable"
     if (boardRef.current) {
       boardRef.current.focus();
     }
@@ -130,13 +130,14 @@ export const Viewer = () => {
       return null;
     }
 
+    const currentMoveData = state[targetPlayer].selectedMoveData;
     const currentStepNumber = state[targetPlayer].selectedStepNumber;
     const targetNumber =
       keyName.includes("left") || keyName.includes("up")
         ? currentStepNumber > 0
           ? currentStepNumber - 1
           : 0
-        : currentStepNumber < getMoveMaxStepNumber(currentMoveSlug)
+        : currentStepNumber < parseInt(currentMoveData.totalSteps) - 1
         ? currentStepNumber + 1
         : currentStepNumber;
 
@@ -156,16 +157,16 @@ export const Viewer = () => {
     let newPosition = currentPosition;
 
     if (keyName.includes("left")) {
-      newPosition.x -= 1;
+      newPosition.x = parseInt(newPosition.x) - 1;
     }
     if (keyName.includes("right")) {
-      newPosition.x += 1;
+      newPosition.x = parseInt(newPosition.x) + 1;
     }
     if (keyName.includes("up")) {
-      newPosition.y -= 1;
+      newPosition.y = parseInt(newPosition.y) - 1;
     }
     if (keyName.includes("down")) {
-      newPosition.y += 1;
+      newPosition.y = parseInt(newPosition.y) + 1;
     }
 
     dispatch({
@@ -193,12 +194,18 @@ export const Viewer = () => {
 
   const stepFilenameP1 =
     p1.selectedMoveSlug !== "-"
-      ? getStepImageFilename(p1.selectedMoveSlug, Number(p1.selectedStepNumber))
+      ? getStepImageFilename(
+          p1.selectedCharacterSlug,
+          p1.selectedMoveData.onlySteps[p1.selectedStepNumber]
+        )
       : null;
 
   const stepFilenameP2 =
     p2.selectedMoveSlug !== "-"
-      ? getStepImageFilename(p2.selectedMoveSlug, Number(p2.selectedStepNumber))
+      ? getStepImageFilename(
+          p2.selectedCharacterSlug,
+          p2.selectedMoveData.onlySteps[p2.selectedStepNumber]
+        )
       : null;
 
   const stepImageP1 = stepFilenameP1 ? retrieveStepImage(stepFilenameP1) : null;
@@ -211,6 +218,13 @@ export const Viewer = () => {
   return (
     <Hotkeys
       keyName="shift+left,shift+right,shift+up,shift+down,ctrl+left,ctrl+right,ctrl+up,ctrl+down,alt+left,alt+right,alt+up,alt+down"
+      filter={(event) => {
+        if (event.target.id === "board") {
+          return true;
+        }
+
+        return false;
+      }}
       allowRepeat
       onKeyDown={handleKeyDown}
     >
@@ -220,6 +234,7 @@ export const Viewer = () => {
       </div>
       <div className="Viewer">
         <div
+          id="board"
           ref={boardRef}
           tabIndex="0"
           className={`board${scanlines ? " scanlines" : ""}`}
@@ -324,6 +339,10 @@ export const Viewer = () => {
           </span>
         </div>
         <Modal id="modalHotkeysHelp" title="Available keyboard hotkeys">
+          <p className="subtitle">
+            When the grid area is focused (white border)
+          </p>
+
           <h3>Move player 1 by a pixel</h3>
           <p>
             <kbd>Ctrl</kbd> + <kbd>Left</kbd>|<kbd>Right</kbd>|<kbd>Up</kbd>|
