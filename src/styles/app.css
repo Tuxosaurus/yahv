@@ -54,6 +54,11 @@ body,
   font-family: "Roboto", "Helvetica Neue", sans-serif;
 }
 
+.App.disabled-scroll {
+  max-height: 100vh;
+  overflow: hidden;
+}
+
 .App-warning,
 .App-header,
 .App-footer {
