@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/yahv/static/css/main.c05653ff.chunk.css",
+    "main.css": "/yahv/static/css/main.42444097.chunk.css",
     "main.js": "/yahv/static/js/main.0c7551ee.chunk.js",
     "main.js.map": "/yahv/static/js/main.0c7551ee.chunk.js.map",
     "runtime-main.js": "/yahv/static/js/runtime-main.b3129c53.js",
@@ -8,7 +8,7 @@
     "static/js/2.647c666a.chunk.js": "/yahv/static/js/2.647c666a.chunk.js",
     "static/js/2.647c666a.chunk.js.map": "/yahv/static/js/2.647c666a.chunk.js.map",
     "index.html": "/yahv/index.html",
-    "static/css/main.c05653ff.chunk.css.map": "/yahv/static/css/main.c05653ff.chunk.css.map",
+    "static/css/main.42444097.chunk.css.map": "/yahv/static/css/main.42444097.chunk.css.map",
     "static/js/2.647c666a.chunk.js.LICENSE.txt": "/yahv/static/js/2.647c666a.chunk.js.LICENSE.txt",
     "static/media/blanka_broll17anm.gif": "/yahv/static/media/blanka_broll17anm.5b89bc5e.gif",
     "static/media/blanka_elec2anm.gif": "/yahv/static/media/blanka_elec2anm.17e10379.gif",
@@ -39,7 +39,7 @@
   "entrypoints": [
     "static/js/runtime-main.b3129c53.js",
     "static/js/2.647c666a.chunk.js",
-    "static/css/main.c05653ff.chunk.css",
+    "static/css/main.42444097.chunk.css",
     "static/js/main.0c7551ee.chunk.js"
   ]
 }
