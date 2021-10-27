@@ -23,6 +23,15 @@
   --zPortrait: 80;
   --ComboboxFullscreen: 99;
   --zModal: 99;
+
+  --hitboxRed: #ff0000;
+  --hitboxBlue: #0000ff;
+  --hitboxBlack: #010101;
+  --hitboxWhite: #fefefe;
+  --hitboxGreen: #00ff00;
+  --hitboxYellow: yellow;
+  --hitboxCyan: #00ffff;
+  --hitboxOrange: #ff6600;
 }
 
 .dark-theme {
@@ -52,11 +61,6 @@ body,
   background: linear-gradient(to right, var(--colorP1) 50%, var(--colorP2) 50%);
   color: var(--colorMain);
   font-family: "Roboto", "Helvetica Neue", sans-serif;
-}
-
-.App.disabled-scroll {
-  max-height: 100vh;
-  overflow: hidden;
 }
 
 .App-warning,
@@ -218,7 +222,7 @@ button:disabled {
 
 [aria-label]:hover::after {
   content: attr(aria-label);
-  z-index: var(----zTooltip);
+  z-index: var(--zTooltip);
   position: absolute;
   top: 90%;
   left: -33%;
@@ -312,8 +316,53 @@ h2.title {
   width: 50%;
 }
 
+.red {
+  background-color: var(--hitboxRed);
+  color: black;
+}
+
+.blue {
+  background-color: var(--hitboxBlue);
+  color: white;
+}
+
+.black {
+  background-color: var(--hitboxBlack);
+  color: white;
+}
+
+.white {
+  background-color: var(--hitboxWhite);
+  color: black;
+}
+
+.green {
+  background-color: var(--hitboxGreen);
+  color: black;
+}
+
+.yellow {
+  background-color: var(--hitboxYellow);
+  color: black;
+}
+
+.cyan {
+  background-color: var(--hitboxCyan);
+  color: black;
+}
+
+.orange {
+  background-color: var(--hitboxOrange);
+  color: black;
+}
+
 /**************************************/
 @media (max-width: 800px) {
+  .App.disabled-scroll {
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
   .App-warning {
     display: block;
   }
@@ -324,6 +373,11 @@ h2.title {
 
   .title span {
     font-size: 18px;
+  }
+
+  .title::before,
+  .title::after {
+    content: none;
   }
 }
 

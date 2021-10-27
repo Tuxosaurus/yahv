@@ -16,19 +16,25 @@ kbd {
   display: none;
   position: fixed;
   z-index: var(--zModal);
-  top: 15vh;
+  top: 12vh;
   left: 50%;
   width: 100%;
   max-width: 600px;
   height: 100%;
   margin-left: -300px;
-  max-height: 70vh;
-  padding: 30px 50px 0;
+  max-height: 75vh;
+  padding: 30px 50px 30px;
   background: var(--colorMain);
   color: var(--colorSub);
   border-radius: var(--radius);
   box-shadow: 0 0 1px 3px var(--colorSub);
   box-sizing: border-box;
+  overflow: auto;
+}
+
+.modal-content {
+  position: relative;
+  min-height: calc(100% - 50px);
 }
 
 .modal.open {
@@ -52,15 +58,24 @@ kbd {
   text-align: center;
 }
 
-.modal h3 {
+.modal h3,
+.modal dt {
   margin: 30px 0 10px;
 }
 
+.modal dt {
+  font-weight: var(--bold);
+  text-align: center;
+  padding: 2px 0;
+  border: 1px solid var(--colorButtonActive);
+  border-radius: var(--radius);
+}
+
 .modal footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  position: relative;
+  top: 30px;
+  width: calc(100% + 100px);
+  margin: 0 -50px;
   text-align: center;
 }
 
@@ -91,11 +106,18 @@ kbd {
 @media (max-width: 800px) {
   .modal {
     max-width: none;
-    max-height: 100vh;
+    min-height: 100vh;
     top: 0;
     left: 0;
+    padding: 20px;
     margin: 0;
     border-radius: 0;
     box-shadow: none;
+  }
+
+  .modal footer {
+    width: calc(100% + 40px);
+    top: 20px;
+    margin: 0 -20px;
   }
 }

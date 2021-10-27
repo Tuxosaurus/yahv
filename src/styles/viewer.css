@@ -99,17 +99,3 @@
     transparent 1px
   );
 }
-
-.board-controls {
-  position: absolute;
-  bottom: 7%;
-  z-index: var(--zBoardControls);
-  text-align: center;
-  left: 0;
-  width: 100%;
-}
-
-.board-controls > span {
-  display: inline-block;
-  margin-right: 8px;
-}

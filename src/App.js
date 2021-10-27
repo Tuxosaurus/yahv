@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 
+import { HotkeysModal } from "./components/hotkeysModal.js";
+import { LegendModal } from "./components/legendModal.js";
 import { Modal } from "./components/modal.js";
 import { PlayerForm } from "./components/playerForm.js";
 import {
@@ -243,26 +245,11 @@ export const App = () => {
       </Modal>
 
       <Modal id="modalHotkeysHelp" title="Available keyboard hotkeys">
-        <p className="subtitle">When the grid area is focused (white border)</p>
+        <HotkeysModal />
+      </Modal>
 
-        <h3>Move player 1 by a pixel</h3>
-        <p>
-          <kbd>Ctrl</kbd> + <kbd>Left</kbd>|<kbd>Right</kbd>|<kbd>Up</kbd>|
-          <kbd>Down</kbd>
-        </p>
-        <h3>Move player 2 by a pixel</h3>
-        <p>
-          <kbd>Alt</kbd> + <kbd>Left</kbd>|<kbd>Right</kbd>|<kbd>Up</kbd>|
-          <kbd>Down</kbd>
-        </p>
-        <h3>Change player 1 step</h3>
-        <p>
-          <kbd>Shift</kbd> + <kbd>Left</kbd>|<kbd>Right</kbd>
-        </p>
-        <h3>Change player 2 step</h3>
-        <p>
-          <kbd>Shift</kbd> + <kbd>Up</kbd>|<kbd>Down</kbd>
-        </p>
+      <Modal id="modalLegend" title="Hitbox colors legend">
+        <LegendModal />
       </Modal>
     </div>
   );

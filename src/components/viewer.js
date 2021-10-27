@@ -4,7 +4,6 @@ import Hotkeys from "react-hot-keys";
 
 import { Canvas } from "./canvas.js";
 import { Legend } from "./legend.js";
-import { Modal } from "./modal.js";
 import { store, validBgs } from "./store.js";
 import { StepSelector } from "./stepSelector.js";
 import { getStepImageFilename } from "../data/utils";
@@ -61,7 +60,6 @@ export const Viewer = () => {
 
   function focusBoard() {
     // To make sure hotkeys are applied after clicking controls
-    // Requires tabIndex="0" to make board "focusable"
     if (boardRef.current) {
       boardRef.current.focus();
     }
@@ -114,10 +112,10 @@ export const Viewer = () => {
     focusBoard();
   }
 
-  function toggleHotkeysHelp() {
+  function toggleModal(modalId) {
     dispatch({
       type: "modalChange",
-      payload: state.modal === null ? "modalHotkeysHelp" : null,
+      payload: state.modal === null ? modalId : null,
     });
   }
 
@@ -249,96 +247,106 @@ export const Viewer = () => {
             <Canvas playerId="p2" image={stepImageP2} zoom={zoom} cps2={cps2} />
           )}
         </div>
-        <div className="board-controls">
-          <span>
-            <button
-              value="0"
-              onClick={handleBackgroundChange}
-              disabled={Number(background) === 0}
-            >
-              Dark
-            </button>
-            <button
-              value="1"
-              onClick={handleBackgroundChange}
-              disabled={Number(background) === 1}
-            >
-              Medium
-            </button>
-            <button
-              value="2"
-              onClick={handleBackgroundChange}
-              disabled={Number(background) === 2}
-            >
-              Bright
-            </button>
-          </span>
-          <span>
-            <button
-              value={1}
-              onClick={handleZoomChange}
-              disabled={Number(zoom) === 1}
-            >
-              X1
-            </button>
-            <button
-              value={2}
-              onClick={handleZoomChange}
-              disabled={Number(zoom) === 2}
-            >
-              X2
-            </button>
-            <button
-              value={3}
-              onClick={handleZoomChange}
-              disabled={Number(zoom) === 3}
-            >
-              X3
-            </button>
-          </span>
-          <span>
-            <button
-              onClick={handleCps2Change}
-              aria-label="Pixel ratio as seen on original hardware (approximation)"
-            >
-              CPS2 {cps2 ? "ON" : "OFF"}
-            </button>
-            <button
-              onClick={handleScanlinesChange}
-              aria-label="CAUTION: Drag and Drop disabled when scanlines are ON"
-            >
-              Scanlines {scanlines ? "ON" : "OFF"}
-            </button>
-          </span>
-          <span>
-            <button
-              className="camera"
-              onClick={capture}
-              aria-label="Download screenshot"
-            />
-            <a
-              className="link-button"
-              href={buildUrl()}
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label="Share link"
-            >
-              www
-            </a>
-          </span>
-          <span>
-            <button
-              className="hotkeys"
-              onClick={toggleHotkeysHelp}
-              aria-label="Hotkeys help"
-              aria-controls="modalHotkeysHelp"
-              aria-expanded={state.modal === "modalHotkeysHelp"}
-            >
-              Hotkeys
-            </button>
-          </span>
-        </div>
-        <Legend />
+        <Legend>
+          <div className="board-controls">
+            <span>
+              <button
+                value="0"
+                onClick={handleBackgroundChange}
+                disabled={Number(background) === 0}
+              >
+                Dark
+              </button>
+              <button
+                value="1"
+                onClick={handleBackgroundChange}
+                disabled={Number(background) === 1}
+              >
+                Medium
+              </button>
+              <button
+                value="2"
+                onClick={handleBackgroundChange}
+                disabled={Number(background) === 2}
+              >
+                Bright
+              </button>
+            </span>
+            <span>
+              <button
+                value={1}
+                onClick={handleZoomChange}
+                disabled={Number(zoom) === 1}
+              >
+                X1
+              </button>
+              <button
+                value={2}
+                onClick={handleZoomChange}
+                disabled={Number(zoom) === 2}
+              >
+                X2
+              </button>
+              <button
+                value={3}
+                onClick={handleZoomChange}
+                disabled={Number(zoom) === 3}
+              >
+                X3
+              </button>
+            </span>
+            <span className="separator">
+              <button
+                onClick={handleCps2Change}
+                aria-label="Pixel ratio as seen on original hardware (approximation)"
+              >
+                CPS2 {cps2 ? "ON" : "OFF"}
+              </button>
+              <button
+                onClick={handleScanlinesChange}
+                aria-label="CAUTION: Drag and Drop disabled when scanlines are ON"
+              >
+                Scanlines {scanlines ? "ON" : "OFF"}
+              </button>
+            </span>
+            <span>
+              <button
+                className="camera"
+                onClick={capture}
+                aria-label="Download screenshot"
+              />
+              <a
+                className="link-button"
+                href={buildUrl()}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label="Share link"
+              >
+                www
+              </a>
+            </span>
+            <span>
+              <button
+                className="hotkeys"
+                onClick={() => toggleModal("modalHotkeysHelp")}
+                aria-label="Hotkeys help"
+                aria-controls="modalHotkeysHelp"
+                aria-expanded={state.modal === "modalHotkeysHelp"}
+              >
+                Hotkeys
+              </button>
+              <button
+                className="legend"
+                onClick={() => toggleModal("modalLegend")}
+                aria-label="Legend"
+                aria-controls="modalLegend"
+                aria-expanded={state.modal === "modalLegend"}
+              >
+                Legend
+              </button>
+            </span>
+          </div>
+        </Legend>
       </div>
     </Hotkeys>
   );

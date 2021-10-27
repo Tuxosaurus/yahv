@@ -1,5 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useDetectClickOutside } from "react-detect-click-outside";
+
+import { store } from "./store.js";
 
 import "../styles/combobox.css";
 
@@ -96,10 +98,14 @@ export const Combobox = ({
   filteredName,
   selectOption,
 }) => {
+  const globalState = useContext(store);
+  const { dispatch, state } = globalState;
   const [searched, setSearched] = useState("");
   const [isDefaultValue, setIsDefaultValue] = useState(true);
   const [lastFocusedIndex, setLastFocusedIndex] = useState(null);
-  const comboRef = useDetectClickOutside({ onTriggered: closeDropdown });
+  const comboRef = useDetectClickOutside({
+    onTriggered: clickOutsideCloseDropdown,
+  });
   const searchRef = useRef(null);
   const listRef = useRef(null);
   const getSearchValue = () => {
@@ -115,10 +121,28 @@ export const Combobox = ({
     if (comboRef.current) {
       comboRef.current?.classList.add("displayed");
       comboRef.current.setAttribute("aria-expanded", true);
+
+      // disable main scroll on small devices
+      dispatch({
+        type: "modalChange",
+        payload: state.modal === null ? "combobox" : null,
+      });
     }
   }
 
   function closeDropdown() {
+    if (comboRef.current) {
+      comboRef.current.classList.remove("displayed");
+      comboRef.current.setAttribute("aria-expanded", false);
+
+      // re-enable main scroll on small devices
+      dispatch({ type: "modalChange", payload: null });
+    }
+  }
+
+  // Dedicated close function for ClickOutside
+  // We don't want to mess with modalChange everytime a click is made
+  function clickOutsideCloseDropdown() {
     if (comboRef.current) {
       comboRef.current.classList.remove("displayed");
       comboRef.current.setAttribute("aria-expanded", false);
@@ -162,7 +186,7 @@ export const Combobox = ({
   function handleKeyDown(event) {
     let focusableItems = [];
     if (listRef.current) {
-      if (listRef.current.firstChild.getAttribute("role") === "group") {
+      if (listRef.current?.firstChild.getAttribute("role") === "group") {
         // check within "group" items for "option" items
         listRef.current.childNodes.forEach((child) => {
           if (child.childNodes.length > 0) {

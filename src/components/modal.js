@@ -26,9 +26,12 @@ export const Modal = ({ id, title, children }) => {
       id={id}
       ref={modalRef}
       className={`modal${state.modal === id ? " open" : ""}`}
+      tabIndex="-1"
     >
-      <h2>{title}</h2>
-      {children}
+      <div className="modal-content">
+        <h2>{title}</h2>
+        {children}
+      </div>
       <footer>
         <button onClick={closeModal}>Close</button>
       </footer>

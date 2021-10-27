@@ -45,7 +45,6 @@ function isValidNotation(n) {
 }
 
 function isValidZoom(z) {
-  console.log("isValidZoom(z)", z, validZooms.includes(z));
   return z && validZooms.includes(z);
 }
 
@@ -121,7 +120,7 @@ const defaultState = {
   modal: null,
   notation: preferredNotation || validNotations[0],
 };
-console.log(defaultState);
+
 export const store = createContext(defaultState);
 const { Provider } = store;
 

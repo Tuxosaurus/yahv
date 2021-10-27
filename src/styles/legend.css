@@ -1,9 +1,5 @@
 .Legend {
-  list-style: none;
-  padding-top: 48px;
-  display: flex;
-  justify-content: center;
-  gap: 24px;
+  position: relative;
   border: 2px solid black;
   border-width: 1px 2px;
   background: black;
@@ -12,59 +8,53 @@
     linear-gradient(to bottom, #444 1px, transparent 1px);
 }
 
+.Legend ul {
+  list-style: none;
+  padding-top: 48px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  color: black;
+}
+
 .Legend li {
-  position: relative;
+  display: flex;
+  align-items: center;
   min-width: 1px;
-  padding: 0 16px;
-  line-height: 16px;
+  padding: 4px 16px;
+  line-height: 12px;
   font-size: 0.6rem;
   font-weight: var(--bold);
   text-align: center;
   border: 1px solid black;
-  color: black;
-}
-
-.Legend li.red {
-  background-color: #ff0000;
-}
-
-.Legend li.blue {
-  background-color: #0000ff;
-  color: white;
-}
-
-.Legend li.black {
-  background-color: #010101;
-  color: white;
-}
-
-.Legend li.white {
-  background-color: #fefefe;
-}
-
-.Legend li.green {
-  background-color: #00ff00;
-}
-
-.Legend li.yellow {
-  background-color: yellow;
-}
-
-.Legend li.cyan {
-  background-color: #00ffff;
-}
-
-.Legend li.orange {
-  background-color: #ff6600;
 }
 
 .Legend li.disabled {
   background-color: #777;
 }
 
+.board-controls {
+  position: absolute;
+  top: -12px;
+  z-index: var(--zBoardControls);
+  text-align: center;
+  left: 0;
+  width: 100%;
+}
+
+.board-controls > span {
+  display: inline-block;
+  margin-right: 8px;
+  margin-bottom: 4px;
+}
+
 /**************************************/
 @media (max-width: 800px) {
   .Legend {
-    gap: 0;
+    padding-bottom: 32px;
+  }
+
+  .Legend li {
+    display: none;
   }
 }
